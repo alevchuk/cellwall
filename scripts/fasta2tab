@@ -1,0 +1,16 @@
+#!/usr/bin/ruby
+
+first_line = true
+
+while line = STDIN.gets
+  if line =~ /^>([^>]+)$/
+    puts unless first_line
+    print $1.chomp
+    print "\t"
+  else
+    print line.chomp
+  end
+
+  first_line = false
+end
+
