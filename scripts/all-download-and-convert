@@ -1,0 +1,23 @@
+#!/usr/bin/ruby
+
+HOME         = `echo ~`.chomp
+FASTA2TAB    = "#{HOME}/.html/cellwall/scripts/fasta2tab-convert"
+WGET_OPTIONS = "-O-" # Download to standard out 
+WGET         = "/usr/bin/wget #{WGET_OPTIONS}"
+
+SOURCE_MAP   = ARGV[0]
+
+if SOURCE_MAP.nil?
+  STDERR.puts "Usage: fasta2tab-download-and-convert <source_map_file>"
+  exit(1)
+end
+
+File.open(SOURCE_MAP) do |f|
+  while line = f.gets
+    line.strip!
+    next if line.empty? or line =~ /^[\s]*#/
+    name, url = line.split(/[ \t]/)
+    puts name, url
+
+  end
+end

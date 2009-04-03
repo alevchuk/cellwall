@@ -1,1 +1,8 @@
-*[^/]
+*
+!*/
+!*/**
+!.gitignore
+!README
+!source_v*.map
+junk
+dumps
