@@ -6,20 +6,25 @@ FILE_UTIL = "/usr/bin/file"
 
 first_line = ""
 loop do
-first_line = STDIN.gets
-if first_line.nil?
-STDERR.puts "#{NAME}: Reached the end without seeing any non-comment data"
-exit(1)
-end
-break unless first_line =~ /^[\s]*#/
+  first_line = STDIN.gets
+  if first_line.nil?
+    STDERR.puts "#{NAME}: Reached the end without seeing any non-comment data"
+    exit(1)
+  end
+  break unless first_line =~ /^[\s]*#/
 end
 
 if first_line =~ /^>/
-puts "FASTA"
-exit
+  puts "FASTA"
+  exit
 elsif first_line.split("\t").size == 9
-puts "GFF3"
-exit
+  all_pairs = first_line.split("\t")[8].split(';')
+  if all_pairs.collect{|keyval| keyval.include? '='} == [true] * all_pairs.size
+    puts "GFF3"
+  else
+    puts "GFF"
+  end
+  exit
 end
 
 # Does not match any special file types, so it's time to use `file` utility
