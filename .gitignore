@@ -3,6 +3,6 @@
 !*/**
 !.gitignore
 !README
-!source_v*.map
+!Sourcemap*
 junk
 dumps
