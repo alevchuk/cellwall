@@ -1,0 +1,33 @@
+#!/usr/bin/ruby
+
+require 'tempfile'
+NAME      = 'filetype-from-stream'
+FILE_UTIL = "/usr/bin/file"
+
+first_line = ""
+loop do
+first_line = STDIN.gets
+if first_line.nil?
+STDERR.puts "#{NAME}: Reached the end without seeing any non-comment data"
+exit(1)
+end
+break unless first_line =~ /^[\s]*#/
+end
+
+if first_line =~ /^>/
+puts "FASTA"
+exit
+elsif first_line.split("\t").size == 9
+puts "GFF3"
+exit
+end
+
+# Does not match any special file types, so it's time to use `file` utility
+tempfile = Tempfile.new(NAME)
+tempfile.puts first_line
+
+tempfile.flush
+type = `#{FILE_UTIL} #{tempfile.path}`
+
+puts type.split(": ")[1]
+
