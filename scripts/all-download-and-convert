@@ -1,9 +1,19 @@
 #!/usr/bin/ruby
 
 HOME         = `echo ~`.chomp
-FASTA2TAB    = "#{HOME}/.html/cellwall/scripts/fasta2tab-convert"
-WGET_OPTIONS = "-O-" # Download to standard out 
+SCRIPTS_DIR  = "#{HOME}/.html/cellwall/scripts"
+FASTA2TAB    = "#{SCRIPTS_DIR}/convert-fasta-to-tab"
+GFF2TAB      = "#{SCRIPTS_DIR}/convert-gff-to-tab"
+FILETYPE     = "#{SCRIPTS_DIR}/filetype-from-stream"
+
+DATE_OPTIONS = "+%Y-%m-%d" # For example 2009-03-23
+DATE         = "/bin/date #{DATE_OPTIONS}"
+
+WGET_OPTIONS = "--quiet -O-" # Download quietly to standard out 
 WGET         = "/usr/bin/wget #{WGET_OPTIONS}"
+
+ZCAT         = "/bin/zcat"
+BZCAT        = "/bin/bzcat"
 
 SOURCE_MAP   = ARGV[0]
 
@@ -12,12 +22,54 @@ if SOURCE_MAP.nil?
   exit(1)
 end
 
+DOWNLOAD_TIMESTAMP = `#{DATE}`.chomp
+
+def download_and_convert_one(name, url)
+  dowload_and_extract = "#{WGET} \"#{url}\""
+  loop do
+    filetype = `#{dowload_and_extract} | #{FILETYPE}`.chomp
+
+    if filetype =~ /^FASTA/
+      destination = "source_downloaded-#{DOWNLOAD_TIMESTAMP}_fasta_#{name}.tab"
+      `#{dowload_and_extract} | #{FASTA2TAB} > #{destination}`
+      puts destination
+      break
+
+    elsif filetype =~ /^GFF3/
+      destination = "source_downloaded-#{DOWNLOAD_TIMESTAMP}_gff3-_#{name}.tab"
+      `#{dowload_and_extract} | #{GFF2TAB} > #{destination}`
+      puts destination
+      break
+
+    elsif filetype =~ /^GFF/
+      destination = "source_downloaded-#{DOWNLOAD_TIMESTAMP}_gff--_#{name}.tab"
+      `#{dowload_and_extract} | #{GFF2TAB} > #{destination}`
+      puts destination
+      break
+
+    elsif filetype =~ /^gzip/
+      dowload_and_extract += " | #{ZCAT}" 
+
+    elsif filetype =~ /^bzip2/
+      dowload_and_extract += " | #{BZCAT}"
+
+    else
+      STDERR.puts "ERROR: Unknown filetype: #{filetype.inspect} for " +
+        "#{dowload_and_extract.inspect}"
+      break
+
+    end
+  end
+end
+
 File.open(SOURCE_MAP) do |f|
   while line = f.gets
     line.strip!
     next if line.empty? or line =~ /^[\s]*#/
     name, url = line.split(/[ \t]/)
-    puts name, url
-
+    Thread.new{download_and_convert_one(name, url)}
   end
 end
+
+(Thread.list - [Thread.main]).each {|t| t.join}
+
