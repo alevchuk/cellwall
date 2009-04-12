@@ -1,14 +1,15 @@
 #!/usr/bin/ruby
 
 require 'tempfile'
-NAME      = 'filetype-from-stream'
+NAME      = File.basename(__FILE__)
 FILE_UTIL = "/usr/bin/file"
 
 first_line = ""
 loop do
   first_line = STDIN.gets
+  puts first_line
   if first_line.nil?
-    STDERR.puts "#{NAME}: Reached the end without seeing any non-comment data"
+    STDERR.puts "#{NAME}: Possibly comments but No data"
     exit(1)
   end
   break unless first_line =~ /^[\s]*#/

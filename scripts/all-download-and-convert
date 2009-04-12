@@ -2,9 +2,10 @@
 
 HOME         = `echo ~`.chomp
 SCRIPTS_DIR  = "#{HOME}/.html/cellwall/scripts"
+NAME         = File.basename(__FILE__)
 FASTA2TAB    = "#{SCRIPTS_DIR}/convert-fasta-to-tab"
 GFF2TAB      = "#{SCRIPTS_DIR}/convert-gff-to-tab"
-FILETYPE     = "#{SCRIPTS_DIR}/filetype-from-stream"
+FILETYPE     = "#{SCRIPTS_DIR}/lookup-filetype-from-stream"
 
 DATE_OPTIONS = "+%Y-%m-%d" # For example 2009-03-23
 DATE         = "/bin/date #{DATE_OPTIONS}"
@@ -19,18 +20,18 @@ TEE          = "/usr/bin/tee"
 SOURCE_MAP   = ARGV[0]
 
 if SOURCE_MAP.nil?
-  STDERR.puts "Usage: fasta2tab-download-and-convert <source_map_file>"
+  STDERR.puts "Usage: #{NAME} <source_map_file>"
   exit(1)
 end
 
 DOWNLOAD_TIMESTAMP = `#{DATE}`.chomp
 
 def run(cmd, tabulizer, type, out_name)
-  # return unless out_name =~ /igenic/ # Skip all but this one
+  return unless out_name =~ /igenic/ # Skip all but this one
 
   destination =
     "source_downloaded-#{DOWNLOAD_TIMESTAMP}_#{type.ljust(5,'-')}_#{out_name}"
-  `#{cmd} | #{TEE} #{destination} | #{tabulizer} > #{destination}.tab`
+  #`#{cmd} | #{TEE} #{destination} | #{tabulizer} > #{destination}.tab`
   puts destination
 end
 
@@ -56,6 +57,10 @@ def download_and_convert_one(name, url)
 
     elsif filetype =~ /^bzip2/
       dowload_and_extract += " | #{BZCAT}"
+
+    elsif filetype == 'nil'
+      STDERR.puts "ERROR: Could not download #{url}"
+      break
 
     else
       STDERR.puts "ERROR: Unknown filetype: #{filetype.inspect} for " +
