@@ -7,6 +7,8 @@ FASTA2TAB    = "#{SCRIPTS_DIR}/convert-fasta-to-tab"
 GFF2TAB      = "#{SCRIPTS_DIR}/convert-gff-to-tab"
 FILETYPE     = "#{SCRIPTS_DIR}/lookup-filetype-from-stream"
 
+MAX_THREADS  = 20
+
 DATE_OPTIONS = "+%Y-%m-%d" # For example 2009-03-23
 DATE         = "/bin/date #{DATE_OPTIONS}"
 
@@ -27,11 +29,11 @@ end
 DOWNLOAD_TIMESTAMP = `#{DATE}`.chomp
 
 def run(cmd, tabulizer, type, out_name)
-  return unless out_name =~ /igenic/ # Skip all but this one
+  #return unless out_name =~ /igenic/ # Skip all but this one
 
   destination =
     "source_downloaded-#{DOWNLOAD_TIMESTAMP}_#{type.ljust(5,'-')}_#{out_name}"
-  #`#{cmd} | #{TEE} #{destination} | #{tabulizer} > #{destination}.tab`
+  #`#{cmd} | #{TEE} #{destination} | #{tabulizer} > dumps/#{destination}.tab`
   puts destination
 end
 
@@ -74,10 +76,19 @@ end
 
 File.open(SOURCE_MAP) do |f|
   while line = f.gets
+
     line.strip!
     next if line.empty? or line =~ /^[\s]*#/
     name, url = line.split(/[ \t]/)
-    Thread.new{download_and_convert_one(name, url)}
+    loop do
+      if (Thread.list - [Thread.main]).size < MAX_THREADS
+        Thread.new{download_and_convert_one(name, url)}
+        break
+      else
+        sleep 5
+      end
+    end
+
   end
 end
 
