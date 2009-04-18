@@ -18,5 +18,5 @@ while line = STDIN.gets
   end
 
   columns_sql = "#{columns.join(' ' + TYPE + ', ')} #{TYPE}"
-  puts "CREATE TABLE from_mysql_#{name} (#{columns_sql});"
+  puts "CREATE TABLE cellwall.from_mysql_#{name} (#{columns_sql});"
 end
