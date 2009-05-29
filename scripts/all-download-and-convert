@@ -32,7 +32,7 @@ def run(cmd, tabulizer, type, out_name)
   #return unless out_name =~ /igenic/ # Skip all but this one
 
   destination =
-    "source_downloaded-#{DOWNLOAD_TIMESTAMP}_#{type.ljust(5,'-')}_#{out_name}"
+    "source_#{DOWNLOAD_TIMESTAMP}_#{type.ljust(5,'-')}_#{out_name}"
   `#{cmd} | #{TEE} #{destination} | #{tabulizer} > dumps/#{destination}.tab`
   puts destination
 end
