@@ -1,0 +1,19 @@
+#!/usr/bin/ruby
+
+class String
+  def begins_with?(str)
+    self[0..(str.size - 1)] == str
+  end
+end
+
+last_query = ''
+while line=STDIN.gets
+  last_query = line if line.begins_with? "Query"
+
+  if line =~ /domain/ and line =~ /E =/
+    puts last_query
+    puts line
+    puts
+    STDOUT.flush
+  end
+end
