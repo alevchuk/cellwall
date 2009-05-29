@@ -33,7 +33,7 @@ def run(cmd, tabulizer, type, out_name)
 
   destination =
     "source_downloaded-#{DOWNLOAD_TIMESTAMP}_#{type.ljust(5,'-')}_#{out_name}"
-  #`#{cmd} | #{TEE} #{destination} | #{tabulizer} > dumps/#{destination}.tab`
+  `#{cmd} | #{TEE} #{destination} | #{tabulizer} > dumps/#{destination}.tab`
   puts destination
 end
 
