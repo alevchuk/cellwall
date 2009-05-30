@@ -1,0 +1,15 @@
+CREATE TABLE cellwall.from_mysql_dblink (id VARCHAR, section VARCHAR, sequence VARCHAR, db VARCHAR, href VARCHAR, updated VARCHAR);
+CREATE TABLE cellwall.from_mysql_db (id VARCHAR, genome VARCHAR, name VARCHAR, db_type VARCHAR, updated VARCHAR);
+CREATE TABLE cellwall.from_mysql_family (id VARCHAR, grp VARCHAR, rank VARCHAR, name VARCHAR, abrev VARCHAR, updated VARCHAR);
+CREATE TABLE cellwall.from_mysql_genome (id VARCHAR, name VARCHAR, updated VARCHAR);
+CREATE TABLE cellwall.from_mysql_groups (id VARCHAR, parent VARCHAR, rank VARCHAR, name VARCHAR, updated VARCHAR);
+CREATE TABLE cellwall.from_mysql_idxref (sequence VARCHAR, accession VARCHAR);
+CREATE TABLE cellwall.from_mysql_parameters (id VARCHAR, section VARCHAR, others VARCHAR, reference VARCHAR, name VARCHAR, value VARCHAR, updated VARCHAR);
+CREATE TABLE cellwall.from_mysql_search (id VARCHAR, name VARCHAR, s_type VARCHAR, genome VARCHAR, db VARCHAR, query VARCHAR, updated VARCHAR);
+CREATE TABLE cellwall.from_mysql_species (id VARCHAR, genus VARCHAR, species VARCHAR, sub_species VARCHAR, common_name VARCHAR, updated VARCHAR);
+CREATE TABLE cellwall.from_mysql_subfamily (id VARCHAR, family VARCHAR, rank VARCHAR, name VARCHAR, updated VARCHAR);
+CREATE TABLE cellwall.from_mysql_users (id VARCHAR, email VARCHAR, password VARCHAR, first VARCHAR, last VARCHAR, institute VARCHAR, address VARCHAR, updated VARCHAR);
+CREATE TABLE cellwall.from_mysql_sequence (id VARCHAR, db VARCHAR, family VARCHAR, species VARCHAR, accession VARCHAR, display VARCHAR, description VARCHAR, length VARCHAR, alphabet VARCHAR, sequence VARCHAR, gene_name VARCHAR, fullname VARCHAR, alt_fullname VARCHAR, symbols VARCHAR, updated VARCHAR);
+CREATE TABLE cellwall.from_mysql_seqtags (id VARCHAR, feature VARCHAR, name VARCHAR, value VARCHAR, updated VARCHAR);
+CREATE TABLE cellwall.from_mysql_seqfeature (id VARCHAR, sequence VARCHAR, rank VARCHAR, primary_tag VARCHAR, updated VARCHAR);
+CREATE TABLE cellwall.from_mysql_seqlocation (id VARCHAR, seqfeature VARCHAR, rank VARCHAR, start_pos VARCHAR, end_pos VARCHAR, strand VARCHAR, updated VARCHAR);
