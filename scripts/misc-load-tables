@@ -22,7 +22,7 @@ while line = STDIN.gets
   end
 
   puts "copy cellwall.from_mysql_#{name} ( #{columns.join(', ')} ) " +
-	"from 'c:\\\\db-dumps/from-mysql-cellwall-#{name}.tab';" # For Windows
+	"from '~/c/dumps/from-mysql-cellwall-#{name}.tab';" # For Linux
 
   puts "insert into cellwall.#{name} (  #{columns.join(', ')} )"
   puts "select to_number(#{columns.join(",'9'), to_number(")},'9')"

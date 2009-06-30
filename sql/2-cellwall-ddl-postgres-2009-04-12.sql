@@ -2,7 +2,7 @@
 -- Table definitions
 -------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-drop table    if exists cellwall.blast_hit;
+drop table    if exists cellwall.blast_hit cascade;
 drop sequence if exists cellwall.blast_hit_id_seq;
 
 drop index    if exists cellwall.blast_hit_search;
@@ -18,7 +18,7 @@ create table  cellwall.blast_hit
        species     integer      not null default '0',  
        description varchar(255) not null default '',  
        updated     timestamp    not null default current_timestamp
-);
+) tablespace cellwall_ts;
 
 alter table cellwall.blast_hit add constraint pk_blast_hit primary key(id);
 alter table cellwall.blast_hit add constraint uk_blast_hit_accession unique(accession);
@@ -28,7 +28,7 @@ create index blast_hit_species on cellwall.blast_hit(species);
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-drop table    if exists cellwall.blast_hsp;
+drop table    if exists cellwall.blast_hsp cascade;
 drop sequence if exists cellwall.blast_hsp_id_seq;
 
 drop index if exists cellwall.blast_hsp_query;
@@ -64,7 +64,7 @@ create table  cellwall.blast_hsp
        hit_conserved    real      not null default '0',
        total_conserved  real      not null default '0',
        updated          timestamp not null default current_timestamp
-);
+) tablespace cellwall_ts;
 
 alter table cellwall.blast_hsp add constraint pk_blast_hsp primary key(id);
 alter table cellwall.blast_hsp add constraint uk_blast_hsp_query_hit unique (query,hit);
@@ -79,7 +79,7 @@ create index blast_hsp_total_length on cellwall.blast_hsp(total_length);
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-drop table    if exists cellwall.comment;
+drop table    if exists cellwall.comment cascade;
 drop sequence if exists cellwall.comment_id_seq;
 
 drop index if exists cellwall.comment_sequence_id;
@@ -95,7 +95,7 @@ create table cellwall.comment
        comment     varchar not null,
        ref         varchar,
        updated     timestamp not null default current_timestamp
-);
+) tablespace cellwall_ts;
 
 alter table cellwall.comment add constraint pk_comment primary key(id);
 
@@ -104,7 +104,7 @@ create index comment_user_id on cellwall.comment(user_id);
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-drop table    if exists cellwall.db;
+drop table    if exists cellwall.db cascade;
 drop sequence if exists cellwall.db_id_seq;
 
 drop index if exists cellwall.db_db_type;
@@ -119,7 +119,7 @@ create table cellwall.db
        name    varchar(128) not null default '',
        db_type varchar(64)  not null default '',
        updated timestamp    not null default current_timestamp
-);
+) tablespace cellwall_ts;
 
 alter table cellwall.db add constraint pk_db primary key(id);
 alter table cellwall.db add constraint uk_db_name unique (name);
@@ -129,7 +129,7 @@ create index db_genome on cellwall.db(genome);
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-drop table    if exists cellwall.dblink;
+drop table    if exists cellwall.dblink cascade;
 drop sequence if exists cellwall.dblink_id_seq;
 
 drop index if exists cellwall.dblink_sequence;
@@ -144,7 +144,7 @@ create table  cellwall.dblink
        db       varchar(255) not null default '',
        href     varchar(255) not null default '',
        updated  timestamp    not null default current_timestamp
-);
+) tablespace cellwall_ts;
 
 alter table cellwall.dblink add constraint pk_dblink primary key(id);
 alter table cellwall.dblink add constraint uk_dblink_href_sequence unique (href,sequence);
@@ -154,7 +154,7 @@ create index dblink_sequence on cellwall.dblink(sequence);
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-drop table    if exists cellwall.family;
+drop table    if exists cellwall.family cascade;
 drop sequence if exists cellwall.family_id_seq;
 
 drop index if exists cellwall.family_grp;
@@ -169,7 +169,7 @@ create table cellwall.family
        name    varchar(255) not null default '',
        abrev   varchar(32)  not null default '',
        updated timestamp    not null default current_timestamp
-);
+) tablespace cellwall_ts;
 
 alter table cellwall.family add constraint pk_family primary key(id);
 alter table cellwall.family add constraint uk_family_name unique (name);
@@ -179,7 +179,7 @@ create index family_grp on cellwall.family(grp);
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-drop table    if exists cellwall.genome;
+drop table    if exists cellwall.genome cascade;
 drop sequence if exists cellwall.genome_id_seq;
 
 create sequence cellwall.genome_id_seq;
@@ -189,14 +189,14 @@ create table cellwall.genome
        id      integer      not null default nextval('cellwall.genome_id_seq'),
        name    varchar(128) not null default '',
        updated timestamp    not null default current_timestamp
-);
+) tablespace cellwall_ts;
 
 alter table cellwall.genome add constraint pk_genome primary key(id);
 alter table cellwall.genome add constraint uk_genome_name unique (name);
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-drop table if exists cellwall.groups;
+drop table if exists cellwall.groups cascade;
 drop sequence if exists cellwall.groups_id_seq;
 
 drop index if exists cellwall.groups_parent;
@@ -210,7 +210,7 @@ create table cellwall.groups
        rank    integer      not null default '0',
        name    varchar(128) not null default '',
        updated timestamp    not null default current_timestamp
-);
+) tablespace cellwall_ts;
 
 alter table cellwall.groups add constraint pk_groups primary key(id);
 alter table cellwall.groups add constraint uk_groups_name unique (name);
@@ -219,7 +219,7 @@ create index groups_parent on cellwall.groups(parent);
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-drop table if exists cellwall.idxref;
+drop table if exists cellwall.idxref cascade;
 
 drop index if exists cellwall.idxref_sequence;
 
@@ -227,7 +227,7 @@ create table  cellwall.idxref
 (
        sequence  integer      not null default '0',
        accession varchar(255) not null default ''
-);
+) tablespace cellwall_ts;
 
 alter table cellwall.idxref add constraint uk_accession unique (accession);
 
@@ -235,7 +235,7 @@ create index idxref_sequence on cellwall.idxref(sequence);
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-drop table    if exists cellwall.parameters;
+drop table    if exists cellwall.parameters cascade;
 drop sequence if exists cellwall.parameters_id_seq;
 
 drop index    if exists cellwall.parameters_section_others_reference_name;
@@ -251,7 +251,7 @@ create table  cellwall.parameters
        name      varchar(64)  not null default '',
        value     varchar(255)          default null,
        updated   timestamp    not null default current_timestamp
-);
+) tablespace cellwall_ts;
 
 alter table cellwall.parameters add constraint pk_parameters primary key(id);
 alter table cellwall.parameters add constraint c_parameters_section check(section in ('genome','database','search','group','family','sequence','species','other') );
@@ -260,8 +260,8 @@ create index parameters_section_others_reference_name on cellwall.parameters(sec
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-drop table    if exists cellwall.search;
-drop sequence if exists cellwall.searc_id_seq;
+drop table    if exists cellwall.search cascade;
+drop sequence if exists cellwall.search_id_seq;
 
 drop index if exists cellwall.search_s_type;
 drop index if exists cellwall.search_db;
@@ -277,7 +277,7 @@ create table  cellwall.search
        db      integer               default null,
        query   varchar      not null default 'family',
        updated timestamp    not null default current_timestamp
-);
+) tablespace cellwall_ts;
 
 alter table cellwall.search add constraint pk_search primary key(id);
 alter table cellwall.search add constraint uk_search_name unique(name);
@@ -288,7 +288,7 @@ create index search_db on cellwall.search(db);
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-drop table    if exists cellwall.seqfeature;
+drop table    if exists cellwall.seqfeature cascade;
 drop sequence if exists cellwall.seqfeature_id_seq;
 
 create sequence cellwall.seqfeature_id_seq;
@@ -300,15 +300,15 @@ create table  cellwall.seqfeature
        rank        integer      not null default '0',
        primary_tag varchar(255)          default null,
        updated     timestamp    not null default current_timestamp
-);
+) tablespace cellwall_ts;
 
 alter table cellwall.seqfeature add constraint pk_seqfeature primary key(id);
 alter table cellwall.seqfeature add constraint uk_seqfeature_sequence_rank unique(sequence,rank);
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-drop table if exists cellwall.seqlocation;
-drop sequence if exists cellwall.seqloacation_id_seq;
+drop table if exists cellwall.seqlocation cascade;
+drop sequence if exists cellwall.seqlocation_id_seq;
 
 create sequence cellwall.seqlocation_id_seq;
 
@@ -321,14 +321,14 @@ create table  cellwall.seqlocation
        end_pos    integer    not null default '0',
        strand     integer    not null default '0',
        updated    timestamp  not null default current_timestamp
-);
+) tablespace cellwall_ts;
 
 alter table cellwall.seqlocation add constraint pk_seqlocation primary key(id);
 alter table cellwall.seqlocation add constraint uk_seqlocation_seqfeature_rank unique(seqfeature,rank);
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-drop table if exists cellwall.seqtags;
+drop table if exists cellwall.seqtags cascade;
 drop sequence if exists cellwall.seqtags_id_seq;
 
 create sequence cellwall.seqtags_id_seq;
@@ -340,7 +340,7 @@ create table  cellwall.seqtags
        name    varchar(255) not null default '',
        value   text         not null,
        updated timestamp    not null default current_timestamp
-);
+) tablespace cellwall_ts;
 
 alter table cellwall.seqtags add constraint pk_segtags primary key(id);
 
@@ -348,7 +348,7 @@ create index seqtags_feature on cellwall.seqtags(feature);
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-drop table    if exists cellwall.species;
+drop table    if exists cellwall.species cascade;
 drop sequence if exists cellwall.species_id_seq;
 
 drop index if exists cellwall.species_sub_species;
@@ -363,7 +363,7 @@ create table  cellwall.species
        sub_species varchar(255) default null,
        common_name varchar(255) default null,
        updated     timestamp    not null default current_timestamp
-);
+) tablespace cellwall_ts;
 
 alter table cellwall.species add constraint pk_species primary key(id);
 alter table cellwall.species add constraint uk_species_genus_species unique(genus,species);
@@ -372,7 +372,7 @@ create index species_sub_species on cellwall.species(sub_species);
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-drop table    if exists cellwall.subfamily;
+drop table    if exists cellwall.subfamily cascade;
 drop sequence if exists cellwall.subfamily_id_seq;
 
 drop index if exists cellwall.subfamily_family;
@@ -386,7 +386,7 @@ create table  cellwall.subfamily
        rank    integer      not null default '0',
        name    varchar(255) not null default '',
        updated timestamp    not null default current_timestamp
-);
+) tablespace cellwall_ts;
 
 alter table cellwall.subfamily add constraint pk_subfamily primary key(id);
 alter table cellwall.subfamily add constraint uk_subfamily_name unique(name);
@@ -395,7 +395,7 @@ create index subfamily_family on cellwall.subfamily(family);
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-drop table    if exists cellwall.users;
+drop table    if exists cellwall.users cascade;
 drop sequence if exists cellwall.users_id_seq;
 
 create sequence cellwall.users_id_seq;
@@ -410,43 +410,48 @@ create table cellwall.users
        institute varchar(255) not null default '',
        address   text         not null,
        updated   timestamp    not null default current_timestamp
-);
+) tablespace cellwall_ts;
 
 alter table cellwall.users add constraint pk_users primary key(id);
 alter table cellwall.users add constraint uk_users_email unique(email);
 alter table cellwall.users add constraint uk_users_first_last unique(first,last);
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------
--- Foreign key definitions
--------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-alter table cellwall.blast_hit add constraint fk_blast_hit_search foreign key (search) references search(id) on update cascade on delete cascade;
-alter table cellwall.blast_hit add constraint fk_blast_hit_species foreign key (species) references species(id) on update cascade;
+drop table if exists cellwall.sequence cascade;
+drop sequence if exists cellwall.sequence_id_seq;
 
-alter table cellwall.blast_hsp add constraint blast_hsp_ibfk_1 foreign key (query) references sequence (id) on delete cascade on update cascade;
-alter table cellwall.blast_hsp add constraint blast_hsp_ibfk_2 foreign key (hit) references blast_hit (id) on delete cascade on update cascade;
+drop index if exists cellwall.sequence_display;
+drop index if exists cellwall.sequence_family;
+drop index if exists cellwall.sequence_db;
+drop index if exists cellwall.sequence_species;
 
-alter table cellwall.comment add constraint comment_ibfk_1 foreign key (sequence) references sequence(id) on update cascade;
-alter table cellwall.comment add constraint comment_ibfk_2 foreign key (user) references users(id) on delete cascade on update cascade;
+create sequence cellwall.sequence_id_seq;
 
-alter table cellwall.db add constraint db_ibfk_1 foreign key (genome) references genome(id) on delete cascade on update cascade;
+create table cellwall.sequence
+(      
+       id           integer      not null default nextval('cellwall.sequence_id_seq'),
+       db           integer      not null default '0',
+       family       integer      not null default '0',
+       species      integer      not null default '0',
+       accession    varchar(128) not null default '',
+       display      varchar(128)          default null,
+       description  varchar(255) not null default '',
+       length       integer      not null default '0',
+       alphabet     varchar(16)  not null default '',
+       sequence     varchar      not null,
+       gene_name    varchar(255)          default null,
+       fullname     varchar(255)          default null,
+       alt_fullname varchar(255)          default null,
+       symbols      varchar(255)          default null,
+       updated      timestamp    not null default current_timestamp
+) tablespace cellwall_ts;
 
-alter table cellwall.dblink add constraint dblink_ibfk_1 foreign key (sequence) references sequence (id) on delete cascade on update cascade;
+alter table cellwall.sequence add constraint pk_sequence primary key(id);
+alter table cellwall.sequence add constraint uk_sequence_accession unique(accession);
 
-alter table cellwall.family add constraint family_ibfk_1 foreign key (grp) references groups (id) on delete cascade on update cascade;
+create index sequence_display on cellwall.sequence(display);
+create index sequence_family on cellwall.sequence(family);
+create index sequence_db on cellwall.sequence(db);
+create index sequence_species on cellwall.sequence(species);
 
-alter table cellwall.groups add constraint groups_ibfk_1 foreign key(parent) references groups(id) on delete cascade on update cascade;
-
-alter table cellwall.idxref add  constraint idxref_ibfk_1 foreign key (sequence) references sequence (id) on delete cascade on update cascade;
-
-alter table cellwall.search add constraint search_ibfk_1 foreign key(db) references db(id) on delete cascade on update cascade;
-
-alter table cellwall.seqfeature add constraint seqfeature_ibfk_1 foreign key (sequence) references sequence (id) on delete cascade on update cascade;
-
-alter table cellwall.seqlocation add constraint seqlocation_ibfk_1 foreign key (seqfeature) references seqfeature (id) on delete cascade on update cascade;
-
-alter table cellwall.seqtags add constraint seqtags_ibfk_1 foreign key(feature) references seqfeature(id) on delete cascade on update cascade;
-
-alter table cellwall.subfamily add constraint subfamily_ibfk_1 foreign key (family) references family (id) on delete cascade on update cascade;
-
--------------------------------------------------------------------------------------------------------------------------------------------------------------

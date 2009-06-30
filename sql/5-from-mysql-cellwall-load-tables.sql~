@@ -1,0 +1,89 @@
+--------------------------------------------------------------------------------------------------------------------------------- 
+-- load sequence to stage
+---------------------------------------------------------------------------------------------------------------------------------
+
+drop table if exists cellwall.st_sequence;
+
+create table cellwall.st_sequence 
+(       
+       source    varchar,       
+       load_date date,       
+       header    varchar,       
+       sequence  varchar
+);
+
+truncate table cellwall.st_sequence;
+-- select * from cellwall.st_sequence limit 100;
+
+-- PHYPA ------------------------------------------------------------------------------------------------------------------------
+
+alter table cellwall.st_sequence alter column source set default 'PHYPA';
+alter table cellwall.st_sequence alter column load_date set default '20090418';
+
+copy cellwall.st_sequence ( header, sequence ) from 'c:\\db-dumps\\source_downloaded-2009-04-10_fasta_jgi-phypa-v1-1_prot--.tab';
+copy cellwall.st_sequence ( header, sequence ) from 'c:\\db-dumps\\source_downloaded-2009-04-10_fasta_jgi-phypa-v1-1_trans-.tab';
+-- copy cellwall.st_sequence ( header, sequence ) from 'c:\\db-dumps\\source_downloaded-2009-04-10_gff--_jgi-phypa-v1-1_genes-.tab'; does not look like a sequence file
+
+commit;
+
+alter table cellwall.st_sequence alter column source set default null;
+alter table cellwall.st_sequence alter column load_date set default null;
+
+-- POPTR ------------------------------------------------------------------------------------------------------------------------
+
+alter table cellwall.st_sequence alter column source set default 'POPTR';
+alter table cellwall.st_sequence alter column load_date set default '20090418';
+
+copy cellwall.st_sequence ( header, sequence ) from 'c:\\db-dumps\\source_downloaded-2009-04-10_fasta_jgi-poptr-v1-1_prot--.tab';
+copy cellwall.st_sequence ( header, sequence ) from 'c:\\db-dumps\\source_downloaded-2009-04-10_fasta_jgi-poptr-v1-1_trans-.tab';
+-- copy cellwall.st_sequence ( header, sequence ) from 'c:\\db-dumps\\source_downloaded-2009-04-10_gff--_jgi-poptr-v1-1_genes-.tab'; does not look like a sequence file
+
+commit;
+
+alter table cellwall.st_sequence alter column source set default null;
+alter table cellwall.st_sequence alter column load_date set default null;
+
+-- TAIR -------------------------------------------------------------------------------------------------------------------------
+
+alter table cellwall.st_sequence alter column source set default 'TAIR';
+alter table cellwall.st_sequence alter column load_date set default '20090418';
+
+-- copy cellwall.st_sequence ( header, sequence ) from 'c:\\db-dumps\\source_downloaded-2009-04-10_fasta_tair-v20080228_intron.tab'; empty
+copy cellwall.st_sequence ( header, sequence ) from 'c:\\db-dumps\\source_downloaded-2009-04-10_fasta_tair-v20080229_igenic.tab';
+copy cellwall.st_sequence ( header, sequence ) from 'c:\\db-dumps\\source_downloaded-2009-04-10_fasta_tair-v20080412_cdna--.tab';
+copy cellwall.st_sequence ( header, sequence ) from 'c:\\db-dumps\\source_downloaded-2009-04-10_fasta_tair-v20080412_cds---.tab';
+copy cellwall.st_sequence ( header, sequence ) from 'c:\\db-dumps\\source_downloaded-2009-04-10_fasta_tair-v20080412_pep---.tab';
+
+commit;
+
+alter table cellwall.st_sequence alter column source set default null;
+alter table cellwall.st_sequence alter column load_date set default null;
+
+-- TIGR -------------------------------------------------------------------------------------------------------------------------
+
+alter table cellwall.st_sequence alter column source set default 'TIGR';
+alter table cellwall.st_sequence alter column load_date set default '20090418';
+
+copy cellwall.st_sequence ( header, sequence ) from 'c:\\db-dumps\\source_downloaded-2009-04-10_fasta_tigr-v6-0-all-_pep---.tab';
+copy cellwall.st_sequence ( header, sequence ) from 'c:\\db-dumps\\source_downloaded-2009-04-10_fasta_tigr-v6-0-all-_seq---.tab';
+-- copy cellwall.st_sequence ( header, sequence ) from 'c:\\db-dumps\\source_downloaded-2009-04-10_gff3-_tigr-v6-0-all-_gff3--.tab'; does not look like a sequence file
+
+commit;
+
+alter table cellwall.st_sequence alter column source set default null;
+alter table cellwall.st_sequence alter column load_date set default null;
+
+-- UNIPROT ----------------------------------------------------------------------------------------------------------------------
+
+alter table cellwall.st_sequence alter column source set default 'UNIPROT';
+alter table cellwall.st_sequence alter column load_date set default '20090418';
+
+copy cellwall.st_sequence ( header, sequence ) from 'c:\\db-dumps\\source_downloaded-2009-04-10_fasta_uniprot-v14-9-_sprot-.tab';
+copy cellwall.st_sequence ( header, sequence ) from 'c:\\db-dumps\\source_downloaded-2009-04-10_fasta_uniprot-v14-9-_tremb-.tab';
+
+commit;
+
+alter table cellwall.st_sequence alter column source set default null;
+alter table cellwall.st_sequence alter column load_date set default null;
+
+---------------------------------------------------------------------------------------------------------------------------------

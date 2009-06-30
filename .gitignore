@@ -4,6 +4,7 @@
 !.gitignore
 !README
 !Sourcemap*
+!*.sql
 junk
 dumps
 gen240*

@@ -1,0 +1,37 @@
+#!/usr/bin/ruby
+
+DB          = "cellwall"
+TABLE_NAMES = "comment db dblink family genome groups idxref parameters search seqfeature seqlocation seqtags sequence species subfamily"
+
+SSH    = "/usr/bin/ssh -o PreferredAuthentications=keyboard-interactive"
+MKFIFO = "/usr/bin/mkfifo"
+RM     = "/bin/rm"
+HOME   = `echo ~`.chomp
+TMP    = "#{HOME}/.html/cellwall/tmp"
+
+
+def mkfifo(fifo_name='unknown', &block)
+  fifo_path = "#{TMP}/#{fifo_name}.fifo.#{unique_suffix}"
+  `#{MKFIFO} --mode=o=,g= #{fifo_path}`
+  block.call(fifo_path)
+  `#{RM} #{fifo_path}`
+end
+
+
+
+
+cmd = "#{SSH} bioweb "
+"'for i in #{TABLE_NAMES}; do
+  echo \">>>$i\"
+  echo \"SELECT * FROM $i;\"  | mysql -u root #{DB}
+done;'"
+
+`#{MKFIFO} out`
+system "{cmd}"
+File.open('out') do |line|
+  p line
+  break
+end
+`#{RM} out`
+
+
