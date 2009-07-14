@@ -19,6 +19,9 @@ ZCAT         = "/bin/zcat"
 BZCAT        = "/bin/bzcat"
 TEE          = "/usr/bin/tee"
 
+
+OPTIONS      = ['--no-tabs']
+
 SOURCE_MAP   = ARGV[0]
 
 if SOURCE_MAP.nil?
@@ -33,7 +36,16 @@ def run(cmd, tabulizer, type, out_name)
 
   destination =
     "source_#{DOWNLOAD_TIMESTAMP}_#{type.ljust(5,'-')}_#{out_name}"
-  `#{cmd} | #{TEE} #{destination} | #{tabulizer} > dumps/#{destination}.tab`
+
+
+  piped_cmd = "#{cmd} | #{TEE} #{destination} " + 
+    if OPTIONS.include?('--no-tabs')
+      "> /dev/null"
+    else 
+      "| #{tabulizer} > dumps/#{destination}.tab"
+    end
+
+  system(piped_cmd)
   puts destination
 end
 
@@ -55,10 +67,7 @@ def download_and_convert_one(name, url)
       break
 
     elsif filetype =~ /^gzip/
-      dowload_and_extract += " | #{ZCAT}" 
-
-    elsif filetype =~ /^bzip2/
-      dowload_and_extract += " | #{BZCAT}"
+     dowload_and_extract += " | #{ZCAT}" 
 
     elsif filetype == 'nil'
       STDERR.puts "ERROR: Could not download #{url}"
@@ -93,3 +102,4 @@ File.open(SOURCE_MAP) do |f|
 end
 
 (Thread.list - [Thread.main]).each {|t| t.join}
+
