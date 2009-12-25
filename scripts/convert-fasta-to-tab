@@ -3,9 +3,11 @@
 first_line = true
 
 while line = STDIN.gets
-  if line =~ /^>([^>]+)$/
+  line.chomp!
+
+  if line =~ /^>/
     puts unless first_line
-    print $1.chomp
+    print line[1..-1]
     print "\t"
   else
     print line.chomp
@@ -13,4 +15,4 @@ while line = STDIN.gets
 
   first_line = false
 end
-
+puts
