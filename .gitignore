@@ -3,6 +3,7 @@
 !*/**
 !.gitignore
 !README
+!DEPENDENCIES
 !Sourcemap*
 !*.sql
 junk

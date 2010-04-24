@@ -1,0 +1,8 @@
+Gfam DB depends on:
+
+  psql gfam < /usr/share/postgresql/8.3/contrib/dblink.sql
+
+
+Gfam DB does not depend on (because these libraries are hard coded):
+
+  /usr/share/postgresql/8.3/contrib/pgcrypto.sql
