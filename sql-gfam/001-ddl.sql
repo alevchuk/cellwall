@@ -44,21 +44,22 @@ drop sequence if exists gfam.family_tree_instance_seq;
 create sequence gfam.family_tree_instance_seq;
 
 create table gfam.family_tree_instance ( 
-       node_id             integer not null default nextval('gfam.family_tree_instance_seq'), 
+       instance_node_id    integer not null default nextval('gfam.family_tree_instance_seq'), 
        parent_node_id      integer, 
        family_tree_node_id integer not null, 
        rank                integer not null, 
-       family_tree_id      integer not null
+       family_tree_id      integer not null,
+       preorder_code       varchar
 ) tablespace gfam_ts;
 
-alter table gfam.family_tree_instance add constraint pk_family_tree_instance primary key(node_id);
+alter table gfam.family_tree_instance add constraint pk_family_tree_instance primary key(instance_node_id);
 alter table gfam.family_tree_instance add constraint uk_family_tree_instance unique(parent_node_id, rank);
 
 alter table gfam.family_tree_instance add constraint fk_family_tree_instance_family_tree 
       foreign key (family_tree_id) references gfam.family_tree(family_tree_id) on update cascade on delete cascade;
 
 alter table gfam.family_tree_instance add constraint fk_family_tree_instance_family_tree_instance 
-      foreign key (parent_node_id) references gfam.family_tree_instance(node_id) on update cascade on delete cascade;
+      foreign key (parent_node_id) references gfam.family_tree_instance(instance_node_id) on update cascade on delete cascade;
 
 alter table gfam.family_tree_instance add constraint fk_family_tree_instance_family_tree_node 
       foreign key (family_tree_node_id) references gfam.family_tree_node(family_tree_node_id) on update cascade on delete cascade;
@@ -134,18 +135,18 @@ create sequence gfam.family_member_seq;
 create table gfam.family_member ( 
        family_member_id integer not null default nextval('gfam.family_member_seq'),
        family_build_id  integer not null,
-       node_id          integer not null,
+       instance_node_id integer not null,
        sequence_id      integer not null
 ) tablespace gfam_ts;
 
 alter table gfam.family_member add constraint pk_family_member primary key(family_member_id);
-alter table gfam.family_member add constraint uk_family_member unique(family_build_id, node_id, sequence_id);
+alter table gfam.family_member add constraint uk_family_member unique(family_build_id, instance_node_id, sequence_id);
 
 alter table gfam.family_member add constraint fk_family_member_family_build
       foreign key (family_build_id) references gfam.family_build(family_build_id) on update cascade on delete cascade;
 
 alter table gfam.family_member add constraint fk_family_member_family_tree_instance
-      foreign key (node_id) references gfam.family_tree_instance(node_id) on update cascade on delete cascade;
+      foreign key (instance_node_id) references gfam.family_tree_instance(instance_node_id) on update cascade on delete cascade;
 
 alter table gfam.family_member add constraint fk_family_member_sequence
       foreign key (sequence_id) references gfam.sequence(sequence_id) on update cascade on delete cascade;
@@ -298,8 +299,6 @@ create table gfam.sequence_feature (
 
 alter table gfam.sequence_feature add constraint pk_sequence_feature primary key(sequence_feature_id);
 alter table gfam.sequence_feature add constraint uk_sequence_feature unique(sequence_id, rank);
-
--- foreign key to sequence_id
 
 alter table gfam.sequence_feature add constraint fk_sequence_feature_sequence
       foreign key (sequence_id) references gfam.sequence(sequence_id) on update cascade on delete cascade;
