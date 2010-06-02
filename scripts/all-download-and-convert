@@ -3,8 +3,9 @@
 HOME         = `echo ~`.chomp
 SCRIPTS_DIR  = "#{HOME}/.html/cellwall/scripts"
 NAME         = File.basename(__FILE__)
-FASTA2TAB    = "#{SCRIPTS_DIR}/convert-fasta-to-tab"
-GFF2TAB      = "#{SCRIPTS_DIR}/convert-gff-to-tab"
+FASTA2TAB    = "#{SCRIPTS_DIR}/convert-fasta-to-tab"  # Pipelined
+GFF3_TO_TAB  = "#{SCRIPTS_DIR}/convert-gff3-to-tab"    # Not Pipelined
+GFF0_TO_TAB  = "#{SCRIPTS_DIR}/convert-gff0-to-tab"    # Not Pipelined
 FILETYPE     = "#{SCRIPTS_DIR}/lookup-filetype-from-stream"
 
 MAX_THREADS  = 20
@@ -18,6 +19,8 @@ WGET         = "/usr/bin/wget #{WGET_OPTIONS}"
 ZCAT         = "/bin/zcat"
 BZCAT        = "/bin/bzcat"
 TEE          = "/usr/bin/tee"
+CP           = "/bin/cp"
+MV           = "/bin/mv"
 
 
 OPTIONS      = ['--no-tabs']
@@ -32,42 +35,50 @@ end
 DOWNLOAD_TIMESTAMP = `#{DATE}`.chomp
 
 def run(cmd, tabulizer, type, out_name)
-  #return unless out_name =~ /igenic/ # Skip all but this one
+  return unless out_name =~ /_struct/ # Skip all but this one
 
   destination =
     "source_#{DOWNLOAD_TIMESTAMP}_#{type.ljust(5,'-')}_#{out_name}"
 
+  if type == "gff" or type == "gff3"
+    # SPECIAL CASE: Cannot pipeline the GFF converter, must do in stages
+    system("#{cmd} > #{destination}")
+    system("#{tabulizer} #{destination}")
+    system("#{MV} #{destination}.tab dumps/")
+   
+  else
+    piped_cmd = "#{cmd} | #{TEE} #{destination} " + 
+      if OPTIONS.include?('--no-tabs')
+        "> /dev/null"
+      else 
+        "| #{tabulizer} > dumps/#{destination}.tab"
+      end
 
-  piped_cmd = "#{cmd} | #{TEE} #{destination} " + 
-    if OPTIONS.include?('--no-tabs')
-      "> /dev/null"
-    else 
-      "| #{tabulizer} > dumps/#{destination}.tab"
-    end
+    system(piped_cmd)
+  end
 
-  system(piped_cmd)
   puts destination
 end
 
 def download_and_convert_one(name, url)
-  dowload_and_extract = "#{WGET} \"#{url}\""
+  download_and_gunzip_cmd = "#{WGET} \"#{url}\""
   loop do
-    filetype = `#{dowload_and_extract} | #{FILETYPE}`.chomp
+    filetype = `#{download_and_gunzip_cmd} | #{FILETYPE}`.chomp
 
     if filetype =~ /^FASTA/
-      run(dowload_and_extract, FASTA2TAB, 'fasta', name)
+      run(download_and_gunzip_cmd, FASTA2TAB, 'fasta', name)
       break
 
     elsif filetype =~ /^GFF3/
-      run(dowload_and_extract, GFF2TAB, 'gff3', name)
+      run(download_and_gunzip_cmd, GFF3_TO_TAB, 'gff3', name)
       break
 
     elsif filetype =~ /^GFF/
-      run(dowload_and_extract, GFF2TAB, 'gff', name)
+      run(download_and_gunzip_cmd, GFF0_TO_TAB, 'gff', name)
       break
 
     elsif filetype =~ /^gzip/
-     dowload_and_extract += " | #{ZCAT}" 
+     download_and_gunzip_cmd += " | #{ZCAT}" 
 
     elsif filetype == 'nil'
       STDERR.puts "ERROR: Could not download #{url}"
@@ -75,7 +86,7 @@ def download_and_convert_one(name, url)
 
     else
       STDERR.puts "ERROR: Unknown filetype: #{filetype.inspect} for " +
-        "#{dowload_and_extract.inspect}"
+        "#{download_and_gunzip_cmd.inspect}"
       break
 
     end
