@@ -1,3 +1,22 @@
+= Gfam (Webserver Operating System) =
+
+Gfam depends on R 2.11.0:
+  -- Debain packages --
+  fort77 
+  cfortran 
+  libreadline5-dev
+  libx11-dev
+  xorg-dev
+
+  -- R source --
+  ./configure --enable-R-shlib
+
+
+
+
+
+= Gfam DB =
+
 Gfam DB depends on:
 
   psql gfam < /usr/share/postgresql/8.3/contrib/dblink.sql
