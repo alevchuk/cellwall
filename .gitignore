@@ -1,6 +1,12 @@
+*
+junk
+dumps
 !*/
 !*/**
 !.gitignore
+!gfam
+!gfam/**
+!gfam/**/**
 !README
 !LICENSE
 !DEPENDENCIES
@@ -9,8 +15,3 @@
 *~
 *pyc
 .*.swp
-*
-junk
-dumps
-gen240*
-4-update-families-summary/*

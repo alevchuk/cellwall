@@ -1,6 +1,6 @@
-= Gfam (Webserver Operating System) =
+= Gfam (Webserver's Operating System) =
 
-Gfam depends on R 2.11.0:
+Depends on R 2.11.0:
   -- Debain packages --
   fort77 
   cfortran 
@@ -11,17 +11,14 @@ Gfam depends on R 2.11.0:
   -- R source --
   ./configure --enable-R-shlib
 
-
-
+Depends on BioPerl:
+  bioperl 1.6.1 (packaged in Debian squeeze)
 
 
 = Gfam DB =
 
-Gfam DB depends on:
-
+Depends on:
   psql gfam < /usr/share/postgresql/8.3/contrib/dblink.sql
 
-
-Gfam DB does not depend on (because these libraries are hard coded):
-
+Does not depend on (because these libraries are hard coded):
   /usr/share/postgresql/8.3/contrib/pgcrypto.sql
