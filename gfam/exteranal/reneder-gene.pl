@@ -1,3 +1,4 @@
+#!/usr/bin/perl
 # vim:sw=4 ts=4
 # $Id: CGI.pm 2 2004-04-01 23:09:24Z laurichj $
 
@@ -15,59 +16,188 @@ Josh Lauricha laurichj@bioinfo.ucr.edu
 use Bio::SeqFeature::Generic;
 use Bio::Graphics;
 use Error;
+
+
+use DBI;
 use strict;
 
 
+# DB connect
+my $dbh = DBI->connect("DBI:Pg:dbname=cellwall;host=cellwalldb",
+        "cellwallweb", "uXmn]h0r", {'RaiseError' => 1});
+                     
 
 sub build_SeqView
 {
 	my($self) = @_;
 
+	my $accession = "At4g19720";
 
-	# Input: seq, exons, cds, left_utr, right_utr, extended_utr
+	my $sth;
+	my $srow;
+
+
+	# Lookup sequence id, length, description
+        my $fromdb_sequence_id;
+        my $fromdb_sequence_length;
+        my $fromdb_sequence_descrip;
+
+	$sth = $dbh->prepare(
+	  "SELECT * FROM cellwall1.sequence WHERE accession = ?"
+	);
+	$sth->execute($accession);
+        if ($srow = $sth->fetchrow_hashref())
+	{
+		$fromdb_sequence_id      = $srow->{'id'};
+		$fromdb_sequence_length  = $srow->{'length'};
+		$fromdb_sequence_descrip = $srow->{'description'};
+	}
+	else
+	{
+		die "ERROR: Accession ${accession} not found in database";
+	};
+
+
+	# Lookup all feature_id's in seqfeature (a hash of arrays)
+	my %fromdb_features;
+
+	$sth = $dbh->prepare(
+	  "SELECT * FROM cellwall1.seqfeature WHERE sequence = ?"
+	);
+	$sth->execute($fromdb_sequence_id);
+	my $tag, my $id;
+	while(my $ref = $sth->fetchrow_hashref()) {
+		$tag = $ref->{'primary_tag'};
+		$id =  $ref->{'id'};
+		$fromdb_features{$tag} = [ ] unless 
+		  exists $fromdb_features{$tag};
+		push @{ $fromdb_features{$tag} }, $id;
+	}
+        if ($sth->rows == 0)
+	{
+		die "ERROR: Sequence_id ${fromdb_sequence_id} " .
+		  "not found in database";
+	};
+	#print join(", ", sort @{ $fromdb_features{'MODEL'} }), "\n";
+	#print @{ $fromdb_features{'MODEL'} }[0], "\n";
+	#exit();
+
+
+	# Lookup all locations (start, end, strand) by feature_id
+	# hash of arrays (triplets) with key being the feature_id
+
+	my %fromdb_locations;
+
+	$sth = $dbh->prepare(
+	  "SELECT * FROM cellwall1.seqlocation WHERE seqfeature = ?"
+	);
+	my $start, my $stop, my $strand;
+	for my $primary_tag ( keys %fromdb_features ) {
+		for my $feature_id ( @{ $fromdb_features{$primary_tag} } ) {
+			$sth->execute($feature_id);
+			while(my $ref = $sth->fetchrow_hashref()) {
+				$start  = $ref->{'start_pos'};
+				$stop   = $ref->{'end_pos'};
+				$strand = $ref->{'strand'};
+
+				$fromdb_locations{$feature_id} = [ ] unless 
+				  exists $fromdb_locations{$feature_id};
+				push @{ $fromdb_locations{$feature_id} },
+				  [ $start, $stop, $strand ];
+				  
+			}
+        		if ($sth->rows == 0)
+			{
+				die "ERROR: seqfeature $feature_id " .
+				  "not found in database";
+			};
+		}
+	}
+
+
+
+	# Create BioPerl data structures
+	# Input: seq, features(models, exons, cds, utrs left/right/extended)
+
         my %seq = (
-		length => 1388,
-		accession_number => 'At4g19720',
-		description => 'glycosyl hydrolase family 18 protein',
+		accession_number => $accession,
+		length           => $fromdb_sequence_length,
+		description      => $fromdb_sequence_descrip,
 	);
 
+	# MODELs
+	my %models; # TODO: Support >1 model
+	my $feature_id = @{ $fromdb_features{'MODEL'} }[0]; 
 
-	my %models = (
+	# TODO: error if size != 1
+	my $loc = @{$fromdb_locations{$feature_id}}[0];
+	%models = (
 		'68417.m02896' => 
-		Bio::SeqFeature::Generic->new(-start=>56, -end=>1388),
+		Bio::SeqFeature::Generic->new(
+		  -start  => @{$loc}[0],
+		  -end    => @{$loc}[1],
+		  -strand => @{$loc}[2],
+		),
 	);
 
+
+	# EXONs
+	my %exons;
         my $s = Bio::Location::Split->new;
-        $s->add_sub_Location(Bio::Location::Simple->new(-start => 1,
-							-end   => 713,
-        						-strand => 1));
 
-        $s->add_sub_Location(Bio::Location::Simple->new(-start => 955,
-							-end   => 1388,
-        						-strand => 1));
-	my %exons = ('68417.m02896' => $s);
+	my $feature_id  = @{$fromdb_features{'EXON'}}[0];
+	my $locs = $fromdb_locations{$feature_id};
+	for $loc (@{$locs}) {
+        	$s->add_sub_Location(Bio::Location::Simple->new(
+			  -start  => @{$loc}[0],
+			  -end    => @{$loc}[1],
+			  -strand => @{$loc}[2],
+        							)
+		);
+	}
+	%exons = ('68417.m02896' => $s) if @{$locs} > 0;
 
+
+	# CDS
+	my %cds;
+	my $s;
+        $s = Bio::Location::Split->new;
+	my $feature_id  = @{$fromdb_features{'CDS'}}[0];
+	
+	my $locs = $fromdb_locations{$feature_id};
+	for $loc (@{$locs}) {
+        	$s->add_sub_Location(Bio::Location::Simple->new(
+                          -start  => @{$loc}[0],
+                          -end    => @{$loc}[1],
+                          -strand => @{$loc}[2],
+        							));
+	}
+	%cds = ('68417.m02896' => $s) if @{$locs} > 0;
+
+
+	# UTRs
+	my %utrs;
+	my @utr_features;
+	push(@utr_features, @{$fromdb_features{'LEFT_UTR'}}) if
+		exists $fromdb_features{'LEFT_UTR'};
+	push(@utr_features, @{$fromdb_features{'RIGHT_UTR'}}) if
+		exists $fromdb_features{'RIGHT_UTR'};
+	push(@utr_features, @{$fromdb_features{'EXTENDED_UTR'}}) if
+		exists $fromdb_features{'EXTENDED_UTR'};
 
         $s = Bio::Location::Split->new;
-        $s->add_sub_Location(Bio::Location::Simple->new(-start => 56,
-							-end   => 713,
-        						-strand => 1));
 
-        $s->add_sub_Location(Bio::Location::Simple->new(-start => 955,
-							-end   => 1388,
-        						-strand => 1));
-	my %cds = ('68417.m02896' => $s);
-
-
-        $s = Bio::Location::Split->new;
-        $s->add_sub_Location(Bio::Location::Simple->new(-start => 1,
-							-end   => 55,
-							-strand => 1
-        						));
-	my %utrs = (
-	  '68417.m02896' => $s,
-	);
-
+	my $feature_id  = @utr_features[0];
+	my $locs = $fromdb_locations{$feature_id};
+	for $loc (@{$locs})
+	{	
+        	$s->add_sub_Location(Bio::Location::Simple->new(
+                          -start  => @{$loc}[0],
+                          -end    => @{$loc}[1],
+                          -strand => @{$loc}[2],
+        							));
+	}
+	%utrs = ('68417.m02896' => $s) if @{$locs} > 0;
 
 
 
@@ -205,4 +335,15 @@ sub render_SeqView
 
 
 
+
+
+
+
+
 render_SeqView();
+
+
+
+# DB clean up
+$dbh->disconnect();
+

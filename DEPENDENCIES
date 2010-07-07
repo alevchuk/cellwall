@@ -12,7 +12,10 @@ Depends on R 2.11.0:
   ./configure --enable-R-shlib
 
 Depends on BioPerl:
-  bioperl 1.6.1 (packaged in Debian squeeze)
+  -- Packaged in Debian squeeze --
+  bioperl 1.6.1 
+  libbio-graphics-perl 2.02
+
 
 
 = Gfam DB =
