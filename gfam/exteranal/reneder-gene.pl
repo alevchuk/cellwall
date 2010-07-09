@@ -31,7 +31,8 @@ sub build_SeqView
 {
 	my($self) = @_;
 
-	my $accession = "At4g19720";
+	#my $accession = "At4g19720";
+	my $accession = "LOC_Os01g66850";
 
 	my $sth;
 	my $srow;
@@ -43,7 +44,7 @@ sub build_SeqView
         my $fromdb_sequence_descrip;
 
 	$sth = $dbh->prepare(
-	  "SELECT * FROM cellwall1.sequence WHERE accession = ?"
+		"SELECT * FROM cellwall1.sequence WHERE accession = ?"
 	);
 	$sth->execute($accession);
         if ($srow = $sth->fetchrow_hashref())
@@ -55,14 +56,40 @@ sub build_SeqView
 	else
 	{
 		die "ERROR: Accession ${accession} not found in database";
+	}
+
+
+	# Lookup all feature_ids and names in seqtags (a hash of hashes)
+	my %fromdb_tags;
+	$sth = $dbh->prepare(
+		"SELECT * FROM cellwall1.seqtags t, cellwall1.seqfeature f " .
+		"WHERE t.feature = f.id AND f.sequence = ?"
+	);
+
+	my $key, my $value, my $feature_id;
+	$sth->execute($fromdb_sequence_id);
+	while(my $ref = $sth->fetchrow_hashref()) {
+		$key   = $ref->{'name'};
+		$value = $ref->{'value'};
+		$feature_id = $ref->{'feature'};
+
+		$fromdb_tags{$feature_id} = { } unless 
+		  exists $fromdb_tags{$feature_id};
+		%{ $fromdb_tags{$feature_id} }->{$key} = $value;
+		  
 	};
+	if ($sth->rows == 0)
+	{
+		die "ERROR: seqfeature $feature_id " .
+		  "not found in database";
+	};
+	# die %{$fromdb_tags{9642}}->{"model"}, "\n";
 
 
 	# Lookup all feature_id's in seqfeature (a hash of arrays)
 	my %fromdb_features;
-
 	$sth = $dbh->prepare(
-	  "SELECT * FROM cellwall1.seqfeature WHERE sequence = ?"
+		"SELECT * FROM cellwall1.seqfeature WHERE sequence = ?"
 	);
 	$sth->execute($fromdb_sequence_id);
 	my $tag, my $id;
@@ -80,16 +107,15 @@ sub build_SeqView
 	};
 	#print join(", ", sort @{ $fromdb_features{'MODEL'} }), "\n";
 	#print @{ $fromdb_features{'MODEL'} }[0], "\n";
+	#print join(", ", sort @{ $fromdb_features{'RIGHT_UTR'} }), "\n";
 	#exit();
 
 
 	# Lookup all locations (start, end, strand) by feature_id
 	# hash of arrays (triplets) with key being the feature_id
-
 	my %fromdb_locations;
-
 	$sth = $dbh->prepare(
-	  "SELECT * FROM cellwall1.seqlocation WHERE seqfeature = ?"
+		"SELECT * FROM cellwall1.seqlocation WHERE seqfeature = ?"
 	);
 	my $start, my $stop, my $strand;
 	for my $primary_tag ( keys %fromdb_features ) {
@@ -116,6 +142,66 @@ sub build_SeqView
 
 
 
+
+	# Lookup all feature_id's in seqfeature (a hash of hashes)
+	# retreavable by "feat_name" tag
+	my %fromdb_features_byname;
+
+	$sth = $dbh->prepare(
+		"SELECT * FROM cellwall1.seqfeature WHERE sequence = ?"
+	);
+	$sth->execute($fromdb_sequence_id);
+	my $tag, my $id;
+	while(my $ref = $sth->fetchrow_hashref()) {
+		$tag = $ref->{'primary_tag'};
+		$id =  $ref->{'id'};
+		#print $id . "  ---> " . $tag . "\n";
+
+		my $feat_name;
+		if ($tag eq 'MODEL') {
+			$feat_name = %{$fromdb_tags{$id}}->{'feat_name'};
+		}
+		else {
+			$feat_name = %{$fromdb_tags{$id}}->{'model'};
+		}
+
+
+		if (!($feat_name))
+		{ # if empty
+			# Generate a random feat_name /nottagged[1-9,a-z]*/
+			#   if $feat_name empty 
+			$feat_name = $feat_name . "_nottagged" .
+                        int(rand(1000));
+		}
+
+		# Generate a random feat_name suffix
+		#   if $feat_name already in $fromdb_features_byname
+		if (exists 
+		  %{ $fromdb_features_byname{$feat_name}}->{$tag}) {
+			$feat_name = $feat_name . "_notunique" .
+			int(rand(1000));
+		}
+
+		$fromdb_features_byname{$feat_name} = { } unless 
+		  exists $fromdb_features_byname{$feat_name};
+
+		%{ $fromdb_features_byname{$feat_name} }->{$tag} = $id;
+	
+	}
+        if ($sth->rows == 0)
+	{
+		die "ERROR: Sequence_id ${fromdb_sequence_id} " .
+		  "not found in database";
+	};
+	#die join(", ", keys %{ $fromdb_features_byname{'MODEL'} }), "\n";
+	#die join(", ", keys %{ $fromdb_features_byname{'RIGHT_UTR'} }), "\n";
+	#die %{ $fromdb_features_byname{'RIGHT_UTR'}}->{'11667.m06719'}, "\n";
+
+
+	
+	# -------------------------------------------
+
+
 	# Create BioPerl data structures
 	# Input: seq, features(models, exons, cds, utrs left/right/extended)
 
@@ -126,79 +212,123 @@ sub build_SeqView
 	);
 
 	# MODELs
-	my %models; # TODO: Support >1 model
-	my $feature_id = @{ $fromdb_features{'MODEL'} }[0]; 
-
-	# TODO: error if size != 1
-	my $loc = @{$fromdb_locations{$feature_id}}[0];
-	%models = (
-		'68417.m02896' => 
-		Bio::SeqFeature::Generic->new(
-		  -start  => @{$loc}[0],
-		  -end    => @{$loc}[1],
-		  -strand => @{$loc}[2],
-		),
-	);
-
-
-	# EXONs
+	my %models;
 	my %exons;
-        my $s = Bio::Location::Split->new;
-
-	my $feature_id  = @{$fromdb_features{'EXON'}}[0];
-	my $locs = $fromdb_locations{$feature_id};
-	for $loc (@{$locs}) {
-        	$s->add_sub_Location(Bio::Location::Simple->new(
-			  -start  => @{$loc}[0],
-			  -end    => @{$loc}[1],
-			  -strand => @{$loc}[2],
-        							)
-		);
-	}
-	%exons = ('68417.m02896' => $s) if @{$locs} > 0;
-
-
-	# CDS
 	my %cds;
-	my $s;
-        $s = Bio::Location::Split->new;
-	my $feature_id  = @{$fromdb_features{'CDS'}}[0];
-	
-	my $locs = $fromdb_locations{$feature_id};
-	for $loc (@{$locs}) {
-        	$s->add_sub_Location(Bio::Location::Simple->new(
-                          -start  => @{$loc}[0],
-                          -end    => @{$loc}[1],
-                          -strand => @{$loc}[2],
-        							));
-	}
-	%cds = ('68417.m02896' => $s) if @{$locs} > 0;
-
-
-	# UTRs
 	my %utrs;
-	my @utr_features;
-	push(@utr_features, @{$fromdb_features{'LEFT_UTR'}}) if
-		exists $fromdb_features{'LEFT_UTR'};
-	push(@utr_features, @{$fromdb_features{'RIGHT_UTR'}}) if
-		exists $fromdb_features{'RIGHT_UTR'};
-	push(@utr_features, @{$fromdb_features{'EXTENDED_UTR'}}) if
-		exists $fromdb_features{'EXTENDED_UTR'};
 
-        $s = Bio::Location::Split->new;
+	my $loc, my $feature_id;
+	for my $feat_name (keys %fromdb_features_byname) {
 
-	my $feature_id  = @utr_features[0];
-	my $locs = $fromdb_locations{$feature_id};
-	for $loc (@{$locs})
-	{	
-        	$s->add_sub_Location(Bio::Location::Simple->new(
-                          -start  => @{$loc}[0],
-                          -end    => @{$loc}[1],
-                          -strand => @{$loc}[2],
-        							));
+		#print "$feat_name\n";
+
+		# TODO: error if size != 1
+		$feature_id = 
+		  %{%fromdb_features_byname->{$feat_name}}->{'MODEL'};
+
+		$loc = @{$fromdb_locations{$feature_id}}[0]; # only 1 loc!
+		if ($loc)
+		{
+		  %models->{$feat_name} =
+		  	Bio::SeqFeature::Generic->new(
+		  	  -start  => @{$loc}[0],
+		  	  -end    => @{$loc}[1],
+		  	  -strand => @{$loc}[2],
+		  	);
+		}
+
+		my $s;
+
+		# EXONs
+	        $s = Bio::Location::Split->new;
+	
+		$feature_id = 
+		  %{%fromdb_features_byname->{$feat_name}}->{'EXON'};
+		my $locs = $fromdb_locations{$feature_id};
+		for $loc (@{$locs}) {
+	        	$s->add_sub_Location(Bio::Location::Simple->new(
+				  -start  => @{$loc}[0],
+				  -end    => @{$loc}[1],
+				  -strand => @{$loc}[2],
+	        							)
+			);
+		}
+	
+		%exons->{%{$fromdb_tags{$feature_id}}->{'model'}} = $s
+		  if @{$locs} > 0;
+
+
+		# CDS
+        	$s = Bio::Location::Split->new;
+		$feature_id = 
+		  %{%fromdb_features_byname->{$feat_name}}->{'CDS'};
+
+		my $locs = $fromdb_locations{$feature_id};
+		for $loc (@{$locs}) {
+        		$s->add_sub_Location(Bio::Location::Simple->new(
+        	                  -start  => @{$loc}[0],
+        	                  -end    => @{$loc}[1],
+        	                  -strand => @{$loc}[2],
+        								));
+		}
+		%cds->{%{$fromdb_tags{$feature_id}}->{'model'}} = $s
+		  if @{$locs} > 0;
+
+
+		# UTRs
+        	$s = Bio::Location::Split->new;
+
+		$feature_id =  # UTR is for future data adjustments
+		  %{%fromdb_features_byname->{$feat_name}}->{'UTR'};
+		my $locs0 = $fromdb_locations{$feature_id};
+		for $loc (@{$locs0}) {
+        		$s->add_sub_Location(Bio::Location::Simple->new(
+        	                  -start  => @{$loc}[0],
+        	                  -end    => @{$loc}[1],
+        	                  -strand => @{$loc}[2],
+        								));
+		}
+
+		$feature_id = 
+		  %{%fromdb_features_byname->{$feat_name}}->{'LEFT_UTR'};
+		my $locs1 = $fromdb_locations{$feature_id};
+		for $loc (@{$locs1}) {
+        		$s->add_sub_Location(Bio::Location::Simple->new(
+        	                  -start  => @{$loc}[0],
+        	                  -end    => @{$loc}[1],
+        	                  -strand => @{$loc}[2],
+        								));
+		}
+
+		$feature_id = 
+		  %{%fromdb_features_byname->{$feat_name}}->{'RIGHT_UTR'};
+		my $locs2 = $fromdb_locations{$feature_id};
+		for $loc (@{$locs2}) {
+        		$s->add_sub_Location(Bio::Location::Simple->new(
+        	                  -start  => @{$loc}[0],
+        	                  -end    => @{$loc}[1],
+        	                  -strand => @{$loc}[2],
+        								));
+		}
+
+		$feature_id = 
+		  %{%fromdb_features_byname->{$feat_name}}->{'EXTENDED_UTR'};
+		my $locs3 = $fromdb_locations{$feature_id};
+		for $loc (@{$locs3}) {
+        		$s->add_sub_Location(Bio::Location::Simple->new(
+        	                  -start  => @{$loc}[0],
+        	                  -end    => @{$loc}[1],
+        	                  -strand => @{$loc}[2],
+        								));
+		}
+		#die("$feature_id\n") if @{$locs3} > 0;
+		%utrs->{$feat_name} = $s
+		  if @{$locs0} + @{$locs1} + @{$locs2} + @{$locs3} > 0;
 	}
-	%utrs = ('68417.m02896' => $s) if @{$locs} > 0;
 
+
+
+	# ------------------------------
 
 
 	# Create a new panel
@@ -244,18 +374,21 @@ sub build_SeqView
 
 
 	# add tracks for each of the models
-	foreach my $feature_name (sort(keys(%models))) {
-		$panel->add_track(
-                        %models->{$feature_name},
-			-glyph => 'generic',
-			-bgcolor => 'lightblue',
-			-fgcolor => 'black',
-			-font2color => 'black',
-			-key => 'MODEL',
-			-label => $feature_name,
-			-bump => +1,
-			-height => 12
-		);
+	#foreach my $feature_name (sort(keys(%models))) {
+	for my $feature_name (sort keys %fromdb_features_byname) {
+		if (exists %models->{$feature_name}) {
+			$panel->add_track(
+                	        %models->{$feature_name},
+				-glyph => 'generic',
+				-bgcolor => 'lightblue',
+				-fgcolor => 'black',
+				-font2color => 'black',
+				-key => 'MODEL',
+				-label => $feature_name,
+				-bump => +1,
+				-height => 12
+			);
+		}
 
 		# Handle the EXONs first
 		if(defined(%exons->{$feature_name})) {
