@@ -32,7 +32,10 @@ sub build_SeqView
 	my($self) = @_;
 
 	#my $accession = "At4g19720";
-	my $accession = "LOC_Os01g66850";
+	#my $accession = "LOC_Os01g66850";
+	#my $accession = $ARGV[0];
+	my $accession;
+	my $id = $ARGV[0];
 
 	my $sth;
 	my $srow;
@@ -44,18 +47,19 @@ sub build_SeqView
         my $fromdb_sequence_descrip;
 
 	$sth = $dbh->prepare(
-		"SELECT * FROM cellwall1.sequence WHERE accession = ?"
+		"SELECT * FROM cellwall1.sequence WHERE id = ?"
 	);
-	$sth->execute($accession);
+	$sth->execute($id);
         if ($srow = $sth->fetchrow_hashref())
 	{
 		$fromdb_sequence_id      = $srow->{'id'};
+		$accession               = $srow->{'accession'};
 		$fromdb_sequence_length  = $srow->{'length'};
 		$fromdb_sequence_descrip = $srow->{'description'};
 	}
 	else
 	{
-		die "ERROR: Accession ${accession} not found in database";
+		die "ERROR: Sequence id ${id} not found in database";
 	}
 
 
