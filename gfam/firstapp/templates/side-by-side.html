@@ -1,0 +1,14 @@
+<table border=0>
+{% for sequence_id in sequence_id_list %}
+  <tr ><td align=center colspan=2>sequence_id {{sequence_id}}</td></tr>
+  <tr ><td valign=top>
+  <a href="http://bioweb.ucr.edu/Cellwall/sequence.pl?action=render_seqview&sequence_locator=sequence_id:{{sequence_id}}">
+  <img style="padding-right: 2em; padding-bottom: 4em;" src="http://bioweb.ucr.edu/Cellwall/sequence.pl?action=render_seqview&sequence_locator=sequence_id:{{sequence_id}}" />
+  </a>
+  </td><td valign=top>
+  <a href="/gene-structure/{{sequence_id}}.png">
+  <img style="padding-bottom: 4em;" src="/gene-structure/{{sequence_id}}.png" />
+  </a>
+  </td></tr>
+{% endfor %}
+</table>
