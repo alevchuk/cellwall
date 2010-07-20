@@ -1,5 +1,6 @@
-# Create your views here.
 from django.http import HttpResponse
+#from django.template import Template, Context
+from django.shortcuts import *
 
 import commands
 import random
@@ -9,23 +10,9 @@ def gene_structure_png(request, *q):
 	return HttpResponse(out, mimetype='image/png')
 	#return HttpResponse(q)
 
-
 def homepage(request):
-	out = ""
-	out += "<table border=0>"
-
+	l = []
 	for x in range(1,200):
-		id = random.randint(1, 4591)
-		out += "<tr ><td align=center colspan=2>sequence_id %d</td></tr>" % id
-		out += "<tr ><td valign=top>"
-		out += "<a href=\"http://bioweb.ucr.edu/Cellwall/sequence.pl?action=render_seqview&sequence_locator=sequence_id:%s\">" % id
-		out += "<img style=\"padding-right: 2em; padding-bottom: 4em;\" src=\"http://bioweb.ucr.edu/Cellwall/sequence.pl?action=render_seqview&sequence_locator=sequence_id:%s\" />" % id
-		out += "</a>"
-		out += "</td><td valign=top>"
-		out += "<a href=\"/gene-structure/%s.png\">" % id
-		out += "<img style=\"padding-bottom: 4em;\" src=\"/gene-structure/%s.png\" />" % id
-		out += "</a>"
-		out += "</td></tr>"
+		l.append(random.randint(1, 4591))
 
-	out += "</table>"
-	return HttpResponse(out)
+	return render_to_response("side-by-side.html", {'sequence_id_list': l})

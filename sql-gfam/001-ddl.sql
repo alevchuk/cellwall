@@ -320,7 +320,6 @@ create table gfam.sequence_tag (
 ) tablespace gfam_ts;
 
 alter table gfam.sequence_tag add constraint pk_sequence_tag primary key(sequence_tag_id);
-alter table gfam.sequence_tag add constraint uk_sequence_tag unique( sequence_feature_id, value);
 
 alter table gfam.sequence_tag add constraint fk_sequence_tag_sequence_feature
       foreign key (sequence_feature_id) references gfam.sequence_feature(sequence_feature_id) on update cascade on delete cascade;
