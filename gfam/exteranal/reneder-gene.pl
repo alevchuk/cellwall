@@ -23,7 +23,7 @@ use strict;
 
 
 # DB connect
-my $dbh = DBI->connect("DBI:Pg:dbname=cellwall;host=cellwalldb",
+my $dbh = DBI->connect("DBI:Pg:dbname=gfam;host=cellwalldb",
         "cellwallweb", "uXmn]h0r", {'RaiseError' => 1});
                      
 
@@ -47,7 +47,7 @@ sub build_SeqView
         my $fromdb_sequence_descrip;
 
 	$sth = $dbh->prepare(
-		"SELECT * FROM cellwall1.sequence WHERE id = ?"
+		"SELECT * FROM stage.cellwall1_sequence WHERE id = ?"
 	);
 	$sth->execute($id);
         if ($srow = $sth->fetchrow_hashref())
@@ -66,8 +66,9 @@ sub build_SeqView
 	# Lookup all feature_ids and names in seqtags (a hash of hashes)
 	my %fromdb_tags;
 	$sth = $dbh->prepare(
-		"SELECT * FROM cellwall1.seqtags t, cellwall1.seqfeature f " .
-		"WHERE t.feature = f.id AND f.sequence = ?"
+		"SELECT * FROM gfam.sequence_tag t, gfam.sequence_feature f " .
+		"WHERE t.sequence_feature_id = f.sequence_feature_id AND " .
+		"f.sequence_id = ?"
 	);
 
 	my $key, my $value, my $feature_id;
@@ -75,7 +76,7 @@ sub build_SeqView
 	while(my $ref = $sth->fetchrow_hashref()) {
 		$key   = $ref->{'name'};
 		$value = $ref->{'value'};
-		$feature_id = $ref->{'feature'};
+		$feature_id = $ref->{'sequence_feature_id'};
 
 		$fromdb_tags{$feature_id} = { } unless 
 		  exists $fromdb_tags{$feature_id};
@@ -84,7 +85,7 @@ sub build_SeqView
 	};
 	if ($sth->rows == 0)
 	{
-		die "ERROR: seqfeature $feature_id " .
+		die "ERROR: sequence_id $fromdb_sequence_id " .
 		  "not found in database";
 	};
 	# die %{$fromdb_tags{9642}}->{"model"}, "\n";
@@ -93,13 +94,13 @@ sub build_SeqView
 	# Lookup all feature_id's in seqfeature (a hash of arrays)
 	my %fromdb_features;
 	$sth = $dbh->prepare(
-		"SELECT * FROM cellwall1.seqfeature WHERE sequence = ?"
+		"SELECT * FROM gfam.sequence_feature WHERE sequence_id = ?"
 	);
 	$sth->execute($fromdb_sequence_id);
 	my $tag, my $id;
 	while(my $ref = $sth->fetchrow_hashref()) {
 		$tag = $ref->{'primary_tag'};
-		$id =  $ref->{'id'};
+		$id =  $ref->{'sequence_feature_id'};
 		$fromdb_features{$tag} = [ ] unless 
 		  exists $fromdb_features{$tag};
 		push @{ $fromdb_features{$tag} }, $id;
@@ -119,7 +120,8 @@ sub build_SeqView
 	# hash of arrays (triplets) with key being the feature_id
 	my %fromdb_locations;
 	$sth = $dbh->prepare(
-		"SELECT * FROM cellwall1.seqlocation WHERE seqfeature = ?"
+		"SELECT * FROM gfam.sequence_location WHERE " .
+		"sequence_feature_id = ?"
 	);
 	my $start, my $stop, my $strand;
 	for my $primary_tag ( keys %fromdb_features ) {
@@ -152,13 +154,13 @@ sub build_SeqView
 	my %fromdb_features_byname;
 
 	$sth = $dbh->prepare(
-		"SELECT * FROM cellwall1.seqfeature WHERE sequence = ?"
+		"SELECT * FROM gfam.sequence_feature WHERE sequence_id = ?"
 	);
 	$sth->execute($fromdb_sequence_id);
 	my $tag, my $id;
 	while(my $ref = $sth->fetchrow_hashref()) {
 		$tag = $ref->{'primary_tag'};
-		$id =  $ref->{'id'};
+		$id =  $ref->{'sequence_feature_id'};
 		#print $id . "  ---> " . $tag . "\n";
 
 		my $feat_name;

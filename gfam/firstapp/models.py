@@ -12,29 +12,29 @@ from django.db import models
 
 class FamilyTree(models.Model):
     family_tree_id = models.IntegerField(primary_key=True)
-    family_tree_name = models.CharField(max_length=-1)
-    family_tree_description = models.CharField(max_length=-1)
+    family_tree_name = models.CharField(max_length=256)
+    family_tree_description = models.CharField(max_length=256)
     class Meta:
         db_table = u'family_tree'
 
 class FamilyTreeNode(models.Model):
     family_tree_node_id = models.IntegerField(primary_key=True)
-    family_tree_node_name = models.CharField(max_length=-1)
-    family_tree_node_abrev = models.CharField(max_length=-1)
+    family_tree_node_name = models.CharField(max_length=256)
+    family_tree_node_abrev = models.CharField(max_length=256)
     class Meta:
         db_table = u'family_tree_node'
 
 class FamilyBuildMethod(models.Model):
     family_build_method_id = models.IntegerField(primary_key=True)
-    family_build_method_name = models.CharField(max_length=-1)
-    family_build_method_desc = models.CharField(max_length=-1)
+    family_build_method_name = models.CharField(max_length=256)
+    family_build_method_desc = models.CharField(max_length=256)
     class Meta:
         db_table = u'family_build_method'
 
 class FamilyBuild(models.Model):
     family_build_id = models.IntegerField(primary_key=True)
-    famaily_build_name = models.CharField(max_length=-1)
-    family_build_desc = models.CharField(max_length=-1)
+    famaily_build_name = models.CharField(max_length=256)
+    family_build_desc = models.CharField(max_length=256)
     family_build_method = models.ForeignKey(FamilyBuildMethod)
     family_build_timestamp = models.DateTimeField()
     class Meta:
@@ -42,10 +42,10 @@ class FamilyBuild(models.Model):
 
 class Sequence(models.Model):
     sequence_id = models.IntegerField(primary_key=True)
-    seguid = models.CharField(unique=True, max_length=-1)
-    alphabet = models.CharField(max_length=-1)
+    seguid = models.CharField(unique=True, max_length=256)
+    alphabet = models.CharField(max_length=256)
     length = models.IntegerField()
-    sequence = models.CharField(max_length=-1)
+    sequence = models.CharField(max_length=256)
     class Meta:
         db_table = u'sequence'
 
@@ -69,16 +69,16 @@ class FamilyMember(models.Model):
 
 class Genome(models.Model):
     genome_id = models.IntegerField(primary_key=True)
-    genome_name = models.CharField(max_length=-1)
+    genome_name = models.CharField(max_length=256)
     class Meta:
         db_table = u'genome'
 
 class Species(models.Model):
     species_id = models.IntegerField(primary_key=True)
-    genus = models.CharField(max_length=-1)
-    species = models.CharField(max_length=-1)
-    sub_species = models.CharField(max_length=-1)
-    common_name = models.CharField(max_length=-1)
+    genus = models.CharField(max_length=256)
+    species = models.CharField(max_length=256)
+    sub_species = models.CharField(max_length=256)
+    common_name = models.CharField(max_length=256)
     class Meta:
         db_table = u'species'
 
@@ -86,31 +86,31 @@ class Species(models.Model):
 class Db(models.Model):
     db_id = models.IntegerField(primary_key=True)
     genome = models.ForeignKey(Genome)
-    db_name = models.CharField(max_length=-1)
-    db_type = models.CharField(max_length=-1)
+    db_name = models.CharField(max_length=256)
+    db_type = models.CharField(max_length=256)
     class Meta:
         db_table = u'db'
 
 class SequenceInformation(models.Model):
     sequence_information_id = models.IntegerField(primary_key=True)
     sequence = models.ForeignKey(Sequence)
-    accession = models.CharField(max_length=-1)
+    accession = models.CharField(max_length=256)
     db = models.ForeignKey(Db)
     species = models.ForeignKey(Species)
-    display = models.CharField(max_length=-1)
-    description = models.CharField(max_length=-1)
-    gene_name = models.CharField(max_length=-1)
-    fullname = models.CharField(max_length=-1)
-    alt_fullname = models.CharField(max_length=-1)
-    symbols = models.CharField(max_length=-1)
+    display = models.CharField(max_length=256)
+    description = models.CharField(max_length=256)
+    gene_name = models.CharField(max_length=256)
+    fullname = models.CharField(max_length=256)
+    alt_fullname = models.CharField(max_length=256)
+    symbols = models.CharField(max_length=256)
     class Meta:
         db_table = u'sequence_information'
 
 class SourceFile(models.Model):
-    file_name = models.CharField(max_length=-1, primary_key=True)
-    path = models.CharField(max_length=-1)
-    sequence_file_desc = models.CharField(max_length=-1)
-    file_type = models.CharField(max_length=-1)
+    file_name = models.CharField(max_length=256, primary_key=True)
+    path = models.CharField(max_length=256)
+    sequence_file_desc = models.CharField(max_length=256)
+    file_type = models.CharField(max_length=256)
     class Meta:
         db_table = u'source_file'
 
@@ -118,7 +118,7 @@ class SequenceFeature(models.Model):
     sequence_feature_id = models.IntegerField(primary_key=True)
     sequence = models.ForeignKey(Sequence)
     rank = models.IntegerField()
-    primary_tag = models.CharField(max_length=-1)
+    primary_tag = models.CharField(max_length=256)
     class Meta:
         db_table = u'sequence_feature'
 
@@ -132,8 +132,8 @@ class SequenceSourceFile(models.Model):
 class SequenceTag(models.Model):
     sequence_tag_id = models.IntegerField(primary_key=True)
     sequence_feature = models.ForeignKey(SequenceFeature)
-    name = models.CharField(max_length=-1)
-    value = models.CharField(max_length=-1)
+    name = models.CharField(max_length=256)
+    value = models.CharField(max_length=256)
     class Meta:
         db_table = u'sequence_tag'
 
@@ -150,10 +150,10 @@ class SequenceLocation(models.Model):
 
 class Dblink(models.Model):
     dblink_id = models.IntegerField(primary_key=True)
-    section = models.CharField(max_length=-1)
+    section = models.CharField(max_length=256)
     sequence = models.ForeignKey(Sequence)
-    db = models.CharField(max_length=-1)
-    href = models.CharField(max_length=-1)
+    db = models.CharField(max_length=256)
+    href = models.CharField(max_length=256)
     class Meta:
         db_table = u'dblink'
 
