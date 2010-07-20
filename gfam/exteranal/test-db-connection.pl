@@ -4,8 +4,11 @@
 use DBI;
 
 # connect
+open FILE, "</etc/gfam/password-db-cellwallweb" or die $!;
+my $dbpasswd = <FILE>;
+chomp($dbpasswd);
 my $dbh = DBI->connect("DBI:Pg:dbname=cellwall;host=cellwalldb", 
-	"cellwallweb", "uXmn]h0r", {'RaiseError' => 1});
+	"cellwallweb", $dbpasswd, {'RaiseError' => 1});
 
 # execute SELECT query
 my $sth = $dbh->prepare("SELECT * FROM cellwall.species");
