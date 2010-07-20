@@ -1,0 +1,62 @@
+# 1. Every line should have 2 words seperated by one space
+# 2. Blank lines and comments are ignored
+#
+# Format: <label> <source>
+# 
+#  <label>    - will be the unique portion in the target filename
+#  <source>   - the URL of the source data
+#
+
+
+# Populus Trichocarpa 
+# http://www.phytozome.net/poplar
+
+phyt-poptr-v5-_prot-- ftp://ftp.jgi-psf.org/pub/JGI_data/phytozome/v5.0/Ptrichocarpa/annotation/Populus.trichocarpa.v2.0.peptide.fa.gz
+phyt-poptr-v5-_struct ftp://ftp.jgi-psf.org/pub/JGI_data/phytozome/v5.0/Ptrichocarpa/annotation/Ptrichocarpa_129_gene.gff3.gz
+
+
+
+# Physcomitrella Patens (Moss)
+# No change since Sourcemap-0.7
+## # http://www.phytozome.net/physcomitrella.php
+phyt-phypa-v5-_prot-- ftp://ftp.jgi-psf.org/pub/JGI_data/phytozome/v5.0/Ppatens/proteins.Phypa1_1.FilteredModels.fasta.gz
+phyt-poptr-v5-_struct ftp://ftp.jgi-psf.org/pub/JGI_data/phytozome/v5.0/Ppatens/Phypa1_1.FilteredModels.gff.gz
+# Same as:
+##jgi-phypa-v1-1_prot-- ftp://ftp.jgi-psf.org/pub/JGI_data/Physcomitrella_patens/v1.1/proteins.Phypa1_1.FilteredModels.fasta.gz
+##jgi-phypa-v1-1_struct ftp://ftp.jgi-psf.org/pub/JGI_data/Physcomitrella_patens/v1.1/Phypa1_1.FilteredModels.gff.gz
+
+
+
+# Oryza Sativa (Rice)
+# No change since Sourcemap-0.7
+## http://rice.plantbiology.msu.edu
+## http://rice.plantbiology.msu.edu/data_download.shtml
+tigr-v6-0-all-_prot-- ftp://ftp.plantbiology.msu.edu/pub/data/Eukaryotic_Projects/o_sativa/annotation_dbs/pseudomolecules/version_6.1/all.dir/all.pep
+tigr-v6-0-all-_struct ftp://ftp.plantbiology.msu.edu/pub/data/Eukaryotic_Projects/o_sativa/annotation_dbs/pseudomolecules/version_6.1/all.dir/all.gff3
+
+
+
+# Arabidopsis thaliana (Thale Cress)
+# No change since Sourcemap-0.7
+# # http://arabidopsis.org/
+# # http://arabidopsis.org/help/helppages/BLAST_help.jsp#datasets
+# # ftp://ftp.arabidopsis.org/home/tair/Sequences/blast_datasets/TAIR8_blastsets/
+# # 
+# #
+# # ftp.ara... somtimes drops downloads when there are more than one connection
+# # so a mirror or proxy may be needed
+# 
+tair-v9-------_prot-- ftp://ftp.arabidopsis.org/home/tair/Sequences/blast_datasets/TAIR9_blastsets/TAIR9_pep_20090619
+tair-v9-------_struct ftp://ftp.arabidopsis.org/home/tair/Genes/TAIR9_genome_release/TAIR9_gff3/TAIR9_GFF3_genes.gff
+
+
+# Uniprot
+# Latest version in ftp://ftp.uniprot.org/pub/databases/uniprot/relnotes.txt
+
+# Proteins only
+# Don't care for uniref's
+# Don't care for Splice Variants (varsplic)
+
+sprot--2010-08_prot-- ftp://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/complete/uniprot_sprot.fasta.gz
+trembl-2010-08_prot-- ftp://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/complete/uniprot_trembl.fasta.gz
+
