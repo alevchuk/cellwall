@@ -33,7 +33,7 @@ phyt-phypa-v5-_struct ftp://ftp.jgi-psf.org/pub/JGI_data/phytozome/v5.0/Ppatens/
 ## http://rice.plantbiology.msu.edu
 ## http://rice.plantbiology.msu.edu/data_download.shtml
 tigr-v6-0-all-_prot-- ftp://ftp.plantbiology.msu.edu/pub/data/Eukaryotic_Projects/o_sativa/annotation_dbs/pseudomolecules/version_6.1/all.dir/all.pep
-tigr-v6-0-all-_dna--- ftp://ftp.plantbiology.msu.edu/pub/data/Eukaryotic_Projects/o_sativa/annotation_dbs/pseudomolecules/version_6.1/all.dir/all.seq
+tigr-v6-0-all-_dna--- ftp://ftp.plantbiology.msu.edu/pub/data/Eukaryotic_Projects/o_sativa/annotation_dbs/pseudomolecules/version_6.1/all.dir/all.cDNA
 tigr-v6-0-all-_struct ftp://ftp.plantbiology.msu.edu/pub/data/Eukaryotic_Projects/o_sativa/annotation_dbs/pseudomolecules/version_6.1/all.dir/all.gff3
 
 
