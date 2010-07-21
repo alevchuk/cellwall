@@ -1,8 +1,0 @@
-#!/usr/bin/ruby
-
-SRC_DIR = File.dirname(File.expand_path(__FILE__))
-
-# Invoke Usage Message (NOTE: exec exits)
-exec "#{SRC_DIR}/convert-gff3-to-tab" if ARGV.size < 1
-
-system "#{SRC_DIR}/convert-gff3-to-tab #{ARGV[0]} --spaces-in-attributes"

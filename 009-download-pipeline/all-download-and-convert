@@ -1,11 +1,9 @@
 #!/usr/bin/ruby
 
 HOME         = `echo ~`.chomp
-SCRIPTS_DIR  = "#{HOME}/.html/cellwall/scripts"
+SCRIPTS_DIR  = File.dirname(File.expand_path(__FILE__))
 NAME         = File.basename(__FILE__)
 FASTA2TAB    = "#{SCRIPTS_DIR}/convert-fasta-to-tab"  # Pipelined
-GFF3_TO_TAB  = "#{SCRIPTS_DIR}/convert-gff3-to-tab"    # Not Pipelined
-GFF0_TO_TAB  = "#{SCRIPTS_DIR}/convert-gff0-to-tab"    # Not Pipelined
 FILETYPE     = "#{SCRIPTS_DIR}/lookup-filetype-from-stream"
 
 MAX_THREADS  = 20
@@ -23,7 +21,7 @@ CP           = "/bin/cp"
 MV           = "/bin/mv"
 
 
-OPTIONS      = ['--no-tabs']
+OPTIONS      = [] #['--no-tabs']
 
 SOURCE_MAP   = ARGV[0]
 
@@ -32,26 +30,31 @@ if SOURCE_MAP.nil?
   exit(1)
 end
 
+if !(SOURCE_MAP =~ /^Sourcemap-(.*)$/)
+  STDERR.puts "Bad filename #{SOURCE_MAP}"
+  exit
+end
+SOURCE_MAP_ID = $1
+
+
+
 DOWNLOAD_TIMESTAMP = `#{DATE}`.chomp
 
 def run(cmd, tabulizer, type, out_name)
-  return unless out_name =~ /_struct/ # Skip all but this one
 
   destination =
-    "source_#{DOWNLOAD_TIMESTAMP}_#{type.ljust(5,'-')}_#{out_name}"
+    "source-#{SOURCE_MAP_ID}/#{DOWNLOAD_TIMESTAMP}_" + 
+    "#{type.ljust(5,'-')}_#{out_name}"
 
   if type == "gff" or type == "gff3"
-    # SPECIAL CASE: Cannot pipeline the GFF converter, must do in stages
-    system("#{cmd} > #{destination}")
-    system("#{tabulizer} #{destination}")
-    system("#{MV} #{destination}.tab dumps/")
+    system("#{cmd} > ./#{destination}")
    
   else
-    piped_cmd = "#{cmd} | #{TEE} #{destination} " + 
+    piped_cmd = "#{cmd} | #{TEE} ./#{destination} " + 
       if OPTIONS.include?('--no-tabs')
         "> /dev/null"
       else 
-        "| #{tabulizer} > dumps/#{destination}.tab"
+        "| #{tabulizer} > ./#{destination}.tab"
       end
 
     system(piped_cmd)
@@ -70,11 +73,11 @@ def download_and_convert_one(name, url)
       break
 
     elsif filetype =~ /^GFF3/
-      run(download_and_gunzip_cmd, GFF3_TO_TAB, 'gff3', name)
+      run(download_and_gunzip_cmd, nil, 'gff3', name)
       break
 
     elsif filetype =~ /^GFF/
-      run(download_and_gunzip_cmd, GFF0_TO_TAB, 'gff', name)
+      run(download_and_gunzip_cmd, nil, 'gff', name)
       break
 
     elsif filetype =~ /^gzip/
@@ -94,8 +97,18 @@ def download_and_convert_one(name, url)
   end
 end
 
+
+
+# Make the destination directory
+`mkdir ./source-#{SOURCE_MAP_ID}`
+
 File.open(SOURCE_MAP) do |f|
   while line = f.gets
+
+    # TODO: Remove me
+    if !(line =~ /_dna-/) # Download only DNA
+      next
+    end
 
     line.strip!
     next if line.empty? or line =~ /^[\s]*#/
@@ -113,4 +126,3 @@ File.open(SOURCE_MAP) do |f|
 end
 
 (Thread.list - [Thread.main]).each {|t| t.join}
-

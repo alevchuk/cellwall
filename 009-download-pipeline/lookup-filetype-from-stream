@@ -7,7 +7,6 @@ FILE_UTIL = "/usr/bin/file"
 first_line = ""
 loop do
   first_line = STDIN.gets
-  puts first_line
   if first_line.nil?
     STDERR.puts "#{NAME}: Possibly comments but No data"
     exit(1)
@@ -30,8 +29,8 @@ end
 
 # Does not match any special file types, so it's time to use `file` utility
 tempfile = Tempfile.new(NAME)
-tempfile.puts first_line
 
+tempfile.puts first_line
 tempfile.flush
 type = `#{FILE_UTIL} #{tempfile.path}`
 
