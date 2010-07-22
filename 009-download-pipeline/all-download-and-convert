@@ -46,6 +46,11 @@ def run(cmd, tabulizer, type, out_name)
     "source-#{SOURCE_MAP_ID}/#{DOWNLOAD_TIMESTAMP}_" + 
     "#{type.ljust(5,'-')}_#{out_name}"
 
+  if File.exists?(destination)
+    puts "#{out_name} already exists Skipped!"
+    return
+  end
+
   if type == "gff" or type == "gff3"
     system("#{cmd} > ./#{destination}")
    
@@ -60,7 +65,7 @@ def run(cmd, tabulizer, type, out_name)
     system(piped_cmd)
   end
 
-  puts destination
+  puts out_name
 end
 
 def download_and_convert_one(name, url)
@@ -106,7 +111,7 @@ File.open(SOURCE_MAP) do |f|
   while line = f.gets
 
     # TODO: Remove me
-    if !(line =~ /_dna-/) # Download only DNA
+    if line =~ /uniprot/ # Skip uniprot
       next
     end
 

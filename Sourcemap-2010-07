@@ -10,8 +10,8 @@
 
 # Populus Trichocarpa 
 # http://www.phytozome.net/poplar
+phyt-poptr-v5-_genome ftp://ftp.jgi-psf.org/pub/JGI_data/phytozome/v5.0/Ptrichocarpa/assembly/Populus_trichocarpa.v2.fa.gz
 phyt-poptr-v5-_prot-- ftp://ftp.jgi-psf.org/pub/JGI_data/phytozome/v5.0/Ptrichocarpa/annotation/Populus.trichocarpa.v2.0.peptide.fa.gz
-phyt-poptr-v5-_dna--- ftp://ftp.jgi-psf.org/pub/JGI_data/phytozome/v5.0/Ptrichocarpa/annotation/Populus.trichocarpa.v2.0.transcript.fa.gz
 phyt-poptr-v5-_struct ftp://ftp.jgi-psf.org/pub/JGI_data/phytozome/v5.0/Ptrichocarpa/annotation/Ptrichocarpa_129_gene.gff3.gz
 
 
@@ -19,22 +19,12 @@ phyt-poptr-v5-_struct ftp://ftp.jgi-psf.org/pub/JGI_data/phytozome/v5.0/Ptrichoc
 # Physcomitrella Patens (Moss)
 # No change since Sourcemap-0.7
 ## # http://www.phytozome.net/physcomitrella.php
+phyt-phypa-v5-_genome ftp://ftp.jgi-psf.org/pub/JGI_data/phytozome/v5.0/Ppatens/Physcomitrella_patens.1_1.fasta.gz
 phyt-phypa-v5-_prot-- ftp://ftp.jgi-psf.org/pub/JGI_data/phytozome/v5.0/Ppatens/proteins.Phypa1_1.FilteredModels.fasta.gz
-phyt-phypa-v5-_dna--- ftp://ftp.jgi-psf.org/pub/JGI_data/phytozome/v5.0/Ppatens/transcripts.Phypa1_1.FilteredModels.fasta.gz
 phyt-phypa-v5-_struct ftp://ftp.jgi-psf.org/pub/JGI_data/phytozome/v5.0/Ppatens/Phypa1_1.FilteredModels.gff.gz
 # Same as:
 ##jgi-phypa-v1-1_prot-- ftp://ftp.jgi-psf.org/pub/JGI_data/Physcomitrella_patens/v1.1/proteins.Phypa1_1.FilteredModels.fasta.gz
 ##jgi-phypa-v1-1_struct ftp://ftp.jgi-psf.org/pub/JGI_data/Physcomitrella_patens/v1.1/Phypa1_1.FilteredModels.gff.gz
-
-
-
-# Oryza Sativa (Rice)
-# No change since Sourcemap-0.7
-## http://rice.plantbiology.msu.edu
-## http://rice.plantbiology.msu.edu/data_download.shtml
-tigr-v6-0-all-_prot-- ftp://ftp.plantbiology.msu.edu/pub/data/Eukaryotic_Projects/o_sativa/annotation_dbs/pseudomolecules/version_6.1/all.dir/all.pep
-tigr-v6-0-all-_dna--- ftp://ftp.plantbiology.msu.edu/pub/data/Eukaryotic_Projects/o_sativa/annotation_dbs/pseudomolecules/version_6.1/all.dir/all.cDNA
-tigr-v6-0-all-_struct ftp://ftp.plantbiology.msu.edu/pub/data/Eukaryotic_Projects/o_sativa/annotation_dbs/pseudomolecules/version_6.1/all.dir/all.gff3
 
 
 
@@ -43,16 +33,40 @@ tigr-v6-0-all-_struct ftp://ftp.plantbiology.msu.edu/pub/data/Eukaryotic_Project
 # # http://arabidopsis.org/
 # # http://arabidopsis.org/help/helppages/BLAST_help.jsp#datasets
 # # ftp://ftp.arabidopsis.org/home/tair/Sequences/blast_datasets/TAIR8_blastsets/
+tair-v9-------_chr1-- ftp://ftp.arabidopsis.org/home/tair/Sequences/whole_chromosomes/chr1.fas
+tair-v9-------_chr2-- ftp://ftp.arabidopsis.org/home/tair/Sequences/whole_chromosomes/chr2.fas
+tair-v9-------_chr3-- ftp://ftp.arabidopsis.org/home/tair/Sequences/whole_chromosomes/chr3.fas
+tair-v9-------_chr4-- ftp://ftp.arabidopsis.org/home/tair/Sequences/whole_chromosomes/chr4.fas
+tair-v9-------_chr5-- ftp://ftp.arabidopsis.org/home/tair/Sequences/whole_chromosomes/chr5.fas
+tair-v9-------_chrM-- ftp://ftp.arabidopsis.org/home/tair/Sequences/whole_chromosomes/chrM.fas
+tair-v9-------_chrC-- ftp://ftp.arabidopsis.org/home/tair/Sequences/whole_chromosomes/chrC.fas
 tair-v9-------_prot-- ftp://ftp.arabidopsis.org/home/tair/Sequences/blast_datasets/TAIR9_blastsets/TAIR9_pep_20090619
-tair-v9-------_dna--- ftp://ftp.arabidopsis.org/home/tair/Sequences/blast_datasets/TAIR9_blastsets/TAIR9_seq_20090619
 tair-v9-------_struct ftp://ftp.arabidopsis.org/home/tair/Genes/TAIR9_genome_release/TAIR9_gff3/TAIR9_GFF3_genes.gff
 
 
-# Uniprot
-# Latest version in ftp://ftp.uniprot.org/pub/databases/uniprot/relnotes.txt
 
-# Proteins only
-# Don't care for uniref's
-# Don't care for Splice Variants (varsplic)
-sprot--2010-08_prot-- ftp://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/complete/uniprot_sprot.fasta.gz
-trembl-2010-08_prot-- ftp://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/complete/uniprot_trembl.fasta.gz
+# Oryza Sativa (Rice)
+# No change since Sourcemap-0.7
+## http://rice.plantbiology.msu.edu
+## http://rice.plantbiology.msu.edu/data_download.shtml
+tigr-v6-0-all-_genome ftp://ftp.plantbiology.msu.edu/pub/data/Eukaryotic_Projects/o_sativa/annotation_dbs/pseudomolecules/version_6.1/all.dir/all.con
+tigr-v6-0-all-_prot-- ftp://ftp.plantbiology.msu.edu/pub/data/Eukaryotic_Projects/o_sativa/annotation_dbs/pseudomolecules/version_6.1/all.dir/all.pep
+tigr-v6-0-all-_struct ftp://ftp.plantbiology.msu.edu/pub/data/Eukaryotic_Projects/o_sativa/annotation_dbs/pseudomolecules/version_6.1/all.dir/all.gff3
+
+tigr-v6-0-all-_chprot ftp://ftp.plantbiology.msu.edu/pub/data/Eukaryotic_Projects/o_sativa/annotation_dbs/pseudomolecules/chloroplast.dir/chrC.pep
+tigr-v6-0-all-_miprot ftp://ftp.plantbiology.msu.edu/pub/data/Eukaryotic_Projects/o_sativa/annotation_dbs/pseudomolecules/mitochondrion.dir/chrM.pep
+
+tigr-v6-0-all-_unchr- ftp://ftp.plantbiology.msu.edu/pub/data/Eukaryotic_Projects/o_sativa/annotation_dbs/pseudomolecules/version_6.1/unmapped.dir/chrUn.con
+tigr-v6-0-all-_unprot ftp://ftp.plantbiology.msu.edu/pub/data/Eukaryotic_Projects/o_sativa/annotation_dbs/pseudomolecules/version_6.1/unmapped.dir/chrUn.pep
+tigr-v6-0-all-_unstr- ftp://ftp.plantbiology.msu.edu/pub/data/Eukaryotic_Projects/o_sativa/annotation_dbs/pseudomolecules/version_6.1/unmapped.dir/chrUn.gff3
+
+tigr-v6-0-all-_sychr- ftp://ftp.plantbiology.msu.edu/pub/data/Eukaryotic_Projects/o_sativa/annotation_dbs/pseudomolecules/version_6.1/unmapped.dir/chrSy.con
+tigr-v6-0-all-_syprot ftp://ftp.plantbiology.msu.edu/pub/data/Eukaryotic_Projects/o_sativa/annotation_dbs/pseudomolecules/version_6.1/unmapped.dir/chrSy.pep
+tigr-v6-0-all-_systr- ftp://ftp.plantbiology.msu.edu/pub/data/Eukaryotic_Projects/o_sativa/annotation_dbs/pseudomolecules/version_6.1/unmapped.dir/chrSy.gff3
+
+
+# Uniprot (Proteins only)
+# WARNING: This link is always pointing to the latest version
+# # ftp://ftp.uniprot.org/pub/databases/uniprot/relnotes.txt
+uniprot2010-08_sprot- ftp://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/complete/uniprot_sprot.fasta.gz
+uniprot2010-08_trembl ftp://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/complete/uniprot_trembl.fasta.gz

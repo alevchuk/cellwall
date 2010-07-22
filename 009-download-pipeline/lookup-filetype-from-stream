@@ -8,7 +8,7 @@ first_line = ""
 loop do
   first_line = STDIN.gets
   if first_line.nil?
-    STDERR.puts "#{NAME}: Possibly comments but No data"
+    STDERR.puts "ERROR: #{NAME}: No data"
     exit(1)
   end
   break unless first_line =~ /^[\s]*#/
