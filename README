@@ -1,2 +1,21 @@
 Description: 	The Cellwall Navigator Version 2.0
 Homepage: 	http://swiki.biocluster.ucr.edu/Cellwall
+
+Build Workflow:
+
+Steps
+---------------------------------------------------------------------------------------
+1. Generate FASTA files by family from the database -> 
+2. Download new sequence files (FASTA) -> OK
+3. MA of sample/old sequences by family (Clean-up step) (except NCI)
+4. HMM create model: HMM by family using MAs from step 3.
+5. HMM search (apply model): HMM search by family output: FASTA files by family from 2.
+6. Load new builds into database
+   6.1 load all sequence to stage
+   6.2 load family files
+   6.3 map new family data to gfam model 
+   6.4 load new family into gfam
+---------------------------------------------------------------------------------------
+
+7. load gff for all families in one step
+8. find dna for proteins (gff/chromosomes)
