@@ -55,6 +55,7 @@ tigr-v6-0-all-_struct ftp://ftp.plantbiology.msu.edu/pub/data/Eukaryotic_Project
 
 tigr-v6-0-all-_chprot ftp://ftp.plantbiology.msu.edu/pub/data/Eukaryotic_Projects/o_sativa/annotation_dbs/pseudomolecules/chloroplast.dir/chrC.pep
 tigr-v6-0-all-_miprot ftp://ftp.plantbiology.msu.edu/pub/data/Eukaryotic_Projects/o_sativa/annotation_dbs/pseudomolecules/mitochondrion.dir/chrM.pep
+# Struct annotaition is in XML files. Forget that.
 
 tigr-v6-0-all-_unchr- ftp://ftp.plantbiology.msu.edu/pub/data/Eukaryotic_Projects/o_sativa/annotation_dbs/pseudomolecules/version_6.1/unmapped.dir/chrUn.con
 tigr-v6-0-all-_unprot ftp://ftp.plantbiology.msu.edu/pub/data/Eukaryotic_Projects/o_sativa/annotation_dbs/pseudomolecules/version_6.1/unmapped.dir/chrUn.pep
