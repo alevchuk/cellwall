@@ -1,0 +1,75 @@
+#!/usr/bin/ruby
+
+ACCESSION_TO_SEQUENCE_ID = {}
+TO_FEATURE_ID            = {}
+
+
+FEATURES  = [] # (sequence_feature_id) sequence_id | rank | primary_tag
+LOCATIONS = [] # (sequence_location_id) sequence_feature_id | rank |
+               #                        start_pos | end_pos | strand
+TAGS      = [] # (sequence_tag_id) sequence_feature_id | name | value
+
+
+# TAIR9 specific
+def adjust_type(type)
+  type.sub( 
+    "five_prime_UTR",  "RIGHT_UTR").sub( 
+    "three_prime_UTR", "LEFT_UTR" ).sub(
+    "exon", "EXON").sub(
+    "mRNA", "MODEL")
+end
+
+
+while line = STDIN.gets
+  line.chomp!
+
+  all = line.split("\t") 
+  seqid, source, type, start, end_, score, strand, phase, attributes = all
+
+  type = adjust_type(type)
+  strand = (strand == "-" ? -1 : 1)
+
+  # TAIR9 specific
+  next if ["protein", "gene"].include?(type) # Skip these
+
+  attr_dict = {}
+  attributes.split(';').each {|kv| k,v = kv.split('='); attr_dict[k] = v}
+
+  # TAIR9 specific
+  accession = (type == "MODEL" ? attr_dict["ID"] : attr_dict["Parent"])
+
+  # TAIR9 specific
+  if accession =~ /,/
+    accession = accession.split(",")
+    accession = accession.select{|c| !(c =~ /-Protein$/) }
+    accession = accession.first
+  end
+  
+  if ACCESSION_TO_SEQUENCE_ID[accession].nil?
+    ACCESSION_TO_SEQUENCE_ID[accession] = ACCESSION_TO_SEQUENCE_ID.size
+  end
+  sequence_id = ACCESSION_TO_SEQUENCE_ID[accession]
+
+  if TO_FEATURE_ID[[accession, type]].nil?
+    TO_FEATURE_ID[[accession, type]] = TO_FEATURE_ID.size
+  end
+  feature_id = TO_FEATURE_ID[[accession, type]]
+
+  # Inserts
+  LOCATIONS.push [feature_id, -1, start, end_, strand]
+
+  if FEATURES[feature_id].nil?
+    FEATURES[feature_id] = [sequence_id, -1, type]
+    TAGS[feature_id]     = [feature_id,
+                            type == "MODEL" ? "feat_name" : "model",
+                            accession]
+  end
+end
+
+[[FEATURES,  "features.tab"],
+ [LOCATIONS, "locations.tab"],
+ [TAGS,       "tags.tab"]].each do |data, file|
+    File.open(file, 'w') do |f|
+      data.each_with_index {|i, id| f.puts(([id] + i).join("\t")) }
+    end
+end

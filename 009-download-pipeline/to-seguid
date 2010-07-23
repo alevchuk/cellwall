@@ -1,0 +1,20 @@
+#!/usr/bin/ruby
+require 'digest/sha1'
+ONE_PER_LINE = ARGV.delete '-1'
+
+
+if ONE_PER_LINE
+  def get_line
+    STDIN.gets
+  end
+else
+  def get_line
+    STDIN.eof? ? false : STDIN.readlines.join
+  end
+end
+
+while one_line_seq = get_line
+  final = one_line_seq.upcase.scan(/[A-Z]/).join
+  seguid = [Digest::SHA1.digest(final)].pack("m").chomp("=\n")
+  ONE_PER_LINE ? puts("#{seguid}\t#{one_line_seq}") : puts(seguid)
+end

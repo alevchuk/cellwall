@@ -23,6 +23,11 @@ MV           = "/bin/mv"
 
 OPTIONS      = [] #['--no-tabs']
 
+PROGS_FOR_MAIN_DIR = ['SEQ_COUNTS.get', 'create-dropout']
+PROGS_FOR_TABS_DIR = ['convert-all-to-tab',
+                      'convert-fasta-to-tab',
+                      'TAB_COUNTS.get']
+
 SOURCE_MAP   = ARGV[0]
 
 if SOURCE_MAP.nil?
