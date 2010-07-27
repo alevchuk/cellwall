@@ -16,7 +16,7 @@ The very first Steps
   $EDITOR Sourcemap-20`date +%y-%m`
 
 2. Download (~6 min):
-  ./009-download-pipeline/all-download-and-convert Sourcemap-20XX-XX
+  ./009-download-pipeline/all-download-and-convert ./Sourcemap-20XX-XX
   cd source-20XX-XX
 
 3. Create the Uniprot dropout (~14 min):
@@ -35,8 +35,7 @@ The very first Steps
   mkdir $NEWDIR
   cp * $NEWDIR
   cd $NEWDIR
-  cat ??
-  ??
+  ../009-download-pipeline/concat-sources ../Sourcemap-2010-07
 
 
 

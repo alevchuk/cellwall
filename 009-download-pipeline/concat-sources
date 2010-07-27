@@ -1,0 +1,31 @@
+#!/usr/bin/ruby
+
+SCRIPTS_DIR  = File.dirname(File.expand_path(__FILE__))
+NAME         = File.basename(__FILE__)
+
+SOURCE_MAP   = ARGV[0]
+
+if SOURCE_MAP.nil?
+  STDERR.puts "Usage: #{NAME} <source_map_file>"
+  exit(1)
+end
+
+if !(File.basename(SOURCE_MAP) =~ /^Sourcemap-(.*)$/)
+  STDERR.puts "Bad filename #{SOURCE_MAP}"
+  exit
+end
+SOURCE_MAP_ID = $1
+
+
+File.open(SOURCE_MAP) do |f|
+  while line = f.gets
+
+    line.strip!
+    next if line.empty? or line =~ /^[\s]*#/
+
+    words = line.split(/[ \t]/)
+    next if !words.include?("cat") # skip other directives
+
+    puts line
+  end
+end

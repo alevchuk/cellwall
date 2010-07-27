@@ -40,9 +40,9 @@ tair-v9-------_chr4-- ftp://ftp.arabidopsis.org/home/tair/Sequences/whole_chromo
 tair-v9-------_chr5-- ftp://ftp.arabidopsis.org/home/tair/Sequences/whole_chromosomes/chr5.fas
 tair-v9-------_chrM-- ftp://ftp.arabidopsis.org/home/tair/Sequences/whole_chromosomes/chrM.fas
 tair-v9-------_chrC-- ftp://ftp.arabidopsis.org/home/tair/Sequences/whole_chromosomes/chrC.fas
+tair-v9-------_genome cat tair-v9-------_*
 tair-v9-------_prot-- ftp://ftp.arabidopsis.org/home/tair/Sequences/blast_datasets/TAIR9_blastsets/TAIR9_pep_20090619
 tair-v9-------_struct ftp://ftp.arabidopsis.org/home/tair/Genes/TAIR9_genome_release/TAIR9_gff3/TAIR9_GFF3_genes.gff
-
 
 
 # Oryza Sativa (Rice)
@@ -71,3 +71,9 @@ tigr-v6-0-all-_systr- ftp://ftp.plantbiology.msu.edu/pub/data/Eukaryotic_Project
 # # ftp://ftp.uniprot.org/pub/databases/uniprot/relnotes.txt
 uniprot2010-08_sprot- ftp://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/complete/uniprot_sprot.fasta.gz
 uniprot2010-08_trembl ftp://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/complete/uniprot_trembl.fasta.gz
+
+
+
+
+all-----------_prot-- cat *prot-- *prot uniprot2010-08_sprot--dropout uniprot2010-08_trembl-droptout 
+ 

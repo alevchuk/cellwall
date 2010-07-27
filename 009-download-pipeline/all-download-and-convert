@@ -1,10 +1,9 @@
 #!/usr/bin/ruby
 
-HOME         = `echo ~`.chomp
 SCRIPTS_DIR  = File.dirname(File.expand_path(__FILE__))
 NAME         = File.basename(__FILE__)
-FASTA2TAB    = "#{SCRIPTS_DIR}/convert-fasta-to-tab"  # Pipelined
 FILETYPE     = "#{SCRIPTS_DIR}/lookup-filetype-from-stream"
+SEGUID       = "#{SCRIPTS_DIR}/filename-seguid-header"
 
 MAX_THREADS  = 20
 
@@ -23,10 +22,17 @@ MV           = "/bin/mv"
 
 OPTIONS      = [] #['--no-tabs']
 
-PROGS_FOR_MAIN_DIR = ['SEQ_COUNTS.get', 'create-dropout']
-PROGS_FOR_TABS_DIR = ['convert-all-to-tab',
-                      'convert-fasta-to-tab',
-                      'TAB_COUNTS.get']
+PROGS_FOR_MAIN_DIR = ['SEQ_COUNTS.get',
+                      'create-dropout',
+                      'create-dropout-from-fasta',
+                      'filename-seguid-header',
+                      'to-seguid',
+                     ]
+
+#PROGS_FOR_TABS_DIR = ['TAB_COUNTS.get',
+#                      'convert-all-to-tab',
+#                      'convert-fasta-to-tab',
+#                     ]
 
 SOURCE_MAP   = ARGV[0]
 
@@ -35,7 +41,7 @@ if SOURCE_MAP.nil?
   exit(1)
 end
 
-if !(SOURCE_MAP =~ /^Sourcemap-(.*)$/)
+if !(File.basename(SOURCE_MAP) =~ /^Sourcemap-(.*)$/)
   STDERR.puts "Bad filename #{SOURCE_MAP}"
   exit
 end
@@ -45,7 +51,7 @@ SOURCE_MAP_ID = $1
 
 DOWNLOAD_TIMESTAMP = `#{DATE}`.chomp
 
-def run(cmd, tabulizer, type, out_name)
+def run(cmd, type, out_name)
 
   destination =
     "source-#{SOURCE_MAP_ID}/#{DOWNLOAD_TIMESTAMP}_" + 
@@ -56,20 +62,7 @@ def run(cmd, tabulizer, type, out_name)
     return
   end
 
-  if type == "gff" or type == "gff3"
-    system("#{cmd} > ./#{destination}")
-   
-  else
-    piped_cmd = "#{cmd} | #{TEE} ./#{destination} " + 
-      if OPTIONS.include?('--no-tabs')
-        "> /dev/null"
-      else 
-        "| #{tabulizer} > ./#{destination}.tab"
-      end
-
-    system(piped_cmd)
-  end
-
+  system("#{cmd} > ./#{destination}")
   puts out_name
 end
 
@@ -79,15 +72,15 @@ def download_and_convert_one(name, url)
     filetype = `#{download_and_gunzip_cmd} | #{FILETYPE}`.chomp
 
     if filetype =~ /^FASTA/
-      run(download_and_gunzip_cmd, FASTA2TAB, 'fasta', name)
+      run(download_and_gunzip_cmd, 'fasta', name)
       break
 
     elsif filetype =~ /^GFF3/
-      run(download_and_gunzip_cmd, nil, 'gff3', name)
+      run(download_and_gunzip_cmd, 'gff3', name)
       break
 
     elsif filetype =~ /^GFF/
-      run(download_and_gunzip_cmd, nil, 'gff', name)
+      run(download_and_gunzip_cmd, 'gff', name)
       break
 
     elsif filetype =~ /^gzip/
@@ -110,18 +103,18 @@ end
 
 
 # Make the destination directory
-`mkdir ./source-#{SOURCE_MAP_ID}`
+dest = "source-#{SOURCE_MAP_ID}"
+`mkdir ./#{dest}`
 
 File.open(SOURCE_MAP) do |f|
   while line = f.gets
 
-    # TODO: Remove me
-    if line =~ /uniprot/ # Skip uniprot
-      next
-    end
-
     line.strip!
     next if line.empty? or line =~ /^[\s]*#/
+
+    words = line.split(/[ \t]/)
+    next if words.size != 2 or words.include?("cat") # skip other directives
+
     name, url = line.split(/[ \t]/)
     loop do
       if (Thread.list - [Thread.main]).size < MAX_THREADS
@@ -136,3 +129,19 @@ File.open(SOURCE_MAP) do |f|
 end
 
 (Thread.list - [Thread.main]).each {|t| t.join}
+
+
+# Copy progs
+PROGS_FOR_MAIN_DIR.each do |f|
+  `cp #{SCRIPTS_DIR}/#{f} ./source-#{SOURCE_MAP_ID}/`
+end
+
+
+## Move tabs
+#tabs = "./source-#{SOURCE_MAP_ID}/tabs"
+#`mkdir #{tabs}` unless File.exists?(tabs)
+#
+#`mv ./source-#{SOURCE_MAP_ID}/*.tab #{tabs}`
+#PROGS_FOR_TABS_DIR.each do |f|
+#  `cp #{SCRIPTS_DIR}/#{f} #{tabs}/`
+#end
