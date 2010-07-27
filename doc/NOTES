@@ -1,23 +1,94 @@
 
 
+
+
+
+
+
+
+
+
+Downloading and prepare fresh sequence files (2010-07-23):
+The very first Steps
+-------------------------------------------------------------------------------
+1. Create new Sourcemap file (copy and edit the previous one):
+  cp Sourcemap-20XX-XX Sourcemap-20`date +%y-%m`
+  $EDITOR Sourcemap-20`date +%y-%m`
+
+2. Download (~6 min):
+  ./009-download-pipeline/all-download-and-convert Sourcemap-20XX-XX
+  cd source-20XX-XX
+
+3. Create the Uniprot dropout (~14 min):
+  NEWDIR=../source-20XX-XX-stage01-dropout
+  mkdir $NEWDIR
+  cp * $NEWDIR
+  cd $NEWDIR
+  ./create-dropout
+
+4. Calculate the sourcefile-seguid-fastaheader relationship (~20 min):
+  ls 20XX-XX-XX_fasta_* | grep -v trembl | \
+  xargs ./filename-seguid-header > ./tabs/SOURCE_SEGUID_HEADER.tab
+
+5. Concatinate proteins and concatinate chromosome files:
+  NEWDIR=../source-20XX-XX-stage02-concat
+  mkdir $NEWDIR
+  cp * $NEWDIR
+  cd $NEWDIR
+  cat ??
+  ??
+
+
+
+Build Families (2010-07-27):
+-------------------------------------------------------------------------------
+
+
+
+
+The very last Steps of pre-Database work (2010-07-26):
+-------------------------------------------------------------------------------
+99. Parse GFFs (this extracts DNA sequences from chromosome files):
+  NEWDIR=../source-20XX-XX-stage99-gff
+  mkdir $NEWDIR
+  cp * $NEWDIR
+  cd $NEWDIR
+  ??
+
+100. Genreate all tab files (for loading into the database):
+  ??
+
+
+
+
+
+
+
+
+
+
 Build Workflow (2010-07-22):
+-------------------------------------------------------------------------------
+1. Generate FASTA files by family from the database (old sequences)
+2. Download 
+   2.1. New sequence files (protein FASTA)
+   2.2. New gene structure files (GFF, dna FASTA)
 
-Steps
----------------------------------------------------------------------------------------
-1. Generate FASTA files by family from the database -> 
-2. Download new sequence files (FASTA) -> OK
-3. MA of old sequences (from step 1) by family (Clean-up step) (except NCI)
-4. HMM create model: HMM by family using MAs from step 3.
-5. HMM search (apply model to step 2): by family. Output: FASTA files by family
-6. Load new builds into database
-   6.1 load all sequence to stage
-   6.2 load family files
-   6.3 map new family data to gfam model 
-   6.4 load new family into gfam
----------------------------------------------------------------------------------------
+3. MA of old sequences by family (Clean-up step) (Split NCI)
+4. HMM create model: HMM by family using MAs
+5. HMM search (apply model to step 2.1): by family. Output: FASTA by family
 
-7. load gff for all families in one step
-8. find dna for proteins (gff/chromosomes)
+6. Extract DNA and gene structure for some proteins (parse gff/chromosomes)
+
+7. Load new builds into database
+   7.1 load all sequence to stage
+   7.2 load family files
+   7.3 map new family data to gfam model 
+   7.4 load new family into gfam
+   7.5 load gff for all families in one step
+
+
+
 
 
 
@@ -27,6 +98,7 @@ Steps
 
 
 FASTA headers (from before 2009-06):
+-------------------------------------------------------------------------------
 
 JGI (PHYPA and POPTR)
    A: Organism
