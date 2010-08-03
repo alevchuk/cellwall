@@ -1,8 +1,9 @@
-# 1. Every line should have 2 words seperated by one space
+# 1. Every line should have 2 or more words seperated by one space
 # 2. Blank lines and comments are ignored
 #
 # Format: <label> <source>
-# 
+# Format: <label> cat <label1> [<label2> ...]
+#
 #  <label>    - will be the unique portion in the target filename
 #  <source>   - the URL of the source data
 #
@@ -10,18 +11,17 @@
 
 # Populus Trichocarpa 
 # http://www.phytozome.net/poplar
-phyt-poptr-v5-_genome ftp://ftp.jgi-psf.org/pub/JGI_data/phytozome/v5.0/Ptrichocarpa/assembly/Populus_trichocarpa.v2.fa.gz
-phyt-poptr-v5-_prot-- ftp://ftp.jgi-psf.org/pub/JGI_data/phytozome/v5.0/Ptrichocarpa/annotation/Populus.trichocarpa.v2.0.peptide.fa.gz
-phyt-poptr-v5-_struct ftp://ftp.jgi-psf.org/pub/JGI_data/phytozome/v5.0/Ptrichocarpa/annotation/Ptrichocarpa_129_gene.gff3.gz
-
+a_phyt-poptr-v5-_pep--- ftp://ftp.jgi-psf.org/pub/JGI_data/phytozome/v5.0/Ptrichocarpa/annotation/Populus.trichocarpa.v2.0.peptide.fa.gz
+b_phyt-poptr-v5-_genome ftp://ftp.jgi-psf.org/pub/JGI_data/phytozome/v5.0/Ptrichocarpa/assembly/Populus_trichocarpa.v2.fa.gz
+b_phyt-poptr-v5-_struct ftp://ftp.jgi-psf.org/pub/JGI_data/phytozome/v5.0/Ptrichocarpa/annotation/Ptrichocarpa_129_gene.gff3.gz
 
 
 # Physcomitrella Patens (Moss)
 # No change since Sourcemap-0.7
 ## # http://www.phytozome.net/physcomitrella.php
-phyt-phypa-v5-_genome ftp://ftp.jgi-psf.org/pub/JGI_data/phytozome/v5.0/Ppatens/Physcomitrella_patens.1_1.fasta.gz
-phyt-phypa-v5-_prot-- ftp://ftp.jgi-psf.org/pub/JGI_data/phytozome/v5.0/Ppatens/proteins.Phypa1_1.FilteredModels.fasta.gz
-phyt-phypa-v5-_struct ftp://ftp.jgi-psf.org/pub/JGI_data/phytozome/v5.0/Ppatens/Phypa1_1.FilteredModels.gff.gz
+a_phyt-phypa-v5-_pep--- ftp://ftp.jgi-psf.org/pub/JGI_data/phytozome/v5.0/Ppatens/proteins.Phypa1_1.FilteredModels.fasta.gz
+b_phyt-phypa-v5-_genome ftp://ftp.jgi-psf.org/pub/JGI_data/phytozome/v5.0/Ppatens/Physcomitrella_patens.1_1.fasta.gz
+b_phyt-phypa-v5-_struct ftp://ftp.jgi-psf.org/pub/JGI_data/phytozome/v5.0/Ppatens/Phypa1_1.FilteredModels.gff.gz
 # Same as:
 ##jgi-phypa-v1-1_prot-- ftp://ftp.jgi-psf.org/pub/JGI_data/Physcomitrella_patens/v1.1/proteins.Phypa1_1.FilteredModels.fasta.gz
 ##jgi-phypa-v1-1_struct ftp://ftp.jgi-psf.org/pub/JGI_data/Physcomitrella_patens/v1.1/Phypa1_1.FilteredModels.gff.gz
@@ -33,47 +33,44 @@ phyt-phypa-v5-_struct ftp://ftp.jgi-psf.org/pub/JGI_data/phytozome/v5.0/Ppatens/
 # # http://arabidopsis.org/
 # # http://arabidopsis.org/help/helppages/BLAST_help.jsp#datasets
 # # ftp://ftp.arabidopsis.org/home/tair/Sequences/blast_datasets/TAIR8_blastsets/
-tair-v9-------_chr1-- ftp://ftp.arabidopsis.org/home/tair/Sequences/whole_chromosomes/chr1.fas
-tair-v9-------_chr2-- ftp://ftp.arabidopsis.org/home/tair/Sequences/whole_chromosomes/chr2.fas
-tair-v9-------_chr3-- ftp://ftp.arabidopsis.org/home/tair/Sequences/whole_chromosomes/chr3.fas
-tair-v9-------_chr4-- ftp://ftp.arabidopsis.org/home/tair/Sequences/whole_chromosomes/chr4.fas
-tair-v9-------_chr5-- ftp://ftp.arabidopsis.org/home/tair/Sequences/whole_chromosomes/chr5.fas
-tair-v9-------_chrM-- ftp://ftp.arabidopsis.org/home/tair/Sequences/whole_chromosomes/chrM.fas
-tair-v9-------_chrC-- ftp://ftp.arabidopsis.org/home/tair/Sequences/whole_chromosomes/chrC.fas
-tair-v9-------_genome cat tair-v9-------_*
-tair-v9-------_prot-- ftp://ftp.arabidopsis.org/home/tair/Sequences/blast_datasets/TAIR9_blastsets/TAIR9_pep_20090619
-tair-v9-------_struct ftp://ftp.arabidopsis.org/home/tair/Genes/TAIR9_genome_release/TAIR9_gff3/TAIR9_GFF3_genes.gff
+a_tair-v9-------_pep--- ftp://ftp.arabidopsis.org/home/tair/Sequences/blast_datasets/TAIR9_blastsets/TAIR9_pep_20090619
+b_tair-v9-------_chr1-- ftp://ftp.arabidopsis.org/home/tair/Sequences/whole_chromosomes/chr1.fas
+b_tair-v9-------_chr2-- ftp://ftp.arabidopsis.org/home/tair/Sequences/whole_chromosomes/chr2.fas
+b_tair-v9-------_chr3-- ftp://ftp.arabidopsis.org/home/tair/Sequences/whole_chromosomes/chr3.fas
+b_tair-v9-------_chr4-- ftp://ftp.arabidopsis.org/home/tair/Sequences/whole_chromosomes/chr4.fas
+b_tair-v9-------_chr5-- ftp://ftp.arabidopsis.org/home/tair/Sequences/whole_chromosomes/chr5.fas
+b_tair-v9-------_chrM-- ftp://ftp.arabidopsis.org/home/tair/Sequences/whole_chromosomes/chrM.fas
+b_tair-v9-------_chrC-- ftp://ftp.arabidopsis.org/home/tair/Sequences/whole_chromosomes/chrC.fas
+b_tair-v9-------_struct ftp://ftp.arabidopsis.org/home/tair/Genes/TAIR9_genome_release/TAIR9_gff3/TAIR9_GFF3_genes.gff
+
+# Concat all Arabidopsis chromosomes
+b_tair-v9-------_genome cat b_tair-v9-------_chr*
 
 
 # Oryza Sativa (Rice)
 # No change since Sourcemap-0.7
+# Struct annotaition for cplast and mito is in XML files. Forget that.
 ## http://rice.plantbiology.msu.edu
 ## http://rice.plantbiology.msu.edu/data_download.shtml
-tigr-v6-0-all-_genome ftp://ftp.plantbiology.msu.edu/pub/data/Eukaryotic_Projects/o_sativa/annotation_dbs/pseudomolecules/version_6.1/all.dir/all.con
-tigr-v6-0-all-_prot-- ftp://ftp.plantbiology.msu.edu/pub/data/Eukaryotic_Projects/o_sativa/annotation_dbs/pseudomolecules/version_6.1/all.dir/all.pep
-tigr-v6-0-all-_struct ftp://ftp.plantbiology.msu.edu/pub/data/Eukaryotic_Projects/o_sativa/annotation_dbs/pseudomolecules/version_6.1/all.dir/all.gff3
-
-tigr-v6-0-all-_chprot ftp://ftp.plantbiology.msu.edu/pub/data/Eukaryotic_Projects/o_sativa/annotation_dbs/pseudomolecules/chloroplast.dir/chrC.pep
-tigr-v6-0-all-_miprot ftp://ftp.plantbiology.msu.edu/pub/data/Eukaryotic_Projects/o_sativa/annotation_dbs/pseudomolecules/mitochondrion.dir/chrM.pep
-# Struct annotaition is in XML files. Forget that.
-
-tigr-v6-0-all-_unchr- ftp://ftp.plantbiology.msu.edu/pub/data/Eukaryotic_Projects/o_sativa/annotation_dbs/pseudomolecules/version_6.1/unmapped.dir/chrUn.con
-tigr-v6-0-all-_unprot ftp://ftp.plantbiology.msu.edu/pub/data/Eukaryotic_Projects/o_sativa/annotation_dbs/pseudomolecules/version_6.1/unmapped.dir/chrUn.pep
-tigr-v6-0-all-_unstr- ftp://ftp.plantbiology.msu.edu/pub/data/Eukaryotic_Projects/o_sativa/annotation_dbs/pseudomolecules/version_6.1/unmapped.dir/chrUn.gff3
-
-tigr-v6-0-all-_sychr- ftp://ftp.plantbiology.msu.edu/pub/data/Eukaryotic_Projects/o_sativa/annotation_dbs/pseudomolecules/version_6.1/unmapped.dir/chrSy.con
-tigr-v6-0-all-_syprot ftp://ftp.plantbiology.msu.edu/pub/data/Eukaryotic_Projects/o_sativa/annotation_dbs/pseudomolecules/version_6.1/unmapped.dir/chrSy.pep
-tigr-v6-0-all-_systr- ftp://ftp.plantbiology.msu.edu/pub/data/Eukaryotic_Projects/o_sativa/annotation_dbs/pseudomolecules/version_6.1/unmapped.dir/chrSy.gff3
+a_tigr-v6-0-all-_nuclea ftp://ftp.plantbiology.msu.edu/pub/data/Eukaryotic_Projects/o_sativa/annotation_dbs/pseudomolecules/version_6.1/all.dir/all.pep
+a_tigr-v6-0-all-_cplast ftp://ftp.plantbiology.msu.edu/pub/data/Eukaryotic_Projects/o_sativa/annotation_dbs/pseudomolecules/chloroplast.dir/chrC.pep
+a_tigr-v6-0-all-_mito-- ftp://ftp.plantbiology.msu.edu/pub/data/Eukaryotic_Projects/o_sativa/annotation_dbs/pseudomolecules/mitochondrion.dir/chrM.pep
+a_tigr-v6-0-all-_un---- ftp://ftp.plantbiology.msu.edu/pub/data/Eukaryotic_Projects/o_sativa/annotation_dbs/pseudomolecules/version_6.1/unmapped.dir/chrUn.pep
+a_tigr-v6-0-all-_sy---- ftp://ftp.plantbiology.msu.edu/pub/data/Eukaryotic_Projects/o_sativa/annotation_dbs/pseudomolecules/version_6.1/unmapped.dir/chrSy.pep
+b_tigr-v6-0-all-_genome ftp://ftp.plantbiology.msu.edu/pub/data/Eukaryotic_Projects/o_sativa/annotation_dbs/pseudomolecules/version_6.1/all.dir/all.con
+b_tigr-v6-0-all-_struct ftp://ftp.plantbiology.msu.edu/pub/data/Eukaryotic_Projects/o_sativa/annotation_dbs/pseudomolecules/version_6.1/all.dir/all.gff3
+b_tigr-v6-0-all-_unnome ftp://ftp.plantbiology.msu.edu/pub/data/Eukaryotic_Projects/o_sativa/annotation_dbs/pseudomolecules/version_6.1/unmapped.dir/chrUn.con
+b_tigr-v6-0-all-_unstru ftp://ftp.plantbiology.msu.edu/pub/data/Eukaryotic_Projects/o_sativa/annotation_dbs/pseudomolecules/version_6.1/unmapped.dir/chrUn.gff3
+b_tigr-v6-0-all-_synome ftp://ftp.plantbiology.msu.edu/pub/data/Eukaryotic_Projects/o_sativa/annotation_dbs/pseudomolecules/version_6.1/unmapped.dir/chrSy.con
+b_tigr-v6-0-all-_systru ftp://ftp.plantbiology.msu.edu/pub/data/Eukaryotic_Projects/o_sativa/annotation_dbs/pseudomolecules/version_6.1/unmapped.dir/chrSy.gff3
 
 
 # Uniprot (Proteins only)
 # WARNING: This link is always pointing to the latest version
 # # ftp://ftp.uniprot.org/pub/databases/uniprot/relnotes.txt
-uniprot2010-08_sprot- ftp://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/complete/uniprot_sprot.fasta.gz
-uniprot2010-08_trembl ftp://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/complete/uniprot_trembl.fasta.gz
+a_uniprot2010-08_sprot- ftp://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/complete/uniprot_sprot.fasta.gz
+a_uniprot2010-08_trembl ftp://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/complete/uniprot_trembl.fasta.gz
 
 
-
-
-all-----------_prot-- cat *prot-- *prot uniprot2010-08_sprot--dropout uniprot2010-08_trembl-droptout 
- 
+# Concat all proteins a_--------------_pep-- cat a_*pep-- a_*prot a_uniprot2010-08_sprot--dropout a_uniprot2010-08_trembl-dropout 
+a_--------------_pep--- cat a_*_pep--- a_tigr-v6-0-all-_* a_uniprot2010-08_*-dropout

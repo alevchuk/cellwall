@@ -8,45 +8,51 @@
 
 
 
-Downloading and prepare fresh sequence files (2010-07-23):
+Downloading and prepare fresh sequence files (2010-07-30):
 The very first Steps
 -------------------------------------------------------------------------------
 1. Create new Sourcemap file (copy and edit the previous one):
   cp Sourcemap-20XX-XX Sourcemap-20`date +%y-%m`
   $EDITOR Sourcemap-20`date +%y-%m`
 
-2. Download (~6 min):
+2. Download (~8 min):
   ./009-download-pipeline/all-download-and-convert ./Sourcemap-20XX-XX
-  cd source-20XX-XX
+  cd source-20XX-XX-stage00
 
-3. Create the Uniprot dropout (~14 min):
+3. Create the Uniprot dropout:
   NEWDIR=../source-20XX-XX-stage01-dropout
   mkdir $NEWDIR
   cp * $NEWDIR
   cd $NEWDIR
-  ./create-dropout
+  ../009-download-pipeline/create-dropout   # ~14 min
 
-4. Calculate the sourcefile-seguid-fastaheader relationship (~20 min):
-  ls 20XX-XX-XX_fasta_* | grep -v trembl | \
-  xargs ./filename-seguid-header > ./tabs/SOURCE_SEGUID_HEADER.tab
-
-5. Concatinate proteins and concatinate chromosome files:
+4. Concatinate proteins and concatinate chromosome files:
   NEWDIR=../source-20XX-XX-stage02-concat
   mkdir $NEWDIR
   cp * $NEWDIR
   cd $NEWDIR
-  ../009-download-pipeline/concat-sources ../Sourcemap-2010-07
+  ../009-download-pipeline/concat-sources ../Sourcemap-20XX-XX   # ~1 min
 
 
 
 Build Families (2010-07-27):
 -------------------------------------------------------------------------------
+5. Download the current families from the database:
+  mkdir ../source-2010-07-stage03-ma/
+  cd !$
+  ../009-download-pipeline/???
+
+6. Generate Multiple Alignments
 
 
 
-
-The very last Steps of pre-Database work (2010-07-26):
+The very last Steps of pre-Database work (2010-07-30):
 -------------------------------------------------------------------------------
+98?. Calculate the sourcefile-seguid-fastaheader relationship (~20 min):
+  ls 20XX-XX-XX_fasta_* | grep -v trembl | \
+  xargs ./filename-seguid-header > ./tabs/SOURCE_SEGUID_HEADER.tab
+
+
 99. Parse GFFs (this extracts DNA sequences from chromosome files):
   NEWDIR=../source-20XX-XX-stage99-gff
   mkdir $NEWDIR

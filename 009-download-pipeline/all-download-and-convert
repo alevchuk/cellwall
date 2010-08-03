@@ -2,13 +2,15 @@
 
 SCRIPTS_DIR  = File.dirname(File.expand_path(__FILE__))
 NAME         = File.basename(__FILE__)
+DEST         = "source-#{SOURCE_MAP_ID}-stage00"
+MAX_THREADS  = 20
+
 FILETYPE     = "#{SCRIPTS_DIR}/lookup-filetype-from-stream"
 SEGUID       = "#{SCRIPTS_DIR}/filename-seguid-header"
 
-MAX_THREADS  = 20
 
-DATE_OPTIONS = "+%Y-%m-%d" # For example 2009-03-23
-DATE         = "/bin/date #{DATE_OPTIONS}"
+#DATE_OPTIONS = "+%Y-%m-%d" # For example 2009-03-23
+#DATE         = "/bin/date #{DATE_OPTIONS}"
 
 WGET_OPTIONS = "--quiet -O-" # Download quietly to standard out 
 WGET         = "/usr/bin/wget #{WGET_OPTIONS}"
@@ -22,9 +24,8 @@ MV           = "/bin/mv"
 
 OPTIONS      = [] #['--no-tabs']
 
+
 PROGS_FOR_MAIN_DIR = ['SEQ_COUNTS.get',
-                      'create-dropout',
-                      'create-dropout-from-fasta',
                       'filename-seguid-header',
                       'to-seguid',
                      ]
@@ -49,12 +50,12 @@ SOURCE_MAP_ID = $1
 
 
 
-DOWNLOAD_TIMESTAMP = `#{DATE}`.chomp
+DOWNLOAD_TIMESTAMP = SOURCE_MAP_ID #`#{DATE}`.chomp
 
 def run(cmd, type, out_name)
 
   destination =
-    "source-#{SOURCE_MAP_ID}/#{DOWNLOAD_TIMESTAMP}_" + 
+    "#{DEST}/#{DOWNLOAD_TIMESTAMP}_" + 
     "#{type.ljust(5,'-')}_#{out_name}"
 
   if File.exists?(destination)
@@ -103,8 +104,7 @@ end
 
 
 # Make the destination directory
-dest = "source-#{SOURCE_MAP_ID}"
-`mkdir ./#{dest}`
+`mkdir ./#{DEST}`
 
 File.open(SOURCE_MAP) do |f|
   while line = f.gets
@@ -136,12 +136,3 @@ PROGS_FOR_MAIN_DIR.each do |f|
   `cp #{SCRIPTS_DIR}/#{f} ./source-#{SOURCE_MAP_ID}/`
 end
 
-
-## Move tabs
-#tabs = "./source-#{SOURCE_MAP_ID}/tabs"
-#`mkdir #{tabs}` unless File.exists?(tabs)
-#
-#`mv ./source-#{SOURCE_MAP_ID}/*.tab #{tabs}`
-#PROGS_FOR_TABS_DIR.each do |f|
-#  `cp #{SCRIPTS_DIR}/#{f} #{tabs}/`
-#end

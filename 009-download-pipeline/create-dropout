@@ -1,21 +1,17 @@
 #!/usr/bin/ruby
 
 SDIR = File.dirname(File.expand_path(__FILE__))
-DESTINATION = "../#{SDIR.split('/').last}-dropout"
+DESTINATION = File.expand_path(".")
 
-if File.exists? DESTINATION
-  puts "WARNING: Destination #{DESTINATION} already exists!"
+
+if !(DESTINATION =~ /-dropout$/)
+  STDERR.puts "WARNING: You are in #{File.basename(DESTINATION)}"
+  STDERR.puts "WARNING: You are not in a Dropout dir!"
   puts "Proceed anyway? (Press 'y' and Enter to proceed)"
   a = gets.chomp
   exit unless a == "y"
 end
 
-if DESTINATION =~ /-dropout-dropout/
-  STDERR.puts "ERROR: You are already in a dir with a Dropout"
-  exit(1)
-end
-
-Dir.chdir SDIR
 
 TARGETS = 
   Dir.glob("*_fasta_uniprot*_trembl") + 
@@ -26,20 +22,11 @@ if TARGETS.size != 2
  "with the reqired filename pattern:\n  " + TARGETS.join("\n  ")
 end
 
-`cp -r #{SDIR} #{DESTINATION}`
 
-
-
-Dir.chdir DESTINATION
 
 TARGETS.each do |t|
   puts `time cat #{t} | ./create-dropout-from-fasta > #{t}-dropout`
   `rm #{t}`
 end
 
-`rm ./tabs/*.tab`
-`./tabs/convert-all-to-tab`
-`mv *.tab tabs/`
-
 `./SEQ_COUNTS.get > ./SEQ_COUNTS`
-`./tabs/TAB_COUNTS.get > ./tabs/TAB_COUNTS`
