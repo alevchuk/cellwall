@@ -1,0 +1,48 @@
+#!/usr/bin/ruby
+
+MAX_THREADS = 1 # Multiple threads will cause corrupted Genbank data
+
+#PREFIX = "AUTO_2005_"
+PREFIX = ""
+FAMILIES = [
+  "S1K",  "GMP",  "UGP", "NSI",   "UGD", "CSL",  "RGP", "XGT",  "XFT",  "XXT",
+  "GSL",  "GT8",  "EXP", "GH18",  "XTH", "BGAL", "GH9", "GH17", "GH28", "GH10",
+  "GH43", "GH51", "PL1", "PL4",   "PME", "PAE",  "FE",  "HRGP", "LRX",  "PRP",
+  "GRP",  "AGP",  "GFT", "GT31a", "GT31b"]
+
+def get(format, family_id)
+  "wget -q \"http://bioweb.ucr.edu/Cellwall/family.pl?" + 
+  "action=download_Family&format=#{format}&family_id=#{family_id}\""
+end
+
+#ALL = ARGV[0]
+#exit if ALL.nil?
+# FAMILIES = []
+# File.open(ALL) do |f|
+#   while line = f.gets
+#     if line =~ /\((.*)\)/
+#       FAMILIES.push $1
+#     end
+#   end
+# end
+
+FAMILIES.each_with_index do |family_name, i|
+  family_id = i + 1
+    
+  loop do
+    if (Thread.list - [Thread.main]).size < MAX_THREADS
+      Thread.new do
+        `#{get("fasta",   family_id)} -O #{PREFIX}#{family_name}.fasta`
+      end
+      Thread.new do
+        `#{get("genbank", family_id)} -O #{PREFIX}#{family_name}.genbank`
+      end
+      break
+    else
+      sleep 5
+    end
+  end
+end
+
+
+(Thread.list - [Thread.main]).each {|t| t.join}
