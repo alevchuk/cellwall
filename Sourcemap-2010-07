@@ -9,6 +9,14 @@
 #
 
 
+# A.
+# Total number of peptide sequences:   11,962,212
+# 
+# B.
+# Total number of nucleic sequences:        4,645
+# Total number of structural features:  2,148,604
+
+
 # Populus Trichocarpa 
 # http://www.phytozome.net/poplar
 a_phyt-poptr-v5-_pep--- ftp://ftp.jgi-psf.org/pub/JGI_data/phytozome/v5.0/Ptrichocarpa/annotation/Populus.trichocarpa.v2.0.peptide.fa.gz
