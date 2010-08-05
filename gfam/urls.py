@@ -14,6 +14,13 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     (r'^admin/', include(admin.site.urls)),
-    (r'gene-structure/(.*)\.png', 'firstapp.views.gene_structure_png'),
+
+    (r'^gene-structure/(.*)\.png', 'firstapp.views.gene_structure_png'),
+    (r'^gene-structure$', 'firstapp.views.sidebyside'),
+
+
+    (r'^family/(.*)\.fasta', 'firstapp.views.family_fasta'),
+    (r'^families$', 'firstapp.views.families'),
+
     (r'^$', 'firstapp.views.homepage'),
 )
