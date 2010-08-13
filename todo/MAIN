@@ -1,0 +1,8 @@
+Outstanding Issues
+  * SEGUID comply with official definition
+  * Sequence data format standard
+  * Sequence finger print (internally SEGUID?)
+  * Data model for sequence (comply with standard vs. as-is)
+  * Source file model
+  * Family version
+  * GFF importing 
