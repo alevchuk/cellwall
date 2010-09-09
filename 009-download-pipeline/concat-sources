@@ -37,6 +37,7 @@ File.open(SOURCE_MAP) do |f|
       line.split(" ")[2..-1].collect{|i| "#{SOURCE_MAP_ID}_*_#{i}"}
 
     sources = sources_patterns.collect{|i| Dir.glob(i)}.flatten!
+    sources.sort! # Make reproducible
 
 
     # Validate
