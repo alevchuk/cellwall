@@ -1,8 +1,19 @@
 #!/usr/bin/ruby
 
+SNAME = File.basename(__FILE__)
+SDIR  = File.dirname(File.expand_path(__FILE__))
+
 DROPOUTS = [/^([^|]*)\|([^|]*)\|([^|]*)_ARATH/,
             /^([^|]*)\|([^|]*)\|([^|]*)_ORYSA/,
+
+            # Rice Variants (http://www.uniprot.org/taxonomy/4530)
+            /^([^|]*)\|([^|]*)\|([^|]*)_ORYSJ/,
+            /^([^|]*)\|([^|]*)\|([^|]*)_ORYSI/,
+
+            # Usually none
             /^([^|]*)\|([^|]*)\|([^|]*)_POPTR/,
+
+            # Usually none
             /^([^|]*)\|([^|]*)\|([^|]*)_PHYPA/,
            ]
 
@@ -29,4 +40,10 @@ while line = STDIN.gets
 
   puts line unless skip
 
+end
+
+
+if linenum == 0
+  STDERR.puts "ERROR: #{SNAME}: Empty input"
+  exit(1)
 end

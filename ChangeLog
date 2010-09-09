@@ -1,0 +1,17 @@
+2010-09-09
+
+	* Sourcemap-2010-07: Redid dropout with Rice variants excluded.
+	All removed were
+	ORYSJ and ORYSI (2,474 + 494 from Sprot) (95,546 + 39,307 from Trembl)
+	A Total number of peptide sequences:   11,824,391 (137,821 removed)
+	B Total number of nucleic sequences:        4,645 (unchanged)
+	B Total number of structural features:  2,148,604 (unchanged)
+	
+	* Fix: Code and data problem fixed - concats were in random order.
+
+2010-08-03
+
+	* Sourcemap-2010-07: Stable version.
+	A Total number of peptide sequences:   11,962,212
+	B Total number of nucleic sequences:        4,645
+	B Total number of structural features:  2,148,604
