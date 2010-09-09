@@ -1,8 +1,8 @@
-Outstanding Issues
-  * SEGUID comply with official definition
-  * Sequence data format standard
-  * Sequence finger print (internally SEGUID?)
-  * Data model for sequence (comply with standard vs. as-is)
-  * Source file model
-  * Family version
-  * GFF importing 
+1 SEGUID comply with official definition
+2 Sequence data format standard
+3 Sequence finger print (internally SEGUID?)
+4 Data model for sequence (comply with standard vs. as-is)
+5 Source file model
+6 Family version
+7 GFF importing 
+8 Add HMM E-value and score?
