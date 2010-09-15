@@ -1,3 +1,12 @@
+2010-09-15
+
+	* Sourcemap-2010-07: Removed duplicates in rice GFFs.
+	Removed were 2010-07_gff3-_b_tigr-v6-0-all-_{unstru =922,systru =591}
+	A Total number of peptide sequences:   11,824,391 (unchanged)
+	B Total number of nucleic sequences:        4,645 (unchanged)
+	B Total number of structural features:  2,078,610 (1,513 removed)
+
+
 2010-09-09
 
 	* Sourcemap-2010-07: Redid dropout with Rice variants excluded.
@@ -5,7 +14,7 @@
 	ORYSJ and ORYSI (2,474 + 494 from Sprot) (95,546 + 39,307 from Trembl)
 	A Total number of peptide sequences:   11,824,391 (137,821 removed)
 	B Total number of nucleic sequences:        4,645 (unchanged)
-	B Total number of structural features:  2,148,604 (unchanged)
+	B Total number of structural features:  2,080,123 (unchanged)
 	
 	* Fix: Code and data problem fixed - concats were in random order.
 
@@ -14,4 +23,4 @@
 	* Sourcemap-2010-07: Stable version.
 	A Total number of peptide sequences:   11,962,212
 	B Total number of nucleic sequences:        4,645
-	B Total number of structural features:  2,148,604
+	B Total number of structural features:  2,080,123

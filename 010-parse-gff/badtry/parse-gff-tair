@@ -1,0 +1,118 @@
+#!/usr/bin/ruby
+
+if ARGV.size != 3
+  STDERR.puts "Usage: parse-gff <features.tab> <locations.tab> <tags.tab>"
+  exit
+end
+
+f_out = ARGV[0]
+l_out = ARGV[1]
+t_out = ARGV[2]
+
+
+
+ACCESSION_TO_SEQUENCE_ID = {}
+TO_FEATURE_ID            = {}
+
+
+FEATURES  = [] # sequence_id | rank | primary_tag
+LOCATIONS = [] # sequence_feature_id | rank | start_pos | end_pos | strand
+TAGS      = [] # sequence_feature_id | name | value
+
+
+# TAIR9 specific
+
+# cat ../source-2010-07-stage02-concat/2010-07_gff* | grep "       TAIR9   " | awk -F"\t" '// {print $3}' | sort | uniq -c
+#  179783 CDS
+#       7 chromosome
+#  196957 exon
+#   31204 five_prime_UTR
+#   28691 gene
+#     176 miRNA
+#   37318 mRNA
+#     428 ncRNA
+#   33410 protein
+#     926 pseudogene
+#    1263 pseudogenic_exon
+#     930 pseudogenic_transcript
+#      15 rRNA
+#      71 snoRNA
+#      13 snRNA
+#   28129 three_prime_UTR
+#    3901 transposable_element_gene
+#     689 tRNA
+
+
+def adjust_type(type)
+  type.sub( 
+    "five_prime_UTR",  "RIGHT_UTR").sub( 
+    "three_prime_UTR", "LEFT_UTR" ).sub(
+    "mRNA", "MODEL").upcase
+end
+
+
+
+
+while line = STDIN.gets
+  line.chomp!
+
+  next if line =~ / *#/ # Skip Comments
+
+  all = line.split("\t") 
+  if all.size != 9
+    STDERR.puts "WARNING: Bad format on line #{STDIN.lineno}: #{all.inspect}"
+    next
+  end
+  seqid, source, type, start, end_, score, strand, phase, attributes = all
+
+  # source is always one of these
+  raise if !["JGI", "MSU_osa1r6", "Ptrichocarpav2_0", "TAIR9"].include?(source)
+  next if source != "TAIR9" # Skip others
+
+  type = adjust_type(type)
+  strand = (strand == "-" ? -1 : 1)
+
+  # TAIR9 specific
+  next if ["protein", "gene"].include?(type) # Skip, they are same as mRNA
+
+  attr_dict = {}
+  attributes.split(';').each {|kv| k,v = kv.split('='); attr_dict[k] = v}
+
+  # TAIR9 specific
+  accession = (type == "MODEL" ? attr_dict["ID"] : attr_dict["Parent"])
+
+  # TAIR9 specific
+  if accession =~ /,/
+    accession = accession.split(",")
+    accession = accession.select{|c| !(c =~ /-Protein$/) }
+    accession = accession.first
+  end
+  
+  if ACCESSION_TO_SEQUENCE_ID[accession].nil?
+    ACCESSION_TO_SEQUENCE_ID[accession] = ACCESSION_TO_SEQUENCE_ID.size
+  end
+  sequence_id = ACCESSION_TO_SEQUENCE_ID[accession]
+
+  if TO_FEATURE_ID[[accession, type]].nil?
+    TO_FEATURE_ID[[accession, type]] = TO_FEATURE_ID.size
+  end
+  feature_id = TO_FEATURE_ID[[accession, type]]
+
+  # Inserts
+  LOCATIONS.push [feature_id, -1, start, end_, strand, phase]
+
+  if FEATURES[feature_id].nil?
+    FEATURES[feature_id] = [sequence_id, -1, type]
+    TAGS[feature_id]     = [feature_id,
+                            type == "MODEL" ? "feat_name" : "model",
+                            accession]
+  end
+end
+
+
+
+[[FEATURES,  f_out], [LOCATIONS, l_out], [TAGS, t_out]].each do |data, file|
+  File.open(file, 'w') do |f|
+    data.each_with_index {|i, id| f.puts(([id] + i).join("\t")) }
+  end
+end
