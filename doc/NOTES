@@ -48,9 +48,11 @@ Build Families (2010-07-27):
 
 The very last Steps of pre-Database work (2010-07-30):
 -------------------------------------------------------------------------------
-98?. Calculate the sourcefile-seguid-fastaheader relationship (~20 min):
-  ls 20XX-XX-XX_fasta_* | grep -v trembl | \
-  xargs ./filename-seguid-header > ./tabs/SOURCE_SEGUID_HEADER.tab
+# May be unnecessary
+#
+## 98?. Calculate the sourcefile-seguid-fastaheader relationship (~20 min):
+##   ls 20XX-XX-XX_fasta_* | grep -v trembl | \
+##   xargs ./filename-seguid-header > ./tabs/SOURCE_SEGUID_HEADER.tab
 
 
 99. Parse GFFs (this extracts DNA sequences from chromosome files):
@@ -60,7 +62,7 @@ The very last Steps of pre-Database work (2010-07-30):
   cd $NEWDIR
   ??
 
-100. Genreate all tab files (for loading into the database):
+100. Generate all tab files (for loading into the database):
   ??
 
 

@@ -4,7 +4,9 @@
 !012-download-bioweb/
 
 !gfam/
+!src/
 !doc/
+!todo/
 !sql-*/
 
 *~

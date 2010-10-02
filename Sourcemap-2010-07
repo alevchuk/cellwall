@@ -8,13 +8,7 @@
 #  <source>   - the URL of the source data
 #
 
-
-# A.
-# Total number of peptide sequences:   11,962,212
-# 
-# B.
-# Total number of nucleic sequences:        4,645
-# Total number of structural features:  2,148,604
+# For sequence and feature counts please see the ./ChangeLog file
 
 
 # Populus Trichocarpa 
@@ -68,16 +62,13 @@ a_tigr-v6-0-all-_sy---- ftp://ftp.plantbiology.msu.edu/pub/data/Eukaryotic_Proje
 b_tigr-v6-0-all-_genome ftp://ftp.plantbiology.msu.edu/pub/data/Eukaryotic_Projects/o_sativa/annotation_dbs/pseudomolecules/version_6.1/all.dir/all.con
 b_tigr-v6-0-all-_struct ftp://ftp.plantbiology.msu.edu/pub/data/Eukaryotic_Projects/o_sativa/annotation_dbs/pseudomolecules/version_6.1/all.dir/all.gff3
 b_tigr-v6-0-all-_unnome ftp://ftp.plantbiology.msu.edu/pub/data/Eukaryotic_Projects/o_sativa/annotation_dbs/pseudomolecules/version_6.1/unmapped.dir/chrUn.con
-b_tigr-v6-0-all-_unstru ftp://ftp.plantbiology.msu.edu/pub/data/Eukaryotic_Projects/o_sativa/annotation_dbs/pseudomolecules/version_6.1/unmapped.dir/chrUn.gff3
 b_tigr-v6-0-all-_synome ftp://ftp.plantbiology.msu.edu/pub/data/Eukaryotic_Projects/o_sativa/annotation_dbs/pseudomolecules/version_6.1/unmapped.dir/chrSy.con
-b_tigr-v6-0-all-_systru ftp://ftp.plantbiology.msu.edu/pub/data/Eukaryotic_Projects/o_sativa/annotation_dbs/pseudomolecules/version_6.1/unmapped.dir/chrSy.gff3
 
 
 # Uniprot (Proteins only)
-# WARNING: This link is always pointing to the latest version
-# # ftp://ftp.uniprot.org/pub/databases/uniprot/relnotes.txt
-a_uniprot2010-08_sprot- ftp://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/complete/uniprot_sprot.fasta.gz
-a_uniprot2010-08_trembl ftp://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/complete/uniprot_trembl.fasta.gz
+# USE: ftp://ftp.uniprot.org/pub/databases/uniprot/previous_releases/release-2010_08/knowledgebase/knowledgebase2010_08.tar.gz
+a_uniprot2010-08_sprot- # USED: ftp://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/complete/uniprot_sprot.fasta.gz
+a_uniprot2010-08_trembl # USED: ftp://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/complete/uniprot_trembl.fasta.gz
 
 
 # Concat all proteins a_--------------_pep-- cat a_*pep-- a_*prot a_uniprot2010-08_sprot--dropout a_uniprot2010-08_trembl-dropout 

@@ -1,0 +1,31 @@
+     35938 2010-07_fasta_a_phyt-phypa-v5-_pep---
+     45778 2010-07_fasta_a_phyt-poptr-v5-_pep---
+     33410 2010-07_fasta_a_tair-v9-------_pep---
+       103 2010-07_fasta_a_tigr-v6-0-all-_cplast
+        54 2010-07_fasta_a_tigr-v6-0-all-_mito--
+     67393 2010-07_fasta_a_tigr-v6-0-all-_nuclea
+        88 2010-07_fasta_a_tigr-v6-0-all-_sy----
+       126 2010-07_fasta_a_tigr-v6-0-all-_un----
+    518415 2010-07_fasta_a_uniprot2010-08_sprot-
+  11397958 2010-07_fasta_a_uniprot2010-08_trembl
+  12099263 total
+
+      2106 2010-07_fasta_b_phyt-phypa-v5-_genome
+      2518 2010-07_fasta_b_phyt-poptr-v5-_genome
+         1 2010-07_fasta_b_tair-v9-------_chr1--
+         1 2010-07_fasta_b_tair-v9-------_chr2--
+         1 2010-07_fasta_b_tair-v9-------_chr3--
+         1 2010-07_fasta_b_tair-v9-------_chr4--
+         1 2010-07_fasta_b_tair-v9-------_chr5--
+         1 2010-07_fasta_b_tair-v9-------_chrC--
+         1 2010-07_fasta_b_tair-v9-------_chrM--
+        12 2010-07_fasta_b_tigr-v6-0-all-_genome
+         1 2010-07_fasta_b_tigr-v6-0-all-_synome
+         1 2010-07_fasta_b_tigr-v6-0-all-_unnome
+      4645 total
+
+    411731 2010-07_gff--_b_phyt-phypa-v5-_struct
+    608096 2010-07_gff3-_b_phyt-poptr-v5-_struct
+    543911 2010-07_gff3-_b_tair-v9-------_struct
+    514872 2010-07_gff3-_b_tigr-v6-0-all-_struct
+   2078610 total

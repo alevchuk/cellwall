@@ -2,17 +2,45 @@
 
 first_line = true
 
-while line = STDIN.gets
-  line.chomp!
+if ARGV.size == 2
+  raise "First arg must be --extracol" if ARGV[0] != "--extracol"
+  exrtacol = ARGV[1]
 
-  if line =~ /^>/
-    puts unless first_line
-    print line[1..-1]
-    print "\t"
-  else
-    print line.chomp
+
+  while line = STDIN.gets
+    line.chomp!
+  
+    if line =~ /^>/
+      puts unless first_line
+      print exrtacol
+      print "\t"
+      print line[1..-1]
+      print "\t"
+    else
+      print line.chomp
+    end
+  
+    first_line = false
   end
+  puts
 
-  first_line = false
+else
+
+  #TODO: Use a function generator
+  while line = STDIN.gets
+    line.chomp!
+
+    if line =~ /^>/
+      puts unless first_line
+      print line[1..-1]
+      print "\t"
+    else
+      print line.chomp
+    end
+
+    first_line = false
+  end
+  puts
+
 end
-puts
+

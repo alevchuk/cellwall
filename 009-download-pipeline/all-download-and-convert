@@ -26,8 +26,8 @@ OPTIONS      = [] #['--no-tabs']
 
 
 PROGS_FOR_MAIN_DIR = ['SEQ_COUNTS.get',
-                      'filename-seguid-header',
-                      'to-seguid',
+                      # 'filename-seguid-header',
+                      # 'to-seguid',
                      ]
 
 #PROGS_FOR_TABS_DIR = ['TAB_COUNTS.get',
