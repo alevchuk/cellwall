@@ -1,0 +1,8 @@
+<h1>Families</h1>
+<pre>
+{% for i in families|dictsort:"instance_node_id" %}{{i.family_tree_node_abrev|ljust:7}} <a
+  href="family/{{i.instance_node_id}}.fasta"
+  title="{{i.family_tree_node_name}}"
+  >FASTA</a> - {{i.family_tree_node_name}}
+{% endfor %}
+</pre>
