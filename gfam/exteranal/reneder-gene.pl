@@ -26,7 +26,7 @@ use strict;
 open FILE, "</etc/gfam/password-db-cellwallweb" or die $!;
 my $dbpasswd = <FILE>;
 chomp($dbpasswd);
-my $dbh = DBI->connect("DBI:Pg:dbname=gfam;host=cellwalldb",
+my $dbh = DBI->connect("DBI:Pg:dbname=gfam;host=cellwalldb;port=8080",
         "cellwallweb", $dbpasswd, {'RaiseError' => 1});
                      
 
@@ -50,7 +50,7 @@ sub build_SeqView
         my $fromdb_sequence_descrip;
 
 	$sth = $dbh->prepare(
-		"SELECT * FROM stage.cellwall1_sequence WHERE id = ?"
+		"SELECT * FROM sandbox.cellwall1_sequence WHERE id = ?"
 	);
 	$sth->execute($id);
         if ($srow = $sth->fetchrow_hashref())
@@ -69,7 +69,8 @@ sub build_SeqView
 	# Lookup all feature_ids and names in seqtags (a hash of hashes)
 	my %fromdb_tags;
 	$sth = $dbh->prepare(
-		"SELECT * FROM gfam.sequence_tag t, gfam.sequence_feature f " .
+		"SELECT * FROM " .
+                "sandbox.cellwall1_sequence_tag t, sandbox.cellwall1_sequence_feature f " .
 		"WHERE t.sequence_feature_id = f.sequence_feature_id AND " .
 		"f.sequence_id = ?"
 	);
@@ -97,7 +98,7 @@ sub build_SeqView
 	# Lookup all feature_id's in seqfeature (a hash of arrays)
 	my %fromdb_features;
 	$sth = $dbh->prepare(
-		"SELECT * FROM gfam.sequence_feature WHERE sequence_id = ?"
+		"SELECT * FROM sandbox.cellwall1_sequence_feature WHERE sequence_id = ?"
 	);
 	$sth->execute($fromdb_sequence_id);
 	my $tag, my $id;
@@ -123,7 +124,7 @@ sub build_SeqView
 	# hash of arrays (triplets) with key being the feature_id
 	my %fromdb_locations;
 	$sth = $dbh->prepare(
-		"SELECT * FROM gfam.sequence_location WHERE " .
+		"SELECT * FROM sandbox.cellwall1_sequence_location WHERE " .
 		"sequence_feature_id = ?"
 	);
 	my $start, my $stop, my $strand;
@@ -157,7 +158,7 @@ sub build_SeqView
 	my %fromdb_features_byname;
 
 	$sth = $dbh->prepare(
-		"SELECT * FROM gfam.sequence_feature WHERE sequence_id = ?"
+		"SELECT * FROM sandbox.cellwall1_sequence_feature WHERE sequence_id = ?"
 	);
 	$sth->execute($fromdb_sequence_id);
 	my $tag, my $id;

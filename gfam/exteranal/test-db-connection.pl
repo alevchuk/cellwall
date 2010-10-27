@@ -7,7 +7,7 @@ use DBI;
 open FILE, "</etc/gfam/password-db-cellwallweb" or die $!;
 my $dbpasswd = <FILE>;
 chomp($dbpasswd);
-my $dbh = DBI->connect("DBI:Pg:dbname=cellwall;host=cellwalldb", 
+my $dbh = DBI->connect("DBI:Pg:dbname=cellwall;host=cellwalldb;port=8080", 
 	"cellwallweb", $dbpasswd, {'RaiseError' => 1});
 
 # execute SELECT query
