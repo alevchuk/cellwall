@@ -73,6 +73,8 @@ gene_data = {
       'structure': 'Image of GAE2 gene structure',
       'sequence': 'AGAAAGGAAAGGAAAGAAAGAAAACAAAAG',
       'species':  'Arabidopsis thaliana',
+      'IDs': '[51779.t00015; 68414.m00118; 68414.t00105; At1g02000.1; ' + \
+	   'F22M8.13; GAE2]',
       'description': 'UDP-glucose ' + \
            '4-epimerase/UDP-galactose 4-epimerase/Galactowaldenase',
 #      'Features': '''1..1781	
@@ -172,6 +174,9 @@ def gene(request, geneid, protein_or_dna):
     else:
     	print "Protein\n"
 
+    if not (geneid in gene_data  or geneid in dna_data):
+	return HttpResponse("%s is not found in this database" % geneid)
+
     t = get_template('gene.html')
     html = t.render(Context({
                              'gene': gene_data,
@@ -181,6 +186,8 @@ def gene(request, geneid, protein_or_dna):
                              'families_for_this_gene': 
                                gene_to_family_data[geneid],
                              'members': members_data,
-                             },
+                             'OtherIDs': gene_data[geneid]['IDs'],
+                             'GeneDescrip': gene_data[geneid]['description'],
+                              },
                    ))
     return HttpResponse(html)
