@@ -1,0 +1,31 @@
+#!/usr/bin/env Rscript
+
+library("ggplot2")
+
+tab <- read.csv("2005-guidance.tab", header=F, sep="\t")
+
+g <- data.frame(Families=factor(),
+  Number_of_Sequences=numeric(),
+  Builds=factor())
+
+builds_list <- list("2005-guidance")
+for (build_name in builds_list) {
+
+  #g <- cbind(stats[,1], rownames(stats), tr(as.data.frame(rep("2009", nrow(stats))))
+  g2 <- data.frame(
+    Families=factor(tab[,1]),
+    Avg_Sequence_Length=as.numeric(tab[,2]),
+    Builds=factor(rep(build_name, nrow(tab))))
+  
+  # Hide NSI
+  g2 <- g2[-4,] 
+
+  g <- rbind(g, g2)
+
+}
+
+pdf("numseq-plot.pdf")
+ggplot(g, aes(Families, Avg_Sequence_Length, fill = Builds)) +
+  geom_bar(position="dodge") + coord_flip(wise=T) +
+  opts(axis.text.y=theme_text(angle=0,hjust=1), axis.text.x=theme_text())
+dev.off()
