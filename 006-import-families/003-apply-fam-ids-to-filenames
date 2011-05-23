@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-File.open("003-fam-ids") do |f|
+File.open("/home_girkelab/alevchuk/projects/002-cellwall/006-import-families/003fam-ids") do |f|
   f.each_line do |line|
     line =~ /^ *([0-9]+).*\((.*)\)/
 
@@ -8,7 +8,7 @@ File.open("003-fam-ids") do |f|
     p [numeric_id, nominal_id]
 
     numeric_id_padded = numeric_id.to_s.rjust(3, '0')
-    Dir.glob("newfam_*_#{nominal_id}.fasta*").each do |filename|
+    Dir.glob("#{nominal_id}.fasta*").each do |filename|
       newname = filename.gsub(nominal_id, "#{numeric_id_padded}-#{nominal_id}")
       STDERR.puts "Renaming #{filename} to #{newname}"
       File.rename(filename, newname)

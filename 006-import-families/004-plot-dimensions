@@ -3,7 +3,7 @@
 library("ggplot2")
 
 tab_files <- dir()[grep("[.]tab$", dir())]
-family_names <- readLines(pipe("./004-get-fam-names"))
+family_names <- readLines(pipe("./004get-fam-names"))
 
 get.stats <- function(filename) {
   tab <- read.csv(filename, header=F, sep="\t")
