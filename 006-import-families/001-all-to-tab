@@ -1,0 +1,37 @@
+cat newfam_2009-08_AGP.fasta    | ./convert-fasta-to-tab  > newfam_2009-08_AGP.fasta.tab 
+cat newfam_2009-08_BGAL.fasta   | ./convert-fasta-to-tab  > newfam_2009-08_BGAL.fasta.tab 
+cat newfam_2009-08_CSL.fasta    | ./convert-fasta-to-tab  > newfam_2009-08_CSL.fasta.tab 
+cat newfam_2009-08_EXP.fasta    | ./convert-fasta-to-tab  > newfam_2009-08_EXP.fasta.tab 
+cat newfam_2009-08_FE.fasta     | ./convert-fasta-to-tab  > newfam_2009-08_FE.fasta.tab 
+cat newfam_2009-08_GH10.fasta   | ./convert-fasta-to-tab  > newfam_2009-08_GH10.fasta.tab 
+cat newfam_2009-08_GH17.fasta   | ./convert-fasta-to-tab  > newfam_2009-08_GH17.fasta.tab 
+cat newfam_2009-08_GH18.fasta   | ./convert-fasta-to-tab  > newfam_2009-08_GH18.fasta.tab 
+cat newfam_2009-08_GH28.fasta   | ./convert-fasta-to-tab  > newfam_2009-08_GH28.fasta.tab 
+cat newfam_2009-08_GH43.fasta   | ./convert-fasta-to-tab  > newfam_2009-08_GH43.fasta.tab 
+cat newfam_2009-08_GH51.fasta   | ./convert-fasta-to-tab  > newfam_2009-08_GH51.fasta.tab 
+cat newfam_2009-08_GH9.fasta    | ./convert-fasta-to-tab  > newfam_2009-08_GH9.fasta.tab 
+cat newfam_2009-08_GMP.fasta    | ./convert-fasta-to-tab  > newfam_2009-08_GMP.fasta.tab 
+cat newfam_2009-08_GRP.fasta    | ./convert-fasta-to-tab  > newfam_2009-08_GRP.fasta.tab 
+cat newfam_2009-08_GSL.fasta    | ./convert-fasta-to-tab  > newfam_2009-08_GSL.fasta.tab 
+cat newfam_2009-08_GT8.fasta    | ./convert-fasta-to-tab  > newfam_2009-08_GT8.fasta.tab 
+cat newfam_2009-08_GT31a.fasta  | ./convert-fasta-to-tab  > newfam_2009-08_GT31a.fasta.tab
+cat newfam_2009-08_GT31b.fasta  | ./convert-fasta-to-tab  > newfam_2009-08_GT31b.fasta.tab 
+cat newfam_2009-08_HRGP.fasta   | ./convert-fasta-to-tab  > newfam_2009-08_HRGP.fasta.tab 
+cat newfam_2009-08_LRX.fasta    | ./convert-fasta-to-tab  > newfam_2009-08_LRX.fasta.tab 
+cat newfam_2009-08_NSI.fasta    | ./convert-fasta-to-tab  > newfam_2009-08_NSI.fasta.tab 
+cat newfam_2009-08_PAE.fasta    | ./convert-fasta-to-tab  > newfam_2009-08_PAE.fasta.tab 
+cat newfam_2009-08_PL1.fasta    | ./convert-fasta-to-tab  > newfam_2009-08_PL1.fasta.tab 
+cat newfam_2009-08_PL4.fasta    | ./convert-fasta-to-tab  > newfam_2009-08_PL4.fasta.tab 
+cat newfam_2009-08_PME.fasta    | ./convert-fasta-to-tab  > newfam_2009-08_PME.fasta.tab 
+cat newfam_2009-08_PRP.fasta    | ./convert-fasta-to-tab  > newfam_2009-08_PRP.fasta.tab 
+cat newfam_2009-08_RGP.fasta    | ./convert-fasta-to-tab  > newfam_2009-08_RGP.fasta.tab 
+cat newfam_2009-08_S1K.fasta    | ./convert-fasta-to-tab  > newfam_2009-08_S1K.fasta.tab 
+cat newfam_2009-08_UGD.fasta    | ./convert-fasta-to-tab  > newfam_2009-08_UGD.fasta.tab 
+cat newfam_2009-08_UGP.fasta    | ./convert-fasta-to-tab  > newfam_2009-08_UGP.fasta.tab 
+cat newfam_2009-08_XFT.fasta    | ./convert-fasta-to-tab  > newfam_2009-08_XFT.fasta.tab 
+cat newfam_2009-08_XGT.fasta    | ./convert-fasta-to-tab  > newfam_2009-08_XGT.fasta.tab 
+cat newfam_2009-08_XTH.fasta    | ./convert-fasta-to-tab  > newfam_2009-08_XTH.fasta.tab 
+cat newfam_2009-08_XXT.fasta    | ./convert-fasta-to-tab  > newfam_2009-08_XXT.fasta.tab 
+
+
+
