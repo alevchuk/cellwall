@@ -2,10 +2,11 @@
 
 library("ggplot2")
 
-tab_files <- dir()[grep("[.]tab$", dir())]
 family_names <- readLines(pipe("./004get-fam-names"))
 
 get.stats <- function(filename) {
+  print(filename)
+
   tab <- read.csv(filename, header=F, sep="\t")
   numseqs <- nrow(tab)
 
@@ -15,20 +16,33 @@ get.stats <- function(filename) {
   list(numseqs, mean_seq_len)
 }
 
-stats <- t(sapply(tab_files, get.stats))
+g <- data.frame(Families=factor(),
+  Number_of_Sequences=numeric(),
+  Builds=factor())
 
-#g <- cbind(stats[,1], rownames(stats), tr(as.data.frame(rep("2009", nrow(stats))))
-g2 <- data.frame(
-  Families=factor(family_names),
-  Number_of_Sequences=as.numeric(stats[,1]),
-  Builds=factor(rep("2009_08", nrow(stats)))
-                )
+builds_list <- dir()[grep("^20", dir())]
+for (build_name in builds_list) {
+  setwd(build_name)
 
-# Hide NSI
-g2 <- g2[-4,]
+  tab_files <- dir()[grep("[.]tab$", dir())]
+  stats <- t(sapply(tab_files, get.stats))
+  
+  #g <- cbind(stats[,1], rownames(stats), tr(as.data.frame(rep("2009", nrow(stats))))
+  g2 <- data.frame(
+    Families=factor(family_names),
+    Avg_Sequence_Length=as.numeric(stats[,2]),
+    Builds=factor(rep(build_name, nrow(stats))))
+  
+  # Hide NSI
+  g2 <- g2[-4,] 
+
+  g <- rbind(g, g2)
+
+  setwd("..")
+}
 
 pdf("numseq-plot.pdf")
-ggplot(g2, aes(Families, Number_of_Sequences, fill = Builds)) +
+ggplot(g, aes(Families, Avg_Sequence_Length, fill = Builds)) +
   geom_bar(position="dodge") + coord_flip(wise=T) +
   opts(axis.text.y=theme_text(angle=0,hjust=1), axis.text.x=theme_text())
 dev.off()
