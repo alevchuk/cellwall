@@ -1,0 +1,29 @@
+#!/usr/bin/ruby
+
+# Take multiple FASTA filenames
+#
+# Produces triplets 1-per-line:
+#   Souce Filename <-> SEGUID <-> FASTA header
+
+
+SCRIPTS_DIR  = File.dirname(File.expand_path(__FILE__))
+TO_SEGUID = "#{SCRIPTS_DIR}/to-seguid"
+
+if !File.exists?(TO_SEGUID)
+  STDERR.puts "ERROR: to-seguid not found!"
+  STDERR.puts "...looked here #{TO_SEGUID}"
+  exit(1)
+end
+
+ARGV.each do |f|
+  source = f.gsub("\t", '\t')
+  IO.popen("cat #{f} | #{TO_SEGUID} -f") do |i|
+    while line = i.gets
+      line.chomp!
+      l = line.split("\t")
+      raise "ERROR: Size is not 2: #{fs.inspect}" unless l.size == 2
+      header, seguid = l
+      puts source + "\t" + seguid + "\t" + header
+    end
+  end
+end

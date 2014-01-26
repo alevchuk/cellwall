@@ -1,0 +1,5 @@
+<h1>{{data.name}}</h1>
+<div>Builds created via this methods: {% for i in data.builds %}
+<a href="/b{{i}}/families">{{i}}</a>
+{% endfor %}
+</div>

@@ -1,0 +1,22 @@
+#!/usr/bin/ruby
+
+# Usage Example:
+#  cat from-mysql-cellwall.headers | \
+#    ~/.html/cellwall/scripts/misc-create-tables > \
+#    from-mysql-cellwall.create-tables
+
+# See also: ~/.html/cellwall/scripts/misc-remove-all-first-lines
+
+TYPE = "VARCHAR"
+
+while line = STDIN.gets
+  all = line.chomp.split("\t")
+  columns = all[0..-2]
+  name = all.last
+  if name =~ /from-mysql-cellwall-(.*?).tab/
+    name = $1
+  end
+
+  columns_sql = "#{columns.join(' ' + TYPE + ', ')} #{TYPE}"
+  puts "CREATE TABLE cellwall.from_mysql_#{name} (#{columns_sql});"
+end

@@ -1,0 +1,138 @@
+#!/usr/bin/ruby
+
+SCRIPTS_DIR  = File.dirname(File.expand_path(__FILE__))
+NAME         = File.basename(__FILE__)
+DEST         = "source-#{SOURCE_MAP_ID}-stage00"
+MAX_THREADS  = 20
+
+FILETYPE     = "#{SCRIPTS_DIR}/lookup-filetype-from-stream"
+SEGUID       = "#{SCRIPTS_DIR}/filename-seguid-header"
+
+
+#DATE_OPTIONS = "+%Y-%m-%d" # For example 2009-03-23
+#DATE         = "/bin/date #{DATE_OPTIONS}"
+
+WGET_OPTIONS = "--quiet -O-" # Download quietly to standard out 
+WGET         = "/usr/bin/wget #{WGET_OPTIONS}"
+
+ZCAT         = "/bin/zcat"
+BZCAT        = "/bin/bzcat"
+TEE          = "/usr/bin/tee"
+CP           = "/bin/cp"
+MV           = "/bin/mv"
+
+
+OPTIONS      = [] #['--no-tabs']
+
+
+PROGS_FOR_MAIN_DIR = ['SEQ_COUNTS.get',
+                      # 'filename-seguid-header',
+                      # 'to-seguid',
+                     ]
+
+#PROGS_FOR_TABS_DIR = ['TAB_COUNTS.get',
+#                      'convert-all-to-tab',
+#                      'convert-fasta-to-tab',
+#                     ]
+
+SOURCE_MAP   = ARGV[0]
+
+if SOURCE_MAP.nil?
+  STDERR.puts "Usage: #{NAME} <source_map_file>"
+  exit(1)
+end
+
+if !(File.basename(SOURCE_MAP) =~ /^Sourcemap-(.*)$/)
+  STDERR.puts "Bad filename #{SOURCE_MAP}"
+  exit
+end
+SOURCE_MAP_ID = $1
+
+
+
+DOWNLOAD_TIMESTAMP = SOURCE_MAP_ID #`#{DATE}`.chomp
+
+def run(cmd, type, out_name)
+
+  destination =
+    "#{DEST}/#{DOWNLOAD_TIMESTAMP}_" + 
+    "#{type.ljust(5,'-')}_#{out_name}"
+
+  if File.exists?(destination)
+    puts "#{out_name} already exists Skipped!"
+    return
+  end
+
+  system("#{cmd} > ./#{destination}")
+  puts out_name
+end
+
+def download_and_convert_one(name, url)
+  download_and_gunzip_cmd = "#{WGET} \"#{url}\""
+  loop do
+    filetype = `#{download_and_gunzip_cmd} | #{FILETYPE}`.chomp
+
+    if filetype =~ /^FASTA/
+      run(download_and_gunzip_cmd, 'fasta', name)
+      break
+
+    elsif filetype =~ /^GFF3/
+      run(download_and_gunzip_cmd, 'gff3', name)
+      break
+
+    elsif filetype =~ /^GFF/
+      run(download_and_gunzip_cmd, 'gff', name)
+      break
+
+    elsif filetype =~ /^gzip/
+     download_and_gunzip_cmd += " | #{ZCAT}" 
+
+    elsif filetype == 'nil'
+      STDERR.puts "ERROR: Could not download #{url}"
+      break
+
+    else
+      STDERR.puts "ERROR: Unknown filetype: #{filetype.inspect} for " +
+        "#{download_and_gunzip_cmd.inspect}"
+      break
+
+    end
+
+  end
+end
+
+
+
+# Make the destination directory
+`mkdir ./#{DEST}`
+
+File.open(SOURCE_MAP) do |f|
+  while line = f.gets
+
+    line.strip!
+    next if line.empty? or line =~ /^[\s]*#/
+
+    words = line.split(/[ \t]/)
+    next if words.size != 2 or words.include?("cat") # skip other directives
+
+    name, url = line.split(/[ \t]/)
+    loop do
+      if (Thread.list - [Thread.main]).size < MAX_THREADS
+        Thread.new{download_and_convert_one(name, url)}
+        break
+      else
+        sleep 5
+      end
+    end
+
+  end
+end
+
+(Thread.list - [Thread.main]).each {|t| t.join}
+
+
+# Copy progs
+PROGS_FOR_MAIN_DIR.each do |f|
+  `cp #{SCRIPTS_DIR}/#{f} ./source-#{SOURCE_MAP_ID}/`
+end
+

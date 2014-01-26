@@ -1,0 +1,77 @@
+#!/usr/bin/ruby
+require 'digest/sha1'
+
+TO_SEGUID_VERSION = "1.0"
+
+ONE_SEQUENCE_PER_LINE = ARGV.delete '-1'
+FASTA_SEQUENCES       = ARGV.delete '-f'
+
+
+def calc_seguid(sequence)
+  final = sequence.upcase.scan(/[A-Z]/).join
+  [Digest::SHA1.digest(final)].pack("m").chomp("=\n")
+end
+
+
+@first_line = true
+@last_header = nil
+
+if ONE_SEQUENCE_PER_LINE
+  def get_line
+    line = STDIN.gets
+    if line.nil?
+      line = false 
+    else
+      line.chomp!
+    end
+    return {:sequence => line, :info => line}
+  end
+
+elsif FASTA_SEQUENCES
+  def get_line
+    return {:sequence => false, :info => nil} if STDIN.eof?
+
+    all = []
+    header = @last_header
+
+    while line = gets
+      line.chomp!
+      if line =~ /^>(.*)/
+        @last_header = $1
+        if @first_line
+          @first_line = false
+          header = @last_header
+          next # skip the header and keep reading
+        else
+          break
+        end
+
+      elsif @first_line
+        STDERR.puts "ERROR: to-seguid: Not a FASTA file"
+        exit(1)
+      end
+
+      all.push line
+    end
+
+    return {:sequence => all.join, :info => header}
+  end
+
+else
+  def get_line
+    return {:sequence => false, :info => nil} if STDIN.eof?
+    sequence = STDIN.readlines.collect{|l| l.chomp}.join
+    return {:sequence => sequence, :info => sequence}
+  end
+end
+
+
+loop do
+  x = get_line
+  break if x[:sequence] == false
+
+  # Escape the tabs
+  x[:info] = x[:info].gsub("\t", '\t') 
+
+  puts x[:info] + "\t" + calc_seguid(x[:sequence])
+end

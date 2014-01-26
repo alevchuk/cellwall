@@ -1,0 +1,49 @@
+#!/usr/bin/ruby
+
+SNAME = File.basename(__FILE__)
+SDIR  = File.dirname(File.expand_path(__FILE__))
+DEST_DIR = File.expand_path(".")
+
+def proceed_anyway?
+  STDERR.puts "Proceed anyway?"
+  STDERR.puts "Type 'y' to proceed; anything else to exit. Then press Enter."
+  a = gets.chomp
+  exit(1) unless a == "y"
+end
+
+
+if !(DEST_DIR =~ /-dropout$/)
+  STDERR.puts "WARNING: #{SNAME}: You are in #{File.basename(DEST_DIR)}"
+  STDERR.puts "WARNING: #{SNAME}: You are not in a Dropout dir!"
+  proceed_anyway?
+end
+
+
+SOURCES = 
+  Dir.glob("*_fasta_a_uniprot*_trembl") + 
+  Dir.glob("*_fasta_a_uniprot*_sprot-")
+
+if SOURCES.size != 2
+  STDERR.puts "ERROR: #{SNAME}: Invalid number of SOURCE files matched " +
+  "with the reqired filename pattern:\n  " + SOURCES.inspect
+  exit(1)
+end
+
+
+SOURCES.each do |t|
+  destination = "#{t}-dropout"
+  if File.exists?(t)
+    STDERR.puts "WARNING: #{SNAME}: Destination #{destination} already exists!"
+    proceed_anyway?
+  end
+
+  puts `time cat #{t} | #{SDIR}/create-dropout-from-fasta > #{destination}`
+  if $? == 0
+    `rm #{t}`
+  else
+    STDERR.puts "WARNING: #{SNAME}: Somthing went wrong for #{t}\n\n"
+  end
+end
+
+# Count number of sequences
+`./SEQ_COUNTS.get > ./SEQ_COUNTS`

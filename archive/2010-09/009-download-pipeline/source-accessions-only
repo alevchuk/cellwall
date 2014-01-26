@@ -1,0 +1,24 @@
+#!/usr/bin/ruby
+
+A = {}
+
+ARGV.each do |src_name|
+  File.open(src_name) do |read_file|
+    while line = read_file.gets
+      if line =~ />(.*)/
+        acc = $1
+        A[src_name] ||= []
+        A[src_name].push acc
+      end
+    end
+  end
+end
+
+
+File.open("source-accessions.tab", 'w') do |write_file|
+  A.keys.sort.each do |src|
+    A[src].each do |a|
+      write_file.puts "#{src}\t#{a}"
+    end
+  end
+end

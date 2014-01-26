@@ -1,1 +1,0 @@
-/etc/gfam/django-settings.py

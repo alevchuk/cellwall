@@ -1,0 +1,13 @@
+= HMM Search =
+
+I wonder if I should choose my cut-off
+threshold at an E-value or at a score.
+
+As Kevin mentioned, E-values are
+database-size dependant. Scores are not.
+
+For instance, take gene Os3g13690.
+Searching for it in in the small JGI database
+gave a somewhat good E-value, 0.002.
+In the large concatenated database was 0.35 E-value.
+But it had a pretty bad score of 18.8 (in any db)

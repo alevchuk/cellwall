@@ -1,0 +1,268 @@
+#!/usr/bin/ruby
+
+if ARGV.size != 0
+  STDERR.puts "Usage: " +
+    "cat ../source-2010-07-stage02-concat/2010-07_gff* | ./parse-gffs"
+  exit
+end
+
+
+GFF_GENE_LINE  = {}
+GFF_MODEL_LINE = {}
+
+GFF_LINE         = []
+GFF_ORPHAN_LINE  = []
+
+
+
+# TAIR9 types
+# ====================================
+# cat ../source-2010-07-stage02-concat/2010-07_gff* | grep "       TAIR9   " | awk -F"\t" '// {print $3}' | sort | uniq -c
+#
+#   28691 gene
+#    3901 transposable_element_gene
+#
+#   37318 mRNA
+#     176 miRNA
+#      15 rRNA
+#     689 tRNA
+#      71 snoRNA
+#      13 snRNA
+#     428 ncRNA
+#     930 pseudogenic_transcript
+#
+#   33410 protein             # in attributes Derives_from= is same as Parent=
+#  179783 CDS
+#  196957 exon
+#   28129 three_prime_UTR
+#   31204 five_prime_UTR
+#       7 chromosome
+#     926 pseudogene
+#    1263 pseudogenic_exon
+
+# PTv2 types
+# ====================================
+# cat ../source-2010-07-stage02-concat/2010-07_gff* | grep "       Ptrichocarpav
+#
+#   41377 gene
+#
+#   45778 mRNA
+#
+#  222397 CDS
+#  235814 exon
+#   30349 3'-UTR
+#   32381 5'-UTR
+
+
+
+# OSa1r6 types
+# ====================================
+# cat 2010-07_gff* | \
+#   grep "      MSU_osa1r6      " | awk -F"\t" '// {print $3}' | sort | uniq -c
+#
+#  58056 gene
+#
+#  68680 mRNA
+#
+# 302878 CDS
+#  44223 five_prime_UTR
+#  42324 three_prime_UTR
+
+
+
+# JGI (will not have entries in gff_gene_line;
+# entries in gff_model_line wil be artificially generated)
+# ====================================
+# cat 2010-07_gff* | grep "      JGI     " \
+# | awk -F"\t" '// {print $3}' | sort | uniq -c
+#
+#  172312 CDS
+#  174956 exon
+#   31817 start_codon
+#   32646 stop_codon
+
+
+
+def adjust_type(type)
+  type.sub( 
+    "five_prime_UTR",  "RIGHT_UTR").sub( 
+    "three_prime_UTR", "LEFT_UTR" ).sub(
+    "3'-UTR", "LEFT_UTR" ).sub(
+    "5'-UTR",  "RIGHT_UTR")
+end
+
+def adjust_strand(strand)
+  strand == "-" ? -1 : 1
+end
+
+
+while line = STDIN.gets
+  line.chomp!
+  next if line =~ / *#/ # Skip Comments
+
+  all_9 = line.split("\t") 
+  if all_9.size != 9
+    STDERR.puts "WARNING: Bad format on line #{STDIN.lineno}: #{all_9.inspect}"
+    next
+  end
+  chrom, source, type, start, end_, score, strand, phase, attributes = all_9
+
+  # source is must be one of these
+  if !["JGI", "MSU_osa1r6", "Ptrichocarpav2_0", "TAIR9"].include?(source)
+    raise "Unkown source #{source}"
+  end
+
+  type = adjust_type(type)
+  strand = adjust_strand(strand)
+
+
+
+  attr_dict = {}
+
+  if source == "JGI"
+    attributes.split(';').each do |kv|
+      k,v = kv.split(' '); v =~ /^"?([^"]*)"?$/; attr_dict[k] = $1
+      if k =~ / / or v =~ / /
+        raise "attributes have spaces in #{all_9}"
+      end
+    end
+  else
+    attributes.split(';').each {|kv| k,v = kv.split('='); attr_dict[k] = v}
+  end
+
+  # Write back (adjusted type, adjusted strand, and attrs in GFF3 format)
+  attributes = attr_dict.collect{|k, v| "#{k}=#{v}"}.join(';')
+  all_9 = [chrom, source, type, start, end_, score, strand, phase, attributes]
+
+
+  if source == "TAIR9"
+
+    if attr_dict["Parent"] =~ /,/
+      parent = attr_dict["Parent"].split(",")
+      parent = parent.select{|c| !(c =~ /-Protein$/) }
+      parent = parent.first
+      attr_dict["Parent"] = parent
+    end
+
+    if type == "protein"
+      if !attr_dict.include?("Derives_from") or attr_dict.include?("Parent")
+        raise "Unexpected TAIR9 type protein #{attr_dict.inspect}"
+      end
+
+      attr_dict["Parent"] = attr_dict["Derives_from"]
+      attr_dict.delete("Derives_from")
+    end
+
+  elsif source == "MSU_osa1r6"
+
+  elsif source == "Ptrichocarpav2_0"
+
+  elsif source == "JGI"
+
+    sequence_accession = attr_dict["name"]
+
+    if sequence_accession.nil?
+      raise "No name tag for #{all_9.inspect} ----> #{attr_dict.inspect}"
+    end
+
+    if GFF_MODEL_LINE.include?(sequence_accession)
+      if GFF_MODEL_LINE[sequence_accession][2] != sequence_accession
+        raise "JGI data has unexpected accession #{sequence_accession} for" +
+        "#{all_9.inspect} -------" +
+        " shouldn't it be  #{GFF_MODEL_LINE[sequence_accession][1].inspect}?"
+      end
+    else
+      GFF_MODEL_LINE[sequence_accession] =
+        [GFF_MODEL_LINE.size + 1, "NULL", sequence_accession, "FALSE"] + ["NULL"] * 9
+    end
+
+    attr_dict["Parent"] = sequence_accession
+
+  end
+
+
+  # gff_gene_line
+  if type =~ /gene$/
+    gene_id = attr_dict["ID"]
+
+    if !GFF_GENE_LINE[gene_id].nil?
+      raise "We already have a gene with ID #{gene_id} ---> " +
+        "#{GFF_GENE_LINE[gene_id].inspect} ---> the conflicting " +
+        "gene candidate is #{all_9.inspect}"
+    end
+    GFF_GENE_LINE[gene_id] = [GFF_GENE_LINE.size + 1, gene_id] + all_9
+
+  # gff_model_line
+  elsif type =~ /RNA$/ or type == "pseudogenic_transcript"
+    gene_id = attr_dict["Parent"]
+    if GFF_GENE_LINE[gene_id].nil?
+      STDERR.puts GFF_GENE_LINE.keys.inspect
+      raise "gff_gene_line_id #{gene_id} not found for #{all_9.inspect}"
+    end
+    gff_gene_line_id = GFF_GENE_LINE[gene_id][0]
+
+    sequence_accession = 
+      (source == "MSU_osa1r6" ? attr_dict["ID"] : attr_dict["Name"])
+    if sequence_accession.nil?
+      raise "Cound not find sequence_accession in #{all_9.inspect}"
+    end
+
+    if !GFF_MODEL_LINE[attr_dict["ID"]].nil?
+      raise "We already have a model with ID #{attr_dict["ID"]} ---> " +
+        "#{GFF_MODEL_LINE[attr_dict["ID"]].inspect} ---> the conflicting " +
+        "model candidate is #{all_9.inspect}"
+    end
+    GFF_MODEL_LINE[attr_dict["ID"]] = 
+      [GFF_MODEL_LINE.size + 1] +
+      [gff_gene_line_id, sequence_accession, "TRUE"] + all_9
+
+  # gff_orphan_line
+  elsif !GFF_MODEL_LINE.include?(attr_dict["Parent"])
+    GFF_ORPHAN_LINE.push([GFF_ORPHAN_LINE.size + 1] + all_9)
+
+  # gff_line
+  else
+    model_id = attr_dict["Parent"] # sequence_accession
+    if GFF_MODEL_LINE[model_id].nil?
+      raise "gff_model_line_id #{model_id} not found for #{all_9.inspect}"    
+    end
+
+    gff_model_line_id = GFF_MODEL_LINE[model_id][0]
+
+    GFF_LINE.push [GFF_LINE.size + 1, gff_model_line_id] + all_9
+  end
+   
+
+  if STDIN.lineno % 100000 == 0
+    puts STDIN.lineno
+  end
+end
+
+
+# p GFF_GENE_LINE; puts; puts 
+File.open("gff_gene_line.tab", 'w') do |f|
+  GFF_GENE_LINE.values.sort{|i,j| i.first <=> j.first}.each do |i|
+    f.puts i.join("\t")
+  end
+end
+
+# p GFF_MODEL_LINE; puts; puts 
+File.open("gff_model_line.tab", 'w') do |f|
+  GFF_MODEL_LINE.values.sort{|i,j| i.first <=> j.first}.each do |i|
+    f.puts i.join("\t")
+  end
+end
+
+# p GFF_LINE; puts; puts 
+File.open("gff_line.tab", 'w') do |f|
+  GFF_LINE.each do |i|
+    f.puts i.join("\t")
+  end
+end
+
+# p GFF_ORPHAN_LINE; puts; puts 
+File.open("gff_orphan_line.tab", 'w') do |f|
+  GFF_ORPHAN_LINE.each do |i|
+    f.puts i.join("\t")
+  end
+end

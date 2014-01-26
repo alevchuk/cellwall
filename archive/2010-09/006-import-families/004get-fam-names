@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+Dir.glob("2005-cleaned/*\.tab").sort.each do |filename|
+  filename =~ /([0-9]+-[^-]+)\.fasta\.tab/
+  puts $1
+end

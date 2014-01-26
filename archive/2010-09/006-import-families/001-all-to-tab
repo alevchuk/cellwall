@@ -1,0 +1,7 @@
+#!/bin/bash
+
+set -v
+
+for i in *.fasta; do
+  cat $i | ../001convert-fasta-to-tab > $i.tab
+done

@@ -1,4 +1,0 @@
-#!/usr/bin/ruby
-SDIR = File.dirname(File.expand_path(__FILE__))
-Dir.chdir SDIR
-exec "ls | grep '_[fg][af][sf]' | xargs wc -l"
