@@ -1,0 +1,18 @@
+Creat Midpoint centered trees with Retree
+
+(1) Copy all *.dnd into tem directory
+	$ cp /data/projects/Cellwall/Tree/*.dnd /home/tgirke/ZZZ/Tree
+
+(2) Calculate midpoint trees with this command 
+	$ for i in *.dnd; do echo "y\n" | cp $i intree; echo -e "Y\nM\nW\nR\nR\nX" | /home/tgirke/Applications/PHYLIP/PHYLIP6/phylip/exe/retree; echo "y\n" | cp outtree $i.dnd; done
+
+(3) Move new *.dnd.dnd files into a new temp directory and rename them to *.dnd
+	$ for i in *.dnd.dnd; do mv $i ${i/\.dnd\.dnd/\.dnd}; done
+
+(4) Make backup copy of original files under /data/projects/Cellwall/Tree/backup
+
+(5) Move new files from (3) to /data/projects/Cellwall/Tree/
+
+(6) Double check file counts in /data/projects/Cellwall/Tree/ and /data/projects/Cellwall/Tree/backup
+	$ ll *.dnd | wc
+

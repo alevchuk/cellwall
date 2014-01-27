@@ -1,0 +1,20 @@
+<family>
+	<name>Glycoside Hydrolase Family 43</name>
+	<abrev>GH43</abrev>
+	<genome name="A. thaliana">
+		<sequence>At3g49880</sequence>
+		<sequence>At5g67540</sequence>
+	</genome>
+	<genome name="O. sativa">
+		<sequence>LOC_Os01g65720</sequence>
+		<sequence>LOC_Os12g21800</sequence>
+	</genome>
+	<genome name="UniProt">
+		<sequence>Q64PR6</sequence>
+		<sequence>Q7S0F4</sequence>
+		<sequence>Q8A1H6</sequence>
+		<sequence>Q8A1H8</sequence>
+		<sequence>Q8A5X4</sequence>
+		<sequence>Q8AB46</sequence>
+	</genome>
+</family>

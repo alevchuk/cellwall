@@ -1,0 +1,19 @@
+<family>
+	<name>UDP-L-rhamnose synthases</name>
+	<abrev>RHM</abrev>
+	<genome name="A. thaliana">
+		<sequence>At1g53500</sequence>
+		<sequence>At1g63000</sequence>
+		<sequence>At1g78570</sequence>
+		<sequence>At3g14790</sequence>
+	</genome>
+	<genome name="O. sativa">
+		<sequence>LOC_Os02g45540</sequence>
+		<sequence>LOC_Os03g17000</sequence>
+	</genome>
+	<genome name="UniProt">
+		<sequence>O65075</sequence>
+		<sequence>Q17556</sequence>
+		<sequence>Q61Y90</sequence>
+	</genome>
+</family>

@@ -1,0 +1,7 @@
+<Perl>
+	# Make sure we can access our code
+	@INC = ( "/srv/web/Cellwall/lib", @INC );
+	$ENV{CELLWALL_HOST}   = "localhost";
+	$ENV{CELLWALL_DB}     = "cellwall";
+	$ENV{CELLWALL_BASE}   = "/srv/web/Cellwall/current";
+</Perl>

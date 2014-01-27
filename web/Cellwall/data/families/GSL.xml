@@ -1,0 +1,37 @@
+<family>
+	<name>Glucan synthase-like</name>
+	<abrev>GSL</abrev>
+	<genome name="A. thaliana">
+		<sequence>At1g05570</sequence>
+		<sequence>At1g06490</sequence>
+		<sequence>At2g13680</sequence>
+		<sequence>At2g31960</sequence>
+		<sequence>At2g36850</sequence>
+		<sequence>At3g07160</sequence>
+		<sequence>At3g14570</sequence>
+		<sequence>At3g59100</sequence>
+		<sequence>At4g03550</sequence>
+		<sequence>At4g04970</sequence>
+		<sequence>At5g13000</sequence>
+		<sequence>At5g36870</sequence>
+	</genome>
+	<genome name="O. sativa">
+		<sequence>LOC_Os01g34890</sequence>
+		<sequence>LOC_Os01g34930</sequence>
+		<sequence>LOC_Os01g48200</sequence>
+		<sequence>LOC_Os01g55040</sequence>
+		<sequence>LOC_Os02g14900</sequence>
+		<sequence>LOC_Os02g58560</sequence>
+		<sequence>LOC_Os03g02760</sequence>
+		<sequence>LOC_Os03g03610</sequence>
+		<sequence>LOC_Os06g02260</sequence>
+		<sequence>LOC_Os06g08380</sequence>
+		<sequence>LOC_Os06g51270</sequence>
+	</genome>
+	<genome name="UniProt">
+		<sequence>Q6WGM8</sequence>
+		<sequence>Q7Y1B7</sequence>
+		<sequence>Q93XQ3</sequence>
+		<sequence>Q9XEG1</sequence>
+	</genome>
+</family>

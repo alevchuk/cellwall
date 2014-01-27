@@ -1,0 +1,121 @@
+<html>
+<head>
+<title>To-Do List</title>
+</head>
+<body bgcolor="#FFFB84">
+
+	<div align="center"><h2>Cellwall Database Planning</h2>Josh Lauricha<br><a href="http://bioinfo.ucr.edu/projects/Cellwall/families.pl">Back to Cell Wall Database</a></div>
+
+
+<ol type="A">
+	<b><li>General Functionality</li></b>
+	<br>
+	<ol>
+		<li>Page definitions and hierarchy</li>
+		<ol type="I">
+			<li>Family Page: lists all family classes</li>
+			<li>List page: lists all members in one family</li>
+			<li>Sequence page: contains information on one family member</li>
+		<br>
+		</ol>
+		<li>Search functions</li> 
+		<ol>
+			<li>Query option for EST BLAST results</li>
+			<li>Query option for content in GenBank files</li>
+		</ol>
+		<br>
+		<li>Update functionality of database</li>
+		<ol type="a">
+			<li>Automated Blast and HMMER searches against ATH1/OSA1</li>
+			<ol type="i">
+				<li>Run when new XML-formatted genome annotations are available from TIGR</li>
+				<li>New hits will be uploaded onto Family (II) and Sequence pages (III)</li>
+			</ol>
+			<li>Automated BLAST searches against dbEST</li>
+			<ol type="i">
+				<li>Run quarterly and update EST hit database</li>
+			</ol>
+		</ol>
+		<br>
+	</ol>
+	<b><li>Database Schema</li></b><br>
+	<ul>
+		<li>XML (TIGR) -> Feature Predictions -> GenBank -> MySQL</li>
+	</ul>
+	<br>
+	<b><li>Content of Pages</li></b>
+	<br>
+	<ol type="I">
+		<b><li>Family page</li></b>
+		<ol>
+			<li>Family names</li>
+		</ol>
+		Batch links
+		<ol start=2>
+			<li><a href="http://bioinfo.ucr.edu/projects/internal/Cellwall/Documents/literature.html">Literature list</a></li>
+			<li>Sequence batch</li>
+			<li>Gene structure</li>
+			<li>EST hit list (entire family)
+			<li>Promoter and 5'UTR batches</li>
+		<br>
+		</ol>
+		<b><li>List page</li></b>
+		<ol>	
+			<li>Gene ID with link to (III) sequence page
+			<li>Internal functional code/description
+			<li>Description
+		</ol>
+		Graphic family views on bottom of page
+		<ol start=4>
+			<li>Gene structure</li>
+			<li>Gap alignment (ClustalW)</li>
+			<li>Global alignment in HTML format (plus download of msf/fasta formats), in the future we will use alignments from PlantFam database, for now use ClustalW alignment and format it into HTML with this MView using this command:</li>
+			<pre>$ for i in *.mul; do mview -in pearson -css on -html header -ruler on -coloring consensus -threshold 80 -consensus on -con_coloring identity $i > $i.html; done</pre>
+			<li>Feature alignment: Pfam domains, targeting and membrane domains (see III.27, start later)</li>
+			<li>Tree display (plus download of x tree formats)</li>
+		</ol>
+		<br>
+		<b><li>Sequence page</li></b>
+		<ol>
+			<li>Sequence in GenBank format</li>
+		</ol>
+		<br>
+		Links to
+		<ol start=2>
+			<li>TIGR</li>
+			<li>TAIR</li>
+			<li>MIPS</li>
+			<li>SwissProt</li>
+			<li>Aramamnon</li>
+			<li>Literature</li>
+			<li>Mutant phenotypes</li>
+			<li>Locus</li>
+			<li>KO GABI & KO SALK</li>
+			<li>Expression: EST count, <a href="http://bioinfo.ucr.edu/projects/Cellwall/Expression/At4g02500.htm">Affy</a> & AFGC</li>
+		</ol>
+		<br>
+		Download/display of sequence data in different formats
+		<ol start=12>
+			<li>GenBank & FASTA</li>
+		</ol>
+		<br>
+		Gene structure view
+		<ol start=13>
+			<li>For this record</li>
+		</ol>
+		<br>
+		EST hits
+		<ol start=14>
+			<li>Graphical overview</li>
+			<li>Link to EST hit list for this record</li>
+		</ol>
+		<br>
+		Feature display in separate protein sequence window
+		<ol start=16>
+			<li>Pfam domains</li>
+			<li>Prosite motifs</li>
+			<li>Targeting and membrane domains (e.g. tmap from EMBOSS, see II.7, start later)</li>
+	</ol>
+</ol>
+</body>
+</html>

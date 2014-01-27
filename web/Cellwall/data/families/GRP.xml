@@ -1,0 +1,31 @@
+<family>
+	<name>Glycine-rich proteins</name>
+	<abrev>GRP</abrev>
+	<genome name="A. thaliana">
+		<sequence>At2g05380</sequence>
+		<sequence>At2g05440</sequence>
+		<sequence>At2g05510</sequence>
+		<sequence>At2g05520</sequence>
+		<sequence>At2g05530</sequence>
+		<sequence>At2g05540</sequence>
+	</genome>
+	<genome name="O. sativa">
+	</genome>
+	<genome name="UniProt">
+		<sequence>O22612</sequence>
+		<sequence>O81929</sequence>
+		<sequence>P11898</sequence>
+		<sequence>P23137</sequence>
+		<sequence>P37703</sequence>
+		<sequence>Q7M1H2</sequence>
+		<sequence>Q7Y087</sequence>
+		<sequence>Q8GVD4</sequence>
+		<sequence>Q8W157</sequence>
+		<sequence>Q94CG1</sequence>
+		<sequence>Q9FR52</sequence>
+		<sequence>Q9FXS8</sequence>
+		<sequence>Q9LWA1</sequence>
+		<sequence>Q9M6T8</sequence>
+		<sequence>Q9MBF4</sequence>
+	</genome>
+</family>

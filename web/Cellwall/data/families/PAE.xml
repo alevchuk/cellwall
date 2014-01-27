@@ -1,0 +1,32 @@
+<family>
+	<name>Pectin acetylesterases</name>
+	<abrev>PAE</abrev>
+	<genome name="A. thaliana">
+		<sequence>At1g09550</sequence>
+		<sequence>At1g57590</sequence>
+		<sequence>At2g46930</sequence>
+		<sequence>At3g05910</sequence>
+		<sequence>At3g09410</sequence>
+		<sequence>At3g62060</sequence>
+		<sequence>At4g19410</sequence>
+		<sequence>At4g19420</sequence>
+		<sequence>At5g23870</sequence>
+		<sequence>At5g26670</sequence>
+		<sequence>At5g45280</sequence>
+	</genome>
+	<genome name="O. sativa">
+		<sequence>LOC_Os01g21630</sequence>
+		<sequence>LOC_Os01g66830</sequence>
+		<sequence>LOC_Os01g66840</sequence>
+		<sequence>LOC_Os01g66850</sequence>
+		<sequence>LOC_Os01g74330</sequence>
+		<sequence>LOC_Os02g47400</sequence>
+		<sequence>LOC_Os04g51340</sequence>
+		<sequence>LOC_Os05g02120</sequence>
+		<sequence>LOC_Os07g44070</sequence>
+		<sequence>LOC_Os10g40290</sequence>
+	</genome>
+	<genome name="UniProt">
+		<sequence>Q41695</sequence>
+	</genome>
+</family>

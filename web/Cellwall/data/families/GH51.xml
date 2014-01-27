@@ -1,0 +1,42 @@
+<family>
+	<name>Glycoside Hydrolase Family 51</name>
+	<abrev>GH51</abrev>
+	<genome name="A. thaliana">
+		<sequence>At3g10740</sequence>
+		<sequence>At5g26120</sequence>
+	</genome>
+	<genome name="O. sativa">
+		<sequence>LOC_Os03g20420</sequence>
+		<sequence>LOC_Os04g20590</sequence>
+		<sequence>LOC_Os07g48750</sequence>
+		<sequence>LOC_Os11g03730</sequence>
+		<sequence>LOC_Os11g03780</sequence>
+		<sequence>LOC_Os12g03470</sequence>
+		<sequence>LOC_Os12g03480</sequence>
+		<sequence>LOC_Os12g03530</sequence>
+	</genome>
+	<genome name="UniProt">
+		<sequence>O88043</sequence>
+		<sequence>P42254</sequence>
+		<sequence>P82593</sequence>
+		<sequence>Q59218</sequence>
+		<sequence>Q6AHR9</sequence>
+		<sequence>Q6MFG4</sequence>
+		<sequence>Q6RX11</sequence>
+		<sequence>Q76LU3</sequence>
+		<sequence>Q76LU4</sequence>
+		<sequence>Q7S412</sequence>
+		<sequence>Q7X9G7</sequence>
+		<sequence>Q828B3</sequence>
+		<sequence>Q8A1K4</sequence>
+		<sequence>Q8A359</sequence>
+		<sequence>Q8AAU6</sequence>
+		<sequence>Q8G7R6</sequence>
+		<sequence>Q8NK90</sequence>
+		<sequence>Q944F3</sequence>
+		<sequence>Q96X54</sequence>
+		<sequence>Q97DN6</sequence>
+		<sequence>Q9ATV7</sequence>
+		<sequence>Q9ATV8</sequence>
+	</genome>
+</family>

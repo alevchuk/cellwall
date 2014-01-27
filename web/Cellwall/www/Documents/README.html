@@ -1,0 +1,115 @@
+<html>
+<head><meta Http-Equiv="Content-Type" content="text/html; charset=UTF-8"><meta Http-Equiv="Cache-Control" Content="no-cache"/><meta Http-Equiv="Pragma" Content="no-cache"/><meta Http-Equiv="Expires" Content="0"/>
+<style type='text/css'>
+	body { color: #000000; font-family: avantgarde, sans-serif; background-color: #D7D7D7; font-size: 11pt} 
+	a { color: #0000FF} 
+	a:hover { background-color: #AAAAAA} 
+	h1, h2, h3, h4, h5, h6 { font-weight: bold} 
+	h1 { font-size: 180%} 
+	h2 { font-size: 150%} 
+	h3 { font-size: 120%} 
+	h4 { font-size: 120%} 
+	pre { font-family: FreeMono, monospace; font-size: 10pt} 
+	tt { font-family: FreeMono, monospace; font-size: 10pt} 
+	tt.model { background-color: rgb(173, 216, 230)} 
+	tt.exon { background-color: rgb(0, 255, 255)} 
+	tt.cds { background-color: rgb(255, 165, 0)} 
+	tt.utrs { background-color: rgb(0, 255, 0)} 
+	tt.misc { background-color: rgb(170, 170, 170)} 
+</style>
+<title>README</title>
+</head>
+<body bgcolor="#D7D7D7">
+<hr size=4 color="blue" noshade>
+<div align="center"><h1>About Cell Wall Navigator</h1></div>
+<hr size=4 color="blue" noshade>
+<div align="center"><a href="http://bioinfo.ucr.edu/projects/internal/Cellwall/index.pl">Back to Database</a></div>
+<hr size=4 color="blue" noshade>
+<ol>
+<b><li type=I>General Functionality</li></b><p>
+<dl>
+	<dd>
+	Cell Wall Navigator (CWN) is an integrated database and mining tool for protein families that are involved in plant cell wall biogenesis. Its interface provides comprehensive query and visualization functions for mining sequence features, exploring evolutionary relationships and retrieving biological information within and across families. It is also an annotation forum that allows users to share their expert knowledge about cell wall genes by uploading functional information through an annotation upload function.<p>
+	Most of the tools in this database are based on modular open-source code that is shared with the public via the BioPerl project (<a href="http://www.bioperl.org/">bioperl.org</a>). This modular architecture maximizes the versatility and portability of the computational backend of this resource. 
+	</dd>
+	<p>
+	<div align="center"><img src="Image/schema.jpg"></div>
+	<div align="center"><b>Figure 1</b></div>
+	<p>
+</dl>
+<b><li type=I>Data Sources and Analysis</li></b><p>
+<dl>
+	<dt><b>Included Gene Families</b></dt>
+	<dd> 
+	At this time, CWN contains gene families that are involved in sugar substrate generation and primary cell wall metabolism. Additional familes can be included in the future for these or related processes, such as secondary wall biosynthesis, wall-associated defense and regulatory mechanisms. Requests for incorporating new families can be sent to the database <a href="mailto:tgirke@citrus.ucr.edu">administrator</a>. Inquiries should contain a suggested family name, its functional category, sequence identifier(s) for one or all of its members and some representative references.
+	</dd>
+	<p>
+	<dt><b>Sequence Databases</b></dt>
+	<dd>
+	CWN retrieves sequences from three different resources: 
+	<ol><ol>
+			<li>the genome sequences from <i><a href="ftp://ftp.tigr.org/pub/data/a_thaliana/ath1/">Arabidopsis thaliana</a></i> and <i><a href="ftp://ftp.tigr.org/pub/data/Eukaryotic_Projects/o_sativa/annotation_dbs/pseudomolecules/version_2.0/all_chrs/">Oryza sativa spp. japonica</a></i> (TIGR),</li>
+		<li>the <a href="http://www.pir.uniprot.org/">UniProt</a> database</li>
+		<li>and the <a href="ftp://ftp.ncbi.nih.gov/blast/db/">EST_Others</a> database from NCBI.</li>
+	</ol></ol>
+	This combinatorial database approach has been chosen to cover the maximum space of known sequences while maintaining the completeness of entirely sequenced plant genomes. As a result, the vast genomics and bioinformatics resources available for <i>Arabidopsis</i> and rice can be easily integrated into CWN and the sequences from other organisms are accessible at the same time for comparative studies. Additional plant genomes will be included in the future when they become available in annotated format (<i>e.g. Chlamydomonas reinhardtii</i>, Populus). Sequence redundancies between the genome and UniProt databases are avoided by removing all <i>Arabidopsis</i> and rice entries from the UniProt database and then appending all predicted proteins from the two genomes. The resulting 'UniProt_At_Osa' database is used for populating and updating the families in CWN by sequence similarity searches. EST data are not incorporated into this family population process due to their fragmentary nature and their high redundancy. As an alternative, the EST search results for all family members in CWN can be retrieved through a search form and the annotation pages of the individual family members.
+	</dd>
+	<p>
+	<dt><b>Sequence Searches for Populating CWN</b></dt>
+	<dl>
+		<dt>Identification and Clustering of Family Members</dt>
+		<dd>
+		An automated search pipeline populates and updates the CWN families in several steps:
+		<ol><ol>
+				<li>One or more 'seed' sequence(s) for a family are used to perform <i><a href="http://www.ncbi.nlm.nih.gov/BLAST/producttable.shtml#begin">BLASTP</a></i> searches against the UniProt_At_Osa database. All sequences generating BLAST e-values &le; e<font SIZE=-2><sup>-10</sup></font> are provisionally included into a family.</li>
+				<li>Multiple protein alignments are calculated from the retrieved sequences with <i><a href="http://www-igbmc.u-strasbg.fr/BioInfo/ClustalX/Top.html">ClustalW</a></i>.</li>
+				<li>Poorly aligned sequences are removed from the alignments with a Perl script. Alignments with several consensus residues distributed across their entire length pass this filtering step. Rejected alignments are further refined by the curator.</li>
+				<li>Profile hidden Markov models (HMMs) are created for each multiple alignment using the <i><a href="http://hmmer.wustl.edu/">hmmbuild</a></i> and <i><a href="http://hmmer.wustl.edu/">hmmcalibrate</a></i> modules from the <i><a href="http://hmmer.wustl.edu/">HMMER</a></i> package.</li>
+				<li>HMM models are used to search the UniProt_At_Osa database with <i><a href="http://hmmer.wustl.edu/">hmmsearch</a></i>. This step retrieves remotely related sequences with higher sensitivity and a lower rate of false positives than BLAST (HMMER e-value cutoff of 0.1).</li>
+				<li>Final alignments are created with <i>ClustalW</i> and <i><a href="http://hmmer.wustl.edu/">hmmalign</a></i>. </li>
+				<li>Once a family has a high-quality HMMs established, it can be fully maintained and updated in the future by performing only the hmmsearch and alignment steps (5 and 6) upon new updates of the search databases.</li>
+		</ol></ol><p>
+		<dt>EST Searches</dt>
+		<dd>The incorporated family members are associated with related ESTs from all organisms represented in the NCBI EST_Others database. This database contains all NCBI ESTs except those from human and mouse. Their inclusion appeared unnecessary since the two organisms are well covered through the above UniProt database. In addition, the extreme over-representation of mouse and human in the EST database would complicate the analysis of the EST data for the user. For retrieving cell wall-related related ESTs, the EST_Others database is searched with all CWN family members using <a href="http://www.ncbi.nlm.nih.gov/BLAST/producttable.shtml#begin">TBLASTN</a> searches (e-value cutoff of &le; e<font SIZE=-2><sup>-10</sup></font>) in quarterly intervals. Due to the vast sequence redundancy of un-clustered EST data and the extensive size of this dataset, the obtained search results constitute by far the largest data domain in CWN. The web interface allows users to efficiently query, filter and sort these results through a separate <a href="http://bioinfo.ucr.edu/projects/internal/Cellwall/search.pl">Search Page</a> and to view them in graphical mode on the annotation page of the individual family members. In addition, the number of EST hits within each family is recorded on a <a href="http://bioinfo.ucr.edu/projects/internal/Cellwall/statistics.pl">Statistics Page</a> along with the number of proteins included in each family.
+		</dd>
+	</dl>
+	<p>
+</dl>
+<b><li type=I>Interface Functionality</li></b><p>
+<dl>
+	<dt><b>Three Hierarchical Levels</b></dt>
+	<dd>The CWN interface consists of three hierarchical levels to analyze gene family data. The front page is the <a href="http://bioinfo.ucr.edu/projects/internal/Cellwall/index.pl">(1) Family Selection or Index Page</a> that lists all protein families included in the database. Several batch links are available at this level to retrieve protein/nucleotide sequences in different formats and to compare gene structures between family members. The active hyperlinks of the listed family names open the <a href="http://bioinfo.ucr.edu/projects/internal/Cellwall/family.pl?family_id=8">(2) Family Browser Pages</a> that provide access to the alignments and trees of each family. The hyperlinked entry numbers of this level guide to the <a href="http://bioinfo.ucr.edu/projects/internal/Cellwall/sequence.pl?sequence_id=1238">(3) Annotation Pages</a>. This deepest level of information retrieval provides access to extensive annotation information about each family member.  
+	</dd>
+	<p>	
+	<dt><b>Search Form</b></dt>
+	<dd>A separate <a href="http://bioinfo.ucr.edu/projects/internal/Cellwall/search.pl">Search Page</a> allows users to efficiently find sequences and other information in this database by providing accession numbers, key words, user annotations or by performing sequence searches with BLAST. The EST BLAST results can be queried, filtered and sorted by many criteria, such as organism names, scores, e-values, etc.  
+	</dd>
+	<p>	
+	<dt><b>Feature Viewing</b> [<a href="http://bioinfo.ucr.edu/projects/internal/Cellwall/family.pl?action=show_Structure&family_id=10">Demo 1</a>] [<a href="http://bioinfo.ucr.edu/projects/internal/Cellwall/sequence.pl?action=sequence&sequence_locator=sequence_id:2700;sequence_accession:At2g22900&highlight=CDS:100..886,1372..1934">Demo 2</a>] [<a href="http://bioinfo.ucr.edu/projects/internal/Cellwall/sequence.pl?sequence_locator=sequence_id%3A953%3Bsequence_accession%3AAt1g02000%3Bsequence_protein%3AAt1g02000.1&highlight=MISC%3A90..106&action=Highlight">Demo 3</a>]</dt>
+	<dd>
+	Gene structures (exon, intron and UTR boundaries) can be graphically displayed for an entire family or for individual members. Since the required coordinate information is derived from TIGR's XML-formatted genome annotations, this feature is currently only available for <i>Arabidopsis</i> and rice sequences, but not for the UniProt entries. An interactive viewing function is available on the Annotation Pages that allow users to highlight exon, intron and UTR elements in the corresponding sequences by clicking on the graphical features. Similar functions for viewing protein domains and motifs from <i>Arabidopsis</i>, rice and UniProt are available as well.  
+	</dd>
+	<p>
+	<dt><b>Alignment Viewing</b> [<a href="http://bioinfo.ucr.edu/projects/internal/Cellwall/family.pl?action=show_Alignment&family_id=10">Demo</a>]</dt>
+	<dd>
+	The multiple alignments generated during the family clustering process (s. above) can be displayed on the Family Browser Pages. The default display option for alignments is a overview showing gaps and regional similarities in graphical mode. An alternative alignment view is the HTML mode showing conserved residues and consensus sequences in color. For analyses in local alignment editor, the alignments can be downloaded in MSF or FASTA formats. Sub-alignments containing only <i>Arabidopsis</i>, rice or UniProt sequences are also available in all viewing or download formats.
+	</dd>
+	<p>
+	<dt><b>Interactive Trees</b> [<a href="http://bioinfo.ucr.edu/projects/internal/Cellwall/family.pl?family_id=10&source_id=-1&action=Highlight&selected=At3g62720%3BAtXT1%3BAt3g62720.1&selected=Q7X9N4%3B%3B2714&selected=Q9ST56%3B%3B2715">Demo XXT</a>] [<a href="http://bioinfo.ucr.edu/projects/internal/Cellwall/family.pl?action=show_Tree&family_id=6&source_id=-1&collapsed=343;62;30&selected=At5g03760;AtCslA9;At5g03760.1;At5g22740;AtCslA2;At5g22740.1;Q6UDF0;CtManS;2487">Demo CSL</a>]</dt>
+	<dd>
+	The alignments for each family are used to calculate phylogenetic trees with the <i><a href="http://www.cmbi.kun.nl/bioinf/PHYLIP/">PHYLIP</a></i> package. A distance-based neighbor-joining method has been chosen for this step that uses <i><a href="http://www.cmbi.kun.nl/bioinf/PHYLIP/protdist.html">PROTDIST</a></i> with the 'categories model' setting for generating distance matrices, <i><a href="http://www.cmbi.kun.nl/bioinf/PHYLIP/neighbor.html">NEIGHBOR</a></i> for tree construction and the midpoint method in <i><a href="http://www.cmbi.kun.nl/bioinf/PHYLIP/retree.html">RETREE</a></i> for defining root positions. In addition to complete family trees, sub-trees restricted to <i>Arabidopsis</i>, rice or UniProt entries can be accessed separately. The internally written program 'TreeBrowse' converts the primary tree files into interactive tree images on the web interface. It allows users to browse through tree structures by collapsing or expanding tree branches, to color-highlight selected members via <a href="http://bioinfo.ucr.edu/projects/internal/Cellwall/family.pl?action=show_Members&family_id=8">check boxes</a> on the Family Browser Pages and to open their annotation pages by clicking on the encoded hyperlinks in the tree images. Additionally, the trees can be downloaded for import into local tree viewing applications (e.g.TreeView).
+	</dd>
+	<p>
+	<dt><b>Annotation Pages</b> [<a href="http://bioinfo.ucr.edu/projects/internal/Cellwall/sequence.pl?action=sequence&sequence_locator=sequence_id:2701;sequence_accession:At3g62720&highlight=UTRs:1..209,1593..1791">Demo</a>]</dt>
+	<dd>Detailed information about single family members can be retrieved on the Annotation Pages that contain protein/nucleotide sequences, several feature viewing options, annotation upload functionality and many links to external resources for accessing additional information. In detail, sequence features (s. above) and <a href="http://bioinfo.ucr.edu/projects/internal/Cellwall/sequence.pl?action=results&search_id=3&sequence_id=1238">EST BLAST hits</a> can be graphically displayed on these pages. Clicks on the EST bars will open their annotation pages. User annotations can be uploaded here or displayed when available in a dedicated field (s. below). The current set of links guides to the following resources: (1) the sequence annotation pages from <a href="http://www.tigr.org/tdb/e2k1/ath1/">TIGR</a>, <a href="http://www.arabidopsis.org/">TAIR</a> and <a href="http://mips.gsf.de/proj/thal/db/index.html">MIPS</a>; (2) the <a href="http://afmb.cnrs-mrs.fr/CAZY/">Carbohydrate-Active enZYmes (CAZy)</a> site; (3) the membrane domain predictions form the <a href="http://aramemnon.botanik.uni-koeln.de/">Aramemnon</a> database; (4) the insertional knockout collections from <a href="http://198.202.69.98/cgi-bin/tdnaexpress">SIGnAL</a> and <a href="http://www.mpiz-koeln.mpg.de/GABI-Kat/">GABI</a>; (5) an internal <a href="http://bioinfo.ucr.edu/projects/internal/Cellwall/Documents/literature.html">literature collection</a>; (6) pathway and <a href="http://www.geneontology.org/">GO annotations</a> and (7) the genome-wide expression data from <a href="http://www.arabidopsis.org/servlets/Search?type=expr&search_action=new_search">AFGC</a>, <a href="http://ssbdjc2.nottingham.ac.uk/">NASC</a> and <a href="http://mpss.udel.edu/at/GeneQuery.html">MPSS</a>. Most of these links are not available for rice and UniProt entries due to the absence of the corresponding resources. Additional links to cell wall-specific sites are available on a separate <a href="http://bioinfo.ucr.edu/projects/internal/Cellwall/Documents/links.html">Link Page</a>.     
+	</dd>
+	<p>
+	<dt><b>Annotation Upload</b></dt>
+	<dd>An <a href="http://bioinfo.ucr.edu/projects/internal/Cellwall/users.pl">Annotation Upload</a> functionality allows registered users to upload important information from their research about sequences, mutants, phenotypes, antibodies, protein functions and other valuable data. Authors can edit or remove their provided information at any time. 
+	</dd>
+	<p>	
+</dl>
+</ol>
+
+</body>
+</html>

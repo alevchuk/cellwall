@@ -1,0 +1,32 @@
+<family>
+	<name>AXS Family</name>
+	<abrev>AXS</abrev>
+	<genome name="A. thaliana">
+		<sequence>At1g08200</sequence>
+		<sequence>At2g27860</sequence>
+	</genome>
+	<genome name="O. sativa">
+		<sequence>LOC_Os01g73790</sequence>
+	</genome>
+	<genome name="UniProt">
+		<sequence>O52325</sequence>
+		<sequence>P77398</sequence>
+		<sequence>Q5PNA6</sequence>
+		<sequence>Q62JS0</sequence>
+		<sequence>Q6D2F1</sequence>
+		<sequence>Q6JJ41</sequence>
+		<sequence>Q6QP37</sequence>
+		<sequence>Q6TNI9</sequence>
+		<sequence>Q7N3Q7</sequence>
+		<sequence>Q7P022</sequence>
+		<sequence>Q83QT8</sequence>
+		<sequence>Q8D341</sequence>
+		<sequence>Q8FFM1</sequence>
+		<sequence>Q8XDZ3</sequence>
+		<sequence>Q8XZS6</sequence>
+		<sequence>Q8Z540</sequence>
+		<sequence>Q8ZDX8</sequence>
+		<sequence>Q93PD8</sequence>
+		<sequence>Q9HY63</sequence>
+	</genome>
+</family>

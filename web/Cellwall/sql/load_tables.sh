@@ -1,0 +1,20 @@
+cat \
+	genome.sql      \
+	group.sql       \
+	parameters.sql  \
+	database.sql    \
+	search.sql      \
+	species.sql     \
+	users.sql       \
+	blast_hit.sql   \
+	family.sql      \
+	sequence.sql    \
+	idxref.sql      \
+	seqfeature.sql  \
+	seqtags.sql     \
+	seqlocation.sql \
+	subfamily.sql   \
+	blast_hsp.sql   \
+	comment.sql     \
+	dblink.sql      \
+| mysql -p -h $CELLWALL_HOST $CELLWALL_DB

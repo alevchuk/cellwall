@@ -1,0 +1,37 @@
+<family>
+	<name>Xyloglucan xylosyltransferases and galactomannan galactosyltransferases</name>
+	<abrev>XXT</abrev>
+	<genome name="A. thaliana">
+		<sequence>At1g18690</sequence>
+		<sequence>At1g74380</sequence>
+		<sequence>At2g22900</sequence>
+		<sequence>At3g62720</sequence>
+		<sequence>At4g02500</sequence>
+		<sequence>At4g37690</sequence>
+		<sequence>At4g38310</sequence>
+		<sequence>At5g07720</sequence>
+	</genome>
+	<genome name="O. sativa">
+		<sequence>LOC_Os02g32750</sequence>
+		<sequence>LOC_Os02g49140</sequence>
+		<sequence>LOC_Os03g18820</sequence>
+		<sequence>LOC_Os03g19310</sequence>
+		<sequence>LOC_Os03g19330</sequence>
+		<sequence>LOC_Os11g34390</sequence>
+		<sequence>LOC_Os12g05380</sequence>
+	</genome>
+	<genome name="UniProt">
+		<sequence>Q5TIM6</sequence>
+		<sequence>Q5TIM7</sequence>
+		<sequence>Q5TIM8</sequence>
+		<sequence>Q5TIM9</sequence>
+		<sequence>Q5TIN0</sequence>
+		<sequence>Q5TIN1</sequence>
+		<sequence>Q5TIN2</sequence>
+		<sequence>Q5TIN3</sequence>
+		<sequence>Q5TIN4</sequence>
+		<sequence>Q5TIN5</sequence>
+		<sequence>Q7X9N4</sequence>
+		<sequence>Q9ST56</sequence>
+	</genome>
+</family>

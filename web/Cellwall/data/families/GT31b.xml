@@ -1,0 +1,30 @@
+<family>
+	<name>Glycosyl transferases 31B</name>
+	<abrev>GT31b</abrev>
+	<genome name="A. thaliana">
+		<sequence>At1g01570</sequence>
+		<sequence>At1g05280</sequence>
+		<sequence>At1g07850</sequence>
+		<sequence>At1g33250</sequence>
+		<sequence>At2g37730</sequence>
+		<sequence>At3g11420</sequence>
+		<sequence>At4g00300</sequence>
+		<sequence>At4g11350</sequence>
+		<sequence>At4g15240</sequence>
+		<sequence>At4g23490</sequence>
+		<sequence>At5g12460</sequence>
+		<sequence>At5g41460</sequence>
+	</genome>
+	<genome name="O. sativa">
+		<sequence>LOC_Os02g45700</sequence>
+		<sequence>LOC_Os03g03270</sequence>
+		<sequence>LOC_Os03g16290</sequence>
+		<sequence>LOC_Os03g16330</sequence>
+		<sequence>LOC_Os04g48950</sequence>
+		<sequence>LOC_Os08g04300</sequence>
+		<sequence>LOC_Os10g37260</sequence>
+		<sequence>LOC_Os10g39020</sequence>
+	</genome>
+	<genome name="UniProt">
+	</genome>
+</family>

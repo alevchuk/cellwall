@@ -1,0 +1,578 @@
+<html>
+<head><meta Http-Equiv="Content-Type" content="text/html; charset=UTF-8"><meta Http-Equiv="Cache-Control" Content="no-cache"/><meta Http-Equiv="Pragma" Content="no-cache"/><meta Http-Equiv="Expires" Content="0"/>
+<style type='text/css'>
+	body { color: #000000; font-family: avantgarde, sans-serif; background-color: #D7D7D7; font-size: 10pt} 
+	a { color: #0000FF} 
+	a:hover { background-color: #AAAAAA} 
+	h1, h2, h3, h4, h5, h6 { font-weight: bold} 
+	h1 { font-size: 180%} 
+	h2 { font-size: 150%} 
+	h3 { font-size: 120%} 
+	h4 { font-size: 120%} 
+	pre { font-family: FreeMono, monospace; font-size: 10pt} 
+	tt { font-family: FreeMono, monospace; font-size: 10pt} 
+	tt.model { background-color: rgb(173, 216, 230)} 
+	tt.exon { background-color: rgb(0, 255, 255)} 
+	tt.cds { background-color: rgb(255, 165, 0)} 
+	tt.utrs { background-color: rgb(0, 255, 0)} 
+	tt.misc { background-color: rgb(170, 170, 170)} 
+</style>
+<title>CW References</title>
+</head>
+<hr size=4 color="blue" noshade>
+<div align="center"><h1>Cell Wall References</h1></div>
+<hr size=4 color="blue" noshade>
+<div align="center"><a href="http://bioinfo.ucr.edu/projects/internal/Cellwall/index.pl">Back to Database</a></div>
+<hr size=4 color="blue" noshade>
+
+<h2>Index</h2>
+<ol type="A">
+	<b><li><a href="#review">Overview Articles</a></li></b><p>
+	<b><li><a href="#specific">Gene Family-Specific Articles</a></li></b><p>
+	<dl>
+	<b><dt>1. <a href="#activation">Monosaccharide activation and interconversion</a></dt></b>
+	<b><dd>1.1 <a href="#S1K">Sugar 1-kinases (S1K)</a></dd></b>
+	<b><dd>1.2 <a href="#NSPP">Nucleotide-sugar pyrophosphorylases (NSPP)</a></dd></b>
+		<dl><dl>
+			<b><dd>1.2.1 <a href="#GMP">GDP-mannose pyrophosphorylase (GMP)</a></dd></b>
+			<b><dd>1.2.2 <a href="#UGP">UDP-glucose pyrophosphorylase (UGP)</a></dd></b>
+		</dl></dl>	
+	<b><dd>1.3 <a href="#NSIEPI">Nucleotide-sugar interconversion - NAD dependent epimerase/dehydratase superfamily (NSI-EPI)</a></dd></b>
+		<dl><dl>
+			<b><dd>1.3 <a href="#reviewnsi">Reviews</a></dd></b>
+			<b><dd>1.3.1 <a href="#UGE">UDP-<font SIZE=-2>D</font>-glucose 4-epimerases (UGE)</a></dd></b>
+			<b><dd>1.3.2 <a href="#GAE">UDP-<font SIZE=-2>D</font>-glucuronic acid 4-epimerases (GAE)</a></dd></b>
+			<b><dd>1.3.3 <a href="#RHA">UDP-<font SIZE=-2>L</font>-rhamnose synthases (RHA)</a></dd></b>
+			<b><dd>1.3.4 <a href="#UXS">UDP-<font SIZE=-2>D</font>-apiose/xylose synthases (UXS)</a></dd></b>
+			<b><dd>1.3.5 <a href="#UXE">UDP-<font SIZE=-2>D</font>-xylose 4-epimerase (UXE)</a></dd></b>
+			<b><dd>1.3.6 <a href="#GME">GDP-<font SIZE=-2>D</font>-mannose 3,5-epimerase (GME)</a></dd></b>
+			<b><dd>1.3.7 <a href="#GER">GDP-4-keto-6-deoxy-<font SIZE=-2>D</font>-mannose-3,5-epimerase-4-reductase (GER)</a></dd></b>
+			<b><dd>1.3.8 <a href="#GMD">GDP-<font SIZE=-2>D</font>-mannose-4,6-dehydratase (GMD)</a></dd></b>
+		</dl></dl>	
+	<b><dd>1.4 <a href="#NSIDH">Nucleotide-sugar interconversion - nucleotide sugar dehydrogenase superfamily (NSI-DH)</a></dd></b>
+		<dl><dl>
+			<b><dd>1.4.1 <a href="#UGD">UDP-<font SIZE=-2>D</font>-glucose dehydrogenases (UGD)</a></dd></b>
+		</dl></dl>	
+	<b><dt>2. <a href="#polysaccharide">Polysaccharide synthesis</a></dt></b>
+	<b><dd>2.1 <a href="#cellulose">Cellulose</a></dd></b>
+		<dl><dl>
+				<b><dd>2.1.1 <a href="#CSL">Cellulose synthases, cellulose synthase-like genes and galactomannan synthases (CAZy-GT2, CES, CSL)</a></dd></b>
+		</dl></dl>	
+	<b><dd>2.2 <a href="#hemicellulose">Hemicellulose</a></dd></b>
+		<dl><dl>
+			<b><dd>2.2.1 <a href="#RGP">Reversibly glycosylated polypeptides (RGP)</a></dd></b>
+			<b><dd>2.2.2 <a href="#XGT">Xyloglucan galactosyltransferase (CAZy-GT47, XGT)</a></dd></b>
+			<b><dd>2.2.3 <a href="#XFT">Xyloglucan fucosyltransferases (CAZy-GT37, XFT)</a></dd></b>
+			<b><dd>2.2.4 <a href="#XXT">Xyloglucan xylosyltransferases and galactomannan galactosyltransferases (CAZy-GT34, XXT)</a></dd></b>
+			<b><dd>2.2.5 <a href="#GAX">Glucuronoarabinoxylan (GAX)</a></dd></b>
+		</dl></dl>	
+	<b><dd>2.3 <a href="#pectins">Pectins</a></dd></b>
+		<dl><dl>
+			<b><dd>2.3 <a href="#reviewpec">Reviews</a></dd></b>
+			<b><dd>2.3.1 <a href="#HG">Homogalacturonan (HG)</a></dd></b>
+			<b><dd>2.3.2 <a href="#XGA">Xylogalacturonan (XGA)</a></dd></b>
+			<b><dd>2.3.3 <a href="#RG-I">Rhamnogalacturonan I (RG-I)</a></dd></b>
+			<b><dd>2.3.4 <a href="#RG-II">Rhamnogalacturonan II (RG-II)</a></dd></b>
+			<b><dd>2.3.5 <a href="#AG-I">Arabinogalactan I (AG-I)</a></dd></b>
+			<b><dd>2.3.6 <a href="#AG-II">Arabinogalactan II (AG-II)</a></dd></b>
+			<b><dd>2.3.7 <a href="#A">Arabinan (A)</a></dd></b>
+		</dl></dl>	
+	<b><dd>2.4 <a href="#callose">Callose</a></dd></b>
+		<dl><dl>
+			<b><dd>2.4.1 <a href="#GSL">Glucan synthase-like (CAZy-GT48, GSL)</a></dd></b>
+		</dl></dl>	
+	<b><dd>2.5 <a href="#othergt">Other glycosyl transferases</a></dd></b>
+		<dl><dl>
+			<b><dd>2.5.1 <a href="#GT8">Glycosyl transferases (pectin bios. CAZy-GT8)</a></dd></b>
+		</dl></dl>	
+	<b><dt>3. <a href="#reassembly">Reassembly</a></dt></b>
+	<b><dd>3.1 <a href="#expansion">Cell expansion</a></dd></b>
+		<dl><dl>
+			<b><dd>3.1.1 <a href="#EXP">Expansins (EXP)</a></dd></b>
+			<b><dd>3.1.2 <a href="#GH18">Yieldins (CAZy-GH18, GH18)</a></dd></b>
+		</dl></dl>	
+	<b><dd>3.2 <a href="#hemireassembly">Hemicellulose reassembly</a></dd></b>
+		<dl><dl>
+			<b><dd>3.2.1 <a href="#XTH">Xyloglucan endotransglucosylases/hydrolases (CAZy-GH16, XTH: XET &amp; XEH)</a></dd></b>
+		</dl></dl>	
+	<b><dd>3.3 <a href="#hydrolases">Hydrolases</a></dd></b>
+		<dl><dl>
+			<b><dd>3.3.1 <a href="#BGAL">&beta;-Galactosidase (CAZy-GH35, BGAL)</a></dd></b>
+			<b><dd>3.3.2 <a href="#GH9">Glycoside hydrolase (CAZy-GH9)</a></dd></b>
+			<b><dd>3.3.3 <a href="#GH17">Glycoside hydrolase (CAZy-GH17)</a></dd></b>
+			<b><dd>3.3.4 <a href="#GH28">Glycoside hydrolase (CAZy-GH28)</a></dd></b>
+			<b><dd>3.3.5 <a href="#GH10">Glycoside hydrolase (CAZy-GH10, 43 & 51)</a></dd></b>
+		</dl></dl>	
+	<b><dd>3.4 <a href="#lyases">Lysases</a></dd></b>
+		<dl><dl>
+			<b><dd>3.4.1 <a href="#PL1">Pectate and pectin lyases (CAZy-PL1)</a></dd></b>
+			<b><dd>3.4.2 <a href="#PL4">Rhamnogalacturonan I lyases (CAZy-PL4)</a></dd></b>
+		</dl></dl>	
+	<b><dd>3.4 <a href="#esterases">Esterases</a></dd></b>
+		<dl><dl>
+			<b><dd>3.4.1 <a href="#PME">Pectin methyl esterases (CAZy-CE8)</a></dd></b>
+			<b><dd>3.4.2 <a href="#PAE">Pectin acetylesterases (CAZy-CE13)</a></dd></b>
+			<b><dd>3.4.3 <a href="#FE">Feruloyl esterases (CAZy-CE1)</a></dd></b>
+		</dl></dl>	
+	<b><dt>4. <a href="#structural">Structural proteins</a></dt></b>
+	<b><dd>4. <a href="#reviewstruct">Reviews</a></dd></b>
+	<b><dd>4.1 <a href="#HRGP">Hydroxyproline-rich glycoproteins or extensins (HRGP)</a></dd></b>
+	<b><dd>4.2 <a href="#LRX">Leucine-rich repeat extensins (LRX)</a></dd></b>
+	<b><dd>4.3 <a href="#PRP">Proline-rich cell wall proteins (PRP)</a></dd></b>
+	<b><dd>4.4 <a href="#GRP">Glycine-rich proteins (GRP)</a></dd></b>
+	<b><dd>4.5 <a href="#AGP">Arabinogalactan proteins (AGP)</a></dd></b>
+	<b><dt>5. <a href="#glycoprot">Glycoprotein biosynthesis</a></dt></b>
+	<b><dd>5.1 <a href="#GFT">Glycoprotein fucosyltransferases (CAZy-GT10, GT10)</a></dd></b>
+	<b><dd>5.2 <a href="#GT31">Glycosyl transferases 31a/b (CAZy-GT31)</a></dd></b>
+	<b><dt>6. <a href="#development">Targeting, development, signaling and defense</a></dt></b>
+	<b><dd>6.1 <a href="#GPI">Glycosylphosphatidylinositol anchor biosynthesis (GPI)</a></dd></b>
+	</dl></dl></dl>
+</b>
+</ol>
+<br>
+<br>
+<p><p>
+
+<h2>Reference List</h2>
+<ol type="A">
+<a name="review"></a>
+<b><li>Overview Articles (Update search: <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=PubMed&term=%28%22cell%20walls%22%5Btitle%5D%20OR%20%22cell%20wall%22%5Btitle%5D%20OR%20%22glycosyltransferases%22%5Btitle%5D%29%20AND%20%28%22plant%22%5BText%20Word%5D%20OR%20plants%5BText%20Word%5D%29%20NOT%20%22fungi%22%5Btitle%5D" target=_blank">all articles</a>, <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=PubMed&term=%28%22cell%20walls%22%5Btitle%5D%20OR%20%22cell%20wall%22%5Btitle%5D%20OR%20%22glycosyltransferases%22%5Btitle%5D%29%20AND%20%28%22plant%22%5BAll%20Fields%5D%20OR%20%22plants%22%5BAll%20Fields%5D%29%20NOT%20%22fungi%22%5Btitle%5D%20AND%20review%5Bptyp%5D" target=_blank">reviews only</a>)</li></b>
+	
+	<dl><dd><dl><dd><dl><dd>
+		<p><a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=pubmed&list_uids=15618507,15489283,15063871,15134749,12913136,14611961,12691742,12393017,11430986,12023868,11543185,11554480,11312132,9301086,7770522" target="_blank">All overview articles in one PubMed list</a><p>
+		<b>Somerville C, Bauer S, Brininstool G, Facette M, Hamann T, Milne J, Osborne E, Paredez A, Persson S, Raab T, Vorwerk S, Youngs H. </b> (2004) Toward a systems approach to understanding plant cell walls. Science: <b>306</b>, 2206-11. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=15618507" target="_blank">PubMed</a><p>
+		<b>Girke T, Lauricha J, Tran H, Keegstra K, Raikhel N. </b> (2004) The Cell Wall Navigator database. A systems-based approach to organism-unrestricted mining of protein families involved in cell wall metabolism. Plant Physiol: <b>136</b>, 3003-8. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=pubmed&dopt=Abstract&list_uids=15489283" target="_blank">PubMed</a><p>
+		<b>Vorwerk S, Somerville S, Somerville C. </b> (2004) The role of plant cell wall polysaccharide composition in disease resistance. Trends Plant Sci: <b>9</b>, 203-9. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=15063871" target="_blank">PubMed</a><p>
+		<b>Scheible WR, Pauly M. </b> (2004) Glycosyltransferases and cell wall biosynthesis: novel players and insights. Curr Opin Plant Biol: <b>7</b>, 285-95. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=15134749" target="_blank">PubMed</a><p>
+		<b>Vincken JP, Schols HA, Oomen RJ, McCann MC, Ulvskov P, Voragen AG, Visser RG. </b> (2003) If homogalacturonan were a side chain of rhamnogalacturonan I. Implications for cell wall architecture. Plant Physiol: <b>132</b>, 1781-9. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=12913136" target="_blank">PubMed</a><p>
+		<b>Pilling E, Hofte H. </b> (2003) Feedback from the wall. Curr Opin Plant Biol: <b>6</b>, 611-6. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=14611961" target="_blank">PubMed</a><p>
+		<b>Coutinho PM, Deleury E, Davies GJ, Henrissat B. </b> (2003) An evolving hierarchical family classification for glycosyltransferases. J Mol Biol: <b>328</b>, 307-17. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=12691742" target="_blank">PubMed</a><p>
+		<b>Reiter WD</b> (2002) Biosynthesis and properties of the plant cell wall. Curr Opin Plant Biol: <b>5</b>, 536-42. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=12393017" target="_blank">PubMed</a><p>
+		<b>Bonetta DT, Facette M, Raab TK, Somerville CR. </b> (2002) Genetic dissection of plant cell-wall biosynthesis. Biochem Soc Trans: <b>30</b>, 298-301. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=12023868" target="_blank">PubMed</a><p>
+		<b>Henrissat B, Coutinho PM, Davies GJ. </b> (2001) A census of carbohydrate-active enzymes in the genome of Arabidopsis thaliana. Plant Mol Biol: <b>47</b>, 55-72. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=11554480" target="_blank">PubMed</a><p>
+		<b>Saxena IM, Brown RM Jr, Dandekar T. </b> (2001) Structure-function characterization of cellulose synthase: relationship to other glycosyltransferases. Phytochemistry: <b>57</b>, 1135-48. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=11430986" target="_blank">PubMed</a><p>
+		<b>Keegstra K, Raikhel N. </b> (2001) Plant glycosyltransferases. Curr Opin Plant Biol: <b>4</b>, 219-24. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=11312132" target="_blank">PubMed</a><p>
+		<b>Ridley BL, O'Neill MA, Mohnen D. </b> (2001) Pectins: structure, biosynthesis, and oligogalacturonide-related signaling. Phytochemistry: <b>57</b>, 929-67. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=11423142" target="_blank">PubMed</a><p>
+		<b>Willats WG, McCartney L, Mackie W, Knox JP. </b> (2001) Pectin: cell biology and prospects for functional analysis. Plant Mol Biol: <b>47</b>, 9-27. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=11554482" target="_blank">PubMed</a><p>
+		<b>Cosgrove DJ. </b> (2001) Expansive growth of plant cell walls. Plant Physiol Biochem: <b>38</b>, 109-24. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=11543185" target="_blank">PubMed</a><p>
+		<b>Carpita, N and McCann, M. </b> (2000) The cell wall. In: Biochemistry and Molecular Biology of Plants. Edited by Buchanan, B.B., Gruissem, W. and Jones, R.L. pp. 52-108. <a href="http://www.aspb.org/publications/biotext/" target="_blank">ASPP</a><p>
+		<b>Reiter WD, Chapple C, Somerville CR. </b> (1997) Mutants of Arabidopsis thaliana with altered cell wall polysaccharide composition. Plant J: <b>12</b>, 335-45. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=9301086" target="_blank">PubMed</a><p>
+		<b>Zablackis E, Huang J, Muller B, Darvill AG, Albersheim P. </b> (1995) Characterization of the cell-wall polysaccharides of Arabidopsis thaliana leaves. Plant Physiol: <b>107</b>, 1129-38. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=7770522" target="_blank">PubMed</a><p>
+		<b>McNeil M, Darvill AG, Fry SC, Albersheim P. </b> (1984) Structure and function of the primary cell walls of plants. Annu Rev Biochem: <b>53</b>, 625-63. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=6383202" target="_blank">PubMed</a><p>
+	</dd></dl></dd></dl></dd></dl>
+<br>
+<a name="specific"></a>
+<b><li>Gene Family-Specific Articles</li></b><p>
+<dl>
+<a name="activation"></a>
+	<b><dt>1. Monosaccharide activation and interconversion</dt></b><p>
+<a name="S1K"></a>
+	<b><dd>1.1 Sugar 1-kinases (S1K, <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=PubMed&term=%28%28galactokinase%5BTitle%5D%29%20OR%20%28galactose%5BTitle%5D%20AND%20kinase%5BTitle%5D%29%29%20AND%20%28%22plants%22%5BMeSH%20Terms%5D%20OR%20plant%5BText%20Word%5D%29" target=_blank">Update search</a>)</dd></b>
+	<dl><dd><dl><dd>
+		<b>Sherson S, Gy I, Medd J, Schmidt R, Dean C, Kreis M, Lecharny A, Cobbett C. </b></b> (1999) The arabinose kinase, ARA1, gene of Arabidopsis is a novel member of the galactose kinase gene family. Plant Mol Biol: <b>39</b>, 1003-12. <a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=10344205" target="_blank">PubMed</a><p>
+		<b>Kaplan CP, Tugal HB, Baker A. </b> (1997) Isolation of a cDNA encoding an Arabidopsis galactokinase by functional expression in yeast. Plant Mol Biol: <b>34</b>, 497-506. <a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=9225860" target="_blank">PubMed</a><p>
+		<b>Bork P, Sander C, Valencia A. </b> (1993) Convergent evolution of similar enzymatic function on different protein folds: the hexokinase, ribokinase, and galactokinase families of sugar kinases. Protein Sci: <b>2</b>, 31-40. <a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=8382990" target="_blank">PubMed</a><p>
+	</dd></dl></dd></dl>
+<a name="NSPP"></a>
+<b><dd>1.2 Nucleotide-sugar pyrophosphorylases (NSPP, <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=PubMed&term=%28uridylyltransferase%5BAll%20Fields%5D%20OR%20guanylyltransferase%5BAll%20Fields%5D%29%20OR%20%28%28GDP%5BAll%20Fields%5D%20OR%20UDP%5BAll%20Fields%5D%29%20AND%20pyrophosphorylase%5BAll%20Fields%5D%29%20AND%20%28%22plants%22%5BMeSH%20Terms%5D%20OR%20plant%5BText%20Word%5D%29" target="_blank">Update search</a>)</dd></b><p>
+	<dl>
+<a name="GMP"></a>
+	<b><dd>1.2.1 GDP-mannose pyrophosphorylase (GMP)</dd></b><p>
+	<dl><dd>
+		<b>Lukowitz W, Nickle TC, Meinke DW, Last RL, Conklin PL, Somerville CR.</b> (2001) Arabidopsis cyt1 mutants are deficient in a mannose-1-phosphate guanylyltransferase and point to a requirement of N-linked glycosylation for cellulose biosynthesis. Proc Natl Acad Sci U S A: <b>98</b>, 2262-7. <a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=11226227" target="_blank">PubMed</a><p>
+	</dd></dl>
+<a name="UGP"></a>
+	<b><dd>1.2.2 UDP-glucose pyrophosphorylase (UGP)</dd></b><p>
+	<dl><dd>
+		<b>Borovkov AY, McClean PE, Secor GA. </b> (1997) Organization and transcription of the gene encoding potato UDP-glucose pyrophosphorylase. Gene: <b>186</b>, 293-7. <a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=9074509" target="_blank">PubMed</a><p>
+		<b>Nakano K, Omura Y, Tagaya M, Fukui T. </b> (1989) UDP-glucose pyrophosphorylase from potato tuber: purification and characterization. J Biochem (Tokyo): <b>106</b>, 528-32. <a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=2558111" target="_blank">PubMed</a><p>
+	</dd></dl>
+	</dl>
+<a name="NSIEPI"></a>
+	<b><dd>1.3 Nucleotide-sugar interconversion - NAD dependent epimerase/dehydratase superfamily (NSI-EPI)</dd></b><p>
+<a name="reviewnsi"></a>
+	<dl>
+		<b><dd>1.3 Reviews (<a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=PubMed&term=nucleotide-sugar%20interconversion" target=_blank">Update search</a>)</dd></b><p>
+	<dl><dd>
+		<b>Seifert GJ. </b> (2004) Nucleotide sugar interconversions and cell wall biosynthesis: how to bring the inside to the outside. Curr Opin Plant Biol: <b>7</b>, 277-84. <a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=15134748" target="_blank">PubMed</a><p>
+		<b>Reiter WD, Vanzin GF. </b> (2001) Molecular genetics of nucleotide sugar interconversion pathways in plants. Plant Mol Biol: <b>47</b>, 95-113. <a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=11554483" target="_blank">PubMed</a><p>
+	</dd></dl>
+<a name="UGE"></a>
+	<b><dd>1.3.1 UDP-<font SIZE=-2>D</font>-glucose 4-epimerases (UGE, <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=PubMed&term=%28%22glucose%22%5BMeSH%20Terms%5D%20OR%20glucose%5BText%20Word%5D%29%20AND%20%28%22racemases%20and%20epimerases%22%5BMeSH%20Terms%5D%20OR%20epimerase%5BText%20Word%5D%29%20AND%20%28%22plants%22%5BMeSH%20Terms%5D%20OR%20plant%5BText%20Word%5D%29" target=_blank">Update search</a>)</dd></b><p>
+	<dl><dd>
+		<b>Seifert GJ, Barber C, Wells B, Dolan L, Roberts K. </b> (2002) Galactose biosynthesis in Arabidopsis: genetic evidence for substrate channeling from UDP-D-galactose into cell wall polymers. Curr Biol: <b>12</b>, 1840-5. <a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=12419184" target="_blank">PubMed</a><p>
+		<b>Dormann P, Benning C. </b> (1998) The role of UDP-glucose epimerase in carbohydrate metabolism of Arabidopsis. Plant J: <b>13</b>, 641-52. <a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=9681006" target="_blank">PubMed</a><p>
+		<b>Dormann P, Benning C. </b> (1996) Functional expression of uridine 5'-diphospho-glucose 4-epimerase (EC 5.1.3.2) from Arabidopsis thaliana in Saccharomyces cerevisiae and Escherichia coli. Arch Biochem Biophys: <b>327</b>, 27-34. <a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=8615692" target="_blank">PubMed</a><p>
+	</dd></dl>
+<a name="GAE"></a>
+	<b><dd>1.3.2 UDP-<font SIZE=-2>D</font>-glucuronic acid 4-epimerases (GAE)</dd></b><p>
+	<dl><dd>
+		<b>Munoz R, Lopez R, de Frutos M, Garcia E. </b> (1999) First molecular characterization of a uridine diphosphate galacturonate 4-epimerase: an enzyme required for capsular biosynthesis in Streptococcus pneumoniae type 1. Mol Microbiol: <b>31</b>, 703-13. <a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=10027985" target="_blank">PubMed</a><p>
+		<b>Liljebjelke K, Adolphson R, Baker K, Doong RL, Mohnen D. </b> (1995) Enzymatic synthesis and purification of uridine diphosphate [14C]galacturonic acid: a substrate for pectin biosynthesis. Anal Biochem: <b>225</b>, 296-304. <a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=7762795" target="_blank">PubMed</a><p>
+	</dd></dl>
+<a name="RHA"></a>
+	<b><dd>1.3.3 UDP-<font SIZE=-2>L</font>-rhamnose synthases (RHA, <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=PubMed&term=%28%28%22rhamnose%22%5BMeSH%20Terms%5D%20OR%20rhamnose%5BText%20Word%5D%29%20AND%20synthesis%5BAll%20Fields%5D%29%20AND%20%28%22plants%22%5BMeSH%20Terms%5D%20OR%20plant%5BText%20Word%5D%29" target=_blank">Update search</a>)</dd></b><p>
+	<dl><dd>
+		<b>Watt G, Leoff C, Harper AD, Bar-Peled M. </b> (2004) A bifunctional 3,5-epimerase/4-keto reductase for nucleotide-rhamnose synthesis in Arabidopsis. Plant Physiol: <b>134</b>, 1337-46. <a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=15020741" target="_blank">PubMed</a><p>
+		<b>Western TL, Young DS, Dean GH, Tan WL, Samuels AL, Haughn GW. </b> (2004) MUCILAGE-MODIFIED4 encodes a putative pectin biosynthetic enzyme developmentally regulated by APETALA2, TRANSPARENT TESTA GLABRA1, and GLABRA2 in the Arabidopsis seed coat. Plant Physiol: <b>134</b>, 296-306. <a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=14701918" target="_blank">PubMed</a><p>
+		<b>Usadel B, Kuschinsky AM, Rosso MG, Eckermann N, Pauly M. </b> (2004) RHM2 is involved in mucilage pectin synthesis and is required for the development of the seed coat in Arabidopsis. Plant Physiol: <b>134</b>, 286-95. <a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=14671019" target="_blank">PubMed</a><p>
+	</dd></dl>
+<a name="UXS"></a>
+	<b><dd>1.3.4 UDP-<font SIZE=-2>D</font>-apiose/xylose synthases (UXS, <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=PubMed&term=%28*glucuronic*%5BTitle%5D%20AND%20*acid*%5BTitle%5D%20AND%20*decarboxylase*%5BTitle%5D%29%20OR%20%28*glucuronate*%5BTitle%5D%20AND%20*decarboxylase*%5BTitle%5D%29%20OR%20%28*xylose*%5BTitle%5DAND%20*synthase*%5BTitle%5D%29" target=_blank">Update search</a>)</dd></b><p>
+	<dl><dd>
+		<b>Molhoj M, Verma R, Reiter WD. </b> (2003) The biosynthesis of the branched-chain sugar d-apiose in plants: functional cloning and characterization of a UDP-d-apiose/UDP-d-xylose synthase from Arabidopsis. Plant J: <b>35</b>, 693-703. <a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=12969423" target="_blank">PubMed</a><p>
+		<b>Harper AD, Bar-Peled M. </b> (2002) Biosynthesis of UDP-xylose. Cloning and characterization of a novel Arabidopsis gene family, UXS, encoding soluble and putative membrane-bound UDP-glucuronic acid decarboxylase isoforms. Plant Physiol: <b>130</b>, 2188-98. <a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=12481102" target="_blank">PubMed</a><p>
+		<b>Kobayashi M, Nakagawa H, Suda I, Miyagawa I, Matoh T. </b> (2002) Purification and cDNA cloning of UDP-D-glucuronate carboxy-lyase (UDP-D-xylose synthase) from pea seedlings. Plant Cell Physiol: <b>43</b>, 1259-65. <a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=12461125" target="_blank">PubMed</a><p>
+		<b>Wheatley ER, Davies DR, Bolwell GP. </b> (2002) Characterisation and immunolocation of an 87 kDa polypeptide associated with UDP-glucuronic acid decarboxylase activity from differentiating tobacco cells (Nicotiana tabacum L.). Phytochemistry: <b>61</b>, 771-80. <a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=12453569" target="_blank">PubMed</a><p>
+		<b>Milioni D, Sado PE, Stacey NJ, Roberts K, McCann MC. </b> (2002) Early gene expression associated with the commitment and differentiation of a plant tracheary element is revealed by cDNA-amplified fragment length polymorphism analysis. Plant Cell: <b>14</b>, 2813-24. <a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=12417703" target="_blank">PubMed</a><p>
+		<b>Moriarity JL, Hurt KJ, Resnick AC, Storm PB, Laroy W, Schnaar RL, Snyder SH. </b> (2002) UDP-glucuronate decarboxylase, a key enzyme in proteoglycan synthesis: cloning, characterization, and localization. J Biol Chem: <b>277</b>, 16968-75. <a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=11877387" target="_blank">PubMed</a><p>
+		<b>Bar-Peled M, Griffith CL, Doering TL. </b> (2001) Functional cloning and characterization of a UDP- glucuronic acid decarboxylase: the pathogenic fungus Cryptococcus neoformans elucidates UDP-xylose synthesis. Proc Natl Acad Sci U S A: <b>98</b>, 12003-8. <a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=11593010" target="_blank">PubMed</a><p>
+		<b>Dalessandro G, Northcote DH. </b> (1977) Changes in enzymic activities of nucleoside diphosphate sugar interconversions during differentiation of cambium to xylem in pine and fir. Biochem J: <b>162</b>, 281-8. <a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=192219" target="_blank">PubMed</a><p>
+		<b>Dalessandro G, Northcote DH. </b> (1977) Changes in enzymic activities of nucleoside diphosphate sugar interconversions during differentiation of cambium to xylem in sycamore and poplar. Biochem J: <b>162</b>, 267-79. <a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=192218" target="_blank">PubMed</a><p>
+		<b>John KV, Schutzbach JS, Ankel H. </b> (1977) Separation and allosteric properties of two forms of UDP-glucuronate carboxy-lyase. J Biol Chem: <b>252</b>, 8013-7. <a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=914860" target="_blank">PubMed</a><p>
+	</dd></dl>
+<a name="UXE"></a>
+	<b><dd>1.3.5 UDP-<font SIZE=-2>D</font>-xylose 4-epimerase (UXE, <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=PubMed&term=%28*xylose*%5BTitle/Abstract%5D%20AND%20*epimerase*%5BTitle/Abstract%5D%29%20AND%20plant" target=_blank">Update search</a>)</dd></b><p>
+	<dl><dd>
+		<b>Burget EG, Verma R, Molhoj M, Reiter WD. </b> (2003) The biosynthesis of L-arabinose in plants: molecular cloning and characterization of a Golgi-localized UDP-D-xylose 4-epimerase encoded by the MUR4 gene of Arabidopsis. Plant Cell: <b>15</b>, 523-31. <a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=12566589" target="_blank">PubMed</a><p>
+		<b>Burget EG, Reiter WD. </b> (1999) The mur4 mutant of arabidopsis is partially defective in the de novo synthesis of uridine diphospho L-arabinose. Plant Physiol: <b>121</b>, 383-9. <a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=10517829" target="_blank">PubMed</a><p>
+	</dd></dl>
+<a name="GME"></a>
+	<b><dd>1.3.6 GDP-<font SIZE=-2>D</font>-mannose 3,5-epimerase (GME)</dd></b><p>
+	<dl><dd>
+		<b>Wolucka BA, Van Montagu M. </b> (2003) GDP-mannose 3',5'-epimerase forms GDP-L-gulose, a putative intermediate for the de novo biosynthesis of vitamin C in plants. J Biol Chem: <b>278</b>, 47483-90. <a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=12954627" target="_blank">PubMed</a><p>
+		<b>Wolucka BA, Persiau G, Van Doorsselaere J, Davey MW, Demol H, Vandekerckhove J, Van Montagu M, Zabeau M, Boerjan W. </b> (2001) Partial purification and identification of GDP-mannose 3",5"-epimerase of Arabidopsis thaliana, a key enzyme of the plant vitamin C pathway. Proc Natl Acad Sci U S A: <b>98</b>, 14843-8. <a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=11752432" target="_blank">PubMed</a><p>
+	</dd></dl>
+<a name="GER"></a>
+	<b><dd>1.3.7 GDP-4-keto-6-deoxy-<font SIZE=-2>D</font>-mannose-3,5-epimerase-4-reductase (GER)</dd></b><p>
+	<dl><dd>
+		<b>Norambuena L, Marchant L, Berninsone P, Hirschberg CB, Silva H, Orellana A. </b> (2002) Transport of UDP-galactose in plants. Identification and functional characterization of AtUTr1, an Arabidopsis thaliana UDP-galactos/UDP-glucose transporter. J Biol Chem: <b>277</b>, 32923-9. <a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=12042319" target="_blank">PubMed</a><p>
+		<b>Baldwin TC, Handford MG, Yuseff MI, Orellana A, Dupree P. </b> (2001) Identification and characterization of GONST1, a golgi-localized GDP-mannose transporter in Arabidopsis. Plant Cell: <b>13</b>, 2283-95. <a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=11595802" target="_blank">PubMed</a><p>
+		<b>Bonin CP, Reiter WD. </b> (2000) A bifunctional epimerase-reductase acts downstream of the MUR1 gene product and completes the de novo synthesis of GDP-L-fucose in Arabidopsis. Plant J: <b>21</b>, 445-54. <a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=10758496" target="_blank">PubMed</a><p>
+	</dd></dl>
+<a name="GMD"></a>
+	<b><dd>1.3.8 GDP-<font SIZE=-2>D</font>-mannose-4,6-dehydratase (GMD)</dd></b><p>
+	<dl><dd>
+		<b>Reuhs BL, Glenn J, Stephens SB, Kim JS, Christie DB, Glushka JG, Zablackis E, Albersheim P, Darvill AG, O'Neill MA. </b> (2004) l-Galactose replaces l-fucose in the pectic polysaccharide rhamnogalacturonan II synthesized by the l-fucose-deficient mur1 Arabidopsis mutant. Planta: <b>219</b>, 147-57. <a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=14991405" target="_blank">PubMed</a><p>
+		<b>Freshour G, Bonin CP, Reiter WD, Albersheim P, Darvill AG, Hahn MG. </b> (2003) Distribution of fucose-containing xyloglucans in cell walls of the mur1 mutant of Arabidopsis. Plant Physiol: <b>131</b>, 1602-12. <a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=12692319" target="_blank">PubMed</a><p>
+		<b>Nakayama K, Maeda Y, Jigami Y. </b> (2003) Interaction of GDP-4-keto-6-deoxymannose-3,5-epimerase-4-reductase with GDP-mannose-4,6-dehydratase stabilizes the enzyme activity for formation of GDP-fucose from GDP-mannose. Glycobiology: <b>13</b>, 673-80. <a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=12692319" target="_blank">12881408</a><p>
+		<b>Bonin CP, Freshour G, Hahn MG, Vanzin GF, Reiter WD. </b> (2003) The GMD1 and GMD2 genes of Arabidopsis encode isoforms of GDP-D-mannose 4,6-dehydratase with cell type-specific expression patterns. Plant Physiol: <b>132</b>, 883-92. <a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=12805618" target="_blank">PubMed</a><p>
+		<b>van Hengel AJ, Roberts K. </b> (2002) Fucosylated arabinogalactan-proteins are required for full root cell elongation in arabidopsis. Plant J: <b>32</b>, 105-13. <a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=12366804" target="_blank">PubMed</a><p>
+		<b>O'Neill MA, Eberhard S, Albersheim P, Darvill AG. </b> (2001) Requirement of borate cross-linking of cell wall rhamnogalacturonan II for Arabidopsis growth. Science: <b>294</b>, 846-9. <a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=11679668" target="_blank">PubMed</a><p>
+		<b>Bonin CP, Potter I, Vanzin GF, Reiter WD. </b> (1997) The MUR1 gene of Arabidopsis thaliana encodes an isoform of GDP-D-mannose-4,6-dehydratase, catalyzing the first step in the de novo synthesis of GDP-L-fucose. Proc Natl Acad Sci U S A: <b>94</b>, 2085-90. <a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=9050909" target="_blank">PubMed</a><p>
+		<b>Zablackis E, York WS, Pauly M, Hantus S, Reiter WD, Chapple CC, Albersheim P, Darvill A. </b> (1995) Substitution of L-fucose by L-galactose in cell walls of Arabidopsis mur1. Science: <b>272</b>, 1808-10. <a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=8650583" target="_blank">PubMed</a><p>
+	</dd></dl>
+	</dl>
+<a name="NSIDH"></a>
+	<b><dd>1.4 Nucleotide-sugar interconversion - nucleotide sugar dehydrogenase superfamily (NSI-DH)</dd></b><p>
+<a name="UGD"></a>
+	<dl>
+	<b><dd>1.4.1 UDP-<font SIZE=-2>D</font>-glucose dehydrogenases (UGD, <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=PubMed&term=%22UDP-glucose%20dehydrogenase%22%5BTitle%5D%20AND%20%28%22plants%22%5BMeSH%20Terms%5D%20OR%20plant%5BText%20Word%5D%29" target=_blank">Update search</a>)</dd></b><p>
+	<dl><dd>
+		<b>Milioni D, Sado PE, Stacey NJ, Roberts K, McCann MC. </b> (2002) Early gene expression associated with the commitment and differentiation of a plant tracheary element is revealed by cDNA-amplified fragment length polymorphism analysis. Plant Cell: <b>14</b>, 2813-24. <a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=12417703" target="_blank">PubMed</a><p>
+		<b>Turner W, Botha FC. </b> (2002) Purification and kinetic properties of UDP-glucose dehydrogenase from sugarcane. Arch Biochem Biophys: <b>407</b>, 209-16. <a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=12413493" target="_blank">PubMed</a><p>
+		<b>Johansson H, Sterky F, Amini B, Lundeberg J, Kleczkowski LA. </b> (2002) Molecular cloning and characterization of a cDNA encoding poplar UDP-glucose dehydrogenase, a key gene of hemicellulose/pectin formation. Biochim Biophys Acta: <b>1576</b>, 53-8. <a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=12031484" target="_blank">PubMed</a><p>
+		<b>Seitz B, Klos C, Wurm M, Tenhaken R. </b> (2000) Matrix polysaccharide precursors in Arabidopsis cell walls are synthesized by alternate pathways with organ-specific expression patterns. Plant J: <b>21</b>, 537-46. <a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=10758504" target="_blank">PubMed</a><p>
+		<b>Tenhaken R, Thulke O. </b> (1996) Cloning of an enzyme that synthesizes a key nucleotide-sugar precursor of hemicellulose biosynthesis from soybean: UDP-glucose dehydrogenase. Plant Physiol: <b>112</b>, 1127-34. <a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=8938413" target="_blank">PubMed</a><p>
+		<b>Robertson D, Smith C, Bolwell GP. </b> (1996) Inducible UDP-glucose dehydrogenase from French bean (Phaseolus vulgaris L.) locates to vascular tissue and has alcohol dehydrogenase activity. Biochem J: <b>313</b>, 311-7. <a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=8546701" target="_blank">PubMed</a><p>
+		<b>Dalessandro G, Northcote DH. </b> (1977) Changes in enzymic activities of nucleoside diphosphate sugar interconversions during differentiation of cambium to xylem in pine and fir. Biochem J: <b>162</b>, 281-8. <a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=192219" target="_blank">PubMed</a><p>
+		<b>Dalessandro G, Northcote DH. </b> (1977) Changes in enzymic activities of nucleoside diphosphate sugar interconversions during differentiation of cambium to xylem in sycamore and poplar. Biochem J: <b>162</b>, 267-79. <a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=192218" target="_blank">PubMed</a><p>
+	</dd></dl>
+	</dl>
+<a name="polysaccharide"></a>
+	<b><dt>2. Polysaccharide synthesis</dt></b><p>
+<a name="cellulose"></a>
+	<b><dd>2.1 Cellulose (<a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=PubMed&term=%22Cellulose%20synthase%22%5Btitle%5D%20OR%20%22Cellulose%20synthase-like%22%5Btitle%5D" target=_blank">Update search</a>)</dd></b><p>
+	<dl>
+<a name="CSL"></a>
+	<b><dd>2.1.1 Cellulose synthases, cellulose synthase-like genes and galactomannan synthases (<a href="http://afmb.cnrs-mrs.fr/CAZY/GT_2.html" target=_blank">CAZy-GT2</a>, CES, CSL)</dd></b><p>
+	<dl><dd>
+		<b>Dhugga KS, Barreiro R, Whitten B, Stecca K, Hazebroek J, Randhawa GS, Dolan M, Kinney AJ, Tomes D, Nichols S, Anderson P. </b> (2004) Guar seed beta-mannan synthase is a member of the cellulose synthase super gene family. Science: <b>303</b>, 363-6. <a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=14726589" target="_blank">PubMed</a><p>
+		<b>Bonetta DT, Facette M, Raab TK, Somerville CR. </b> (2002) Genetic dissection of plant cell-wall biosynthesis. Biochem Soc Trans: <b>30</b>, 298-301. <a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=12023868" target="_blank">PubMed</a><p>
+		<b>Peng L, Kawagoe Y, Hogan P, Delmer D. </b> (2002) Sitosterol-beta-glucoside as primer for cellulose synthesis in plants. Science: <b>295</b>, 147-50. <a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=11778054" target="_blank">PubMed</a><p>
+		<b>Scheible WR, Eshed R, Richmond T, Delmer D, Somerville C. </b> (2001) Modifications of cellulose synthase confer resistance to isoxaben and thiazolidinone herbicides in Arabidopsis Ixr1 mutants. Proc Natl Acad Sci U S A: <b>98</b>, 10079-84. <a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=11517344" target="_blank">PubMed</a><p>
+		<b>Richmond TA, Somerville CR. </b> (2001) Integrative approaches to determining Csl function. Plant Mol Biol: <b>47</b>, 131-43. <a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=11554468" target="_blank">PubMed</a><p>
+		<b>Vergara CE, Carpita NC. </b> (2001) Beta-D-glycan synthases and the CesA gene family: lessons to be learned from the mixed-linkage (1-->3),(1-->4)beta-D-glucan synthase. Plant Mol Biol: <b>47</b>, 145-60. <a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=11554469" target="_blank">PubMed</a><p>
+		<b>Richmond TA, Somerville CR. </b> (2000) The cellulose synthase superfamily. Plant Physiol: <b>124</b>, 495-8. <a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=11027699" target="_blank">PubMed</a><p>
+		<b>Richmond T. </b> (2000) Higher plant cellulose synthases. Genome Biol: <b>1</b>, 1-5. <a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=11178255" target="_blank">PubMed</a><p>
+	</dd></dl>
+	</dl>
+<a name="hemicellulose"></a>
+	<b><dd>2.2 Hemicellulose</dd></b><p>
+	<dl>
+<a name="RGP"></a>
+	<b><dd>2.2.1 Reversibly glycosylated polypeptides (RGP)</dd></b><p>
+	<dl><dd>
+		<b>Delgado IJ, Wang Z, de Rocher A, Keegstra K, Raikhel NV. </b> (1998) Cloning and characterization of AtRGP1. A reversibly autoglycosylated arabidopsis protein implicated in cell wall biosynthesis. Plant Physiol: <b>116</b>, 1339-50. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=9536051" target="_blank">PubMed</a><p>
+		<b>Dhugga KS, Tiwari SC, Ray PM. </b> (1997) A reversibly glycosylated polypeptide (RGP1) possibly involved in plant cell wall synthesis: purification, gene cloning, and trans-Golgi localization. Proc Natl Acad Sci U S A: <b>94</b>, 7679-84. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=9207152" target="_blank">PubMed</a><p>
+		<b>Dhugga KS, Ulvskov P, Gallagher SR, Ray PM. </b> (1991) Plant polypeptides reversibly glycosylated by UDP-glucose. Possible components of Golgi beta-glucan synthase in pea cells. J Biol Chem: <b>266</b>, 21977-84. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=1834664" target="_blank">PubMed</a><p>
+	</dd></dl>
+<a name="XGT"></a>
+	<b><dd>2.2.2 Xyloglucan galactosyltransferase (<a href="http://afmb.cnrs-mrs.fr/CAZY/GT_47.html" target=_blank">CAZy-GT47</a>, XGT)</dd></b><p>
+	<dl><dd>
+		<b>Pena MJ, Ryden P, Madson M, Smith AC, Carpita NC. </b> (2004) The galactose residues of xyloglucan are essential to maintain mechanical strength of the primary cell walls in Arabidopsis during growth. Plant Physiol: <b>134</b>,443-51. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=14730072" target="_blank">PubMed</a><p>
+		<b>Madson M, Dunand C, Li X, Verma R, Vanzin GF, Caplan J, Shoue DA, Carpita NC, Reiter WD. </b> (2003) The MUR3 gene of Arabidopsis encodes a xyloglucan galactosyltransferase that is evolutionarily related to animal exostosins. Plant Cell: <b>15</b>, 1662-70. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=12837954" target="_blank">PubMed</a><p>
+		<b>Zhong R, Ye ZH. </b> (2003) Unraveling the functions of glycosyltransferase family 47 in plants. Trends Plant Sci: <b>8</b>, 565-8. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=14659703" target="_blank">PubMed</a><p>
+		<b>Ryden P, Sugimoto-Shirasu K, Smith AC, Findlay K, Reiter WD, McCann MC. </b> (2003) Tensile properties of Arabidopsis cell walls depend on both a xyloglucan cross-linked microfibrillar network and rhamnogalacturonan II-borate complexes. Plant Physiol: <b>132</b>, 1033-40. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=12805631" target="_blank">PubMed</a><p>
+	</dd></dl>
+<a name="XFT"></a>
+	<b><dd>2.2.3 Xyloglucan fucosyltransferases (<a href="http://afmb.cnrs-mrs.fr/CAZY/GT_37.html" target=_blank">CAZy-GT37</a>, XFT)</dd></b><p>
+	<dl><dd>
+		<b>Perrin RM, Jia Z, Wagner TA, O'Neill MA, Sarria R, York WS, Raikhel NV, Keegstra K. </b> (2003) Analysis of xyloglucan fucosylation in Arabidopsis. Plant Physiol: <b>132</b>, 768-78. <a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=12805606" target="_blank">PubMed</a><p>
+		<b>Vanzin GF, Madson M, Carpita NC, Raikhel NV, Keegstra K, Reiter WD. </b> (2002) The mur2 mutant of Arabidopsis thaliana lacks fucosylated xyloglucan because of a lesion in fucosyltransferase AtFUT1. Proc Natl Acad Sci U S A: <b>99</b>, 3340-5. <a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=11854459" target="_blank">PubMed</a><p>
+		<b>Sarria R, Tanya A. Wagner, Malcolm A. O'Neill, Ahmed Faik, Curtis G. Wilkerson, Kenneth Keegstra, and Natasha V. Raikhel</b> (2001) Characterization of a Family of Arabidopsis Genes Related to Xyloglucan Fucosyltransferase1. Plant Physiol: <b>127</b>: 1595-1606. <a href="http://www.plantphysiol.org/cgi/content/full/127/4/1595?view=full&pmid=11743104" target="_blank">PubMed</a><p>
+		<b>Bakker H, Schijlen E, de Vries T, Schiphorst WE, Jordi W, Lommen A, Bosch D, van Die I. </b> (2001) Plant members of the alpha1--&gt;3/4-fucosyltransferase gene family encode an alpha1--&gt;4-fucosyltransferase, potentially involved in Lewis(a) biosynthesis, and two core alpha1--&gt;3-fucosyltransferases. FEBS Lett: <b>507</b>, 307-12. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=11696361" target="_blank">PubMed</a><p>
+		<b>Perrin R, Wilkerson C, Keegstra K. </b> (2001) Golgi enzymes that synthesize plant cell wall polysaccharides: finding and evaluating candidates in the genomic era. Plant Mol Biol: <b>47</b>, 115-30. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=11554467" target="_blank">PubMed</a><p>
+		<b>Wilson IB, Rendic D, Freilinger A, Dumic J, Altmann F, Mucha J, Muller S, Hauser MT. </b> (2001) Cloning and expression of cDNAs encoding alpha1,3-fucosyltransferase homologues from Arabidopsis thaliana. Biochim Biophys Acta: <b>1527</b>, 88-96. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=11420147" target="_blank">PubMed</a><p>
+		<b>Faik A, Bar-Peled M, DeRocher AE, Zeng W, Perrin RM, Wilkerson C, Raikhel NV, Keegstra K. </b> (2000) Biochemical characterization and molecular cloning of an alpha-1,2-fucosyltransferase that catalyzes the last step of cell wall xyloglucan biosynthesis in pea. J Biol Chem: <b>275</b>, 15082-9. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=10747946" target="_blank">PubMed</a><p>
+		<b>Perrin RM, DeRocher AE, Bar-Peled M, Zeng W, Norambuena L, Orellana A, Raikhel NV, Keegstra K. </b> (1999) Xyloglucan fucosyltransferase, an enzyme involved in plant cell wall biosynthesis. Science: <b>284</b>, 1976-9. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=10373113" target="_blank">PubMed</a><p>
+	</dd></dl>
+<a name="XXT"></a>
+<b><dd>2.2.4 Xyloglucan xylosyltransferases and galactomannan galactosyltransferases (<a href="http://afmb.cnrs-mrs.fr/CAZY/GT_34.html" target=_blank">CAZy-GT34</a>, XXT)</dd></b><p>
+	<dl><dd>
+		<b>Edwards ME, Choo TS, Dickson CA, Scott C, Gidley MJ, Reid JS. </b> (2004) The seeds of Lotus japonicus lines transformed with sense, antisense, and sense/antisense galactomannan galactosyltransferase constructs have structurally altered galactomannans in their endosperm cell walls. Plant Physiol: <b>134</b>, 1153-62. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=14988472" target="_blank">PubMed</a><p>
+		<b>Reid JS, Edwards ME, Dickson CA, Scott C, Gidley MJ. </b> (2003) Tobacco transgenic lines that express fenugreek galactomannan galactosyltransferase constitutively have structurally altered galactomannans in their seed endosperm cell walls. Plant Physiol: <b>131</b>, 1487-95. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=12644698" target="_blank">PubMed</a><p>
+		<b>Faik A, Price NJ, Raikhel NV, Keegstra K. </b> (2002) An Arabidopsis gene encoding an alpha-xylosyltransferase involved in xyloglucan biosynthesis. Proc Natl Acad Sci U S A: <b>99</b>, 7797-802. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=12032363" target="_blank">PubMed</a><p>
+		<b>Edwards ME, Marshall E, Gidley MJ, Reid JS. </b> (2002) Transfer specificity of detergent-solubilized fenugreek galactomannan galactosyltransferase. Plant Physioli: <b>129</b>, 1391-7. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=12114592" target="_blank">PubMed</a><p>
+		<b>Edwards ME, Dickson CA, Chengappa S, Sidebottom C, Gidley MJ, Reid JS. </b> (1999) Molecular characterisation of a membrane-bound galactosyltransferase of plant cell wall matrix polysaccharide biosynthesis. Plant J: <b>19</b>, 691-7. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=10571854" target="_blank">PubMed</a><p>
+		<b>Ray PM. </b> (1980) Cooperative action of beta-glucan synthetase and UDP-xylose xylosyl transferase of Golgi membranes in the synthesis of xyloglucan-like polysaccharide. Biochim Biophys Acta: <b>629</b>, 431-44. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=6448078" target="_blank">PubMed</a><p>
+	</dd></dl>
+<a name="GAX"></a>
+	<b><dd>2.2.5 Glucuronoarabinoxylan (GAX)</dd></b><p>
+	<dl><dd>
+		<b>Verbruggen MA, Beldman G, Voragen AG. </b> (1998) Enzymic degradation of sorghum glucuronoarabinoxylans leading to tentative structures. Carbohydr Res: <b>306</b>, 275-82. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=9691451" target="_blank">PubMed</a><p>
+		<b>Coughlan MP, Hazlewood GP. </b> (1993) beta-1,4-D-xylan-degrading enzyme systems: biochemistry, molecular biology and applications. Biotechnol Appl Biochem: <b>17</b>, 259-89. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=8338637" target="_blank">PubMed</a><p>
+	</dd></dl>
+	</dl>
+<a name="pectins"></a>
+	<b><dd>2.3 Pectins</dd></b><p>
+	<dl>
+<a name="reviewpec"></a>
+	<b><dd>2.3 Reviews</dd></b><p>
+	<dl><dl>
+		<b>Vincken JP, Schols HA, Oomen RJ, McCann MC, Ulvskov P, Voragen AG, Visser RG. </b> (2003) If homogalacturonan were a side chain of rhamnogalacturonan I. Implications for cell wall architecture. Plant Physiol: <b>132</b>, 1781-9. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=12913136" target="_blank">PubMed</a><p>
+		<b>Ridley BL, O'Neill MA, Mohnen D. </b> (2001) Pectins: structure, biosynthesis, and oligogalacturonide-related signaling. Phytochemistry: <b>57</b>, 929-67. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=11423142" target="_blank">PubMed</a><p>
+		<b>Willats WG, McCartney L, Mackie W, Knox JP. </b> (2001) Pectin: cell biology and prospects for functional analysis. Plant Mol Biol: <b>47</b>, 9-27. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=11554482" target="_blank">PubMed</a><p>
+	</dl></dl>
+<a name="HG"></a>
+	<b><dd>2.3.1 Homogalacturonan (HG)</dd></b><p>
+	<dl><dl>
+			<b>Wietholter N, Graessner B, Mierau M, Willats WG, Knox JP, Moerschbacher BM. </b> (2003) Isolation and characterisation of the homogalacturonan from type II cell walls of the commelinoid monocot wheat using HF-solvolysis. Carbohydr Res: <b>338</b>, 423-31. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=12559744" target="_blank">PubMed</a><p>
+			<b>Ishii T, Matsunaga T. </b> (2001) Pectic polysaccharide rhamnogalacturonan II is covalently linked to homogalacturonan. Phytochemistry: <b>57</b>, 969-74. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=11423143" target="_blank">PubMed</a><p>
+	</dl></dl>
+<a name="XGA"></a>
+	<b><dd>2.3.2 Xylogalacturonan (XGA)</dd></b><p>
+	<dl><dl>
+			<b>Nakamura A, Furuta H, Maeda H, Takao T, Nagamatsu Y. </b> (2002) Analysis of the molecular construction of xylogalacturonan isolated from soluble soybean polysaccharides. Biosci Biotechnol Biochem: <i>66</i>, 1155-8. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=12092836" target="_blank">PubMed</a><p>
+	</dl></dl>
+<a name="RG-I"></a>
+	<b><dd>2.3.3 Rhamnogalacturonan I (RG-I)</dd></b><p>
+	<dl><dl>
+			<b>Geshi N, Jorgensen B, Ulvskov P. </b> (2004) Subcellular localization and topology of beta(1-->4)galactosyltransferase that elongates beta(1-->4)galactan side chains in rhamnogalacturonan I in potato. Planta: <b>218</b>, 862-8. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=14652759" target="_blank">PubMed</a><p>
+	</dl></dl>
+<a name="RG-II"></a>
+	<b><dd>2.3.4 Rhamnogalacturonan II (RG-II)</dd></b><p>
+	<dl><dl>
+			<b>O'Neill MA, Ishii T, Albersheim P, Darvill AG. </b> (2004) RHAMNOGALACTURONAN II: Structure and Function of a Borate Cross-Linked Cell Wall Pectic Polysaccharide. Annu Rev Plant Physiol Plant Mol Biol: <b>55</b>, 109-139. <a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=15117276" target="_blank">PubMed</a><p>
+		<b>Iwai H, Masaoka N, Ishii T, Satoh S. </b> (2002) A pectin glucuronyltransferase gene is essential for intercellular attachment in the plant meristem. Proc Natl Acad Sci U S A: <b>99</b>, 16319-24. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=12451175" target="_blank">PubMed</a>
+		<br><i>Comment: Glucuronyltransferase (NpGUT1) is involved in rhamnogalacturonan II biosynthesis. Sequence is part of CAZy-GT47 family (XGT).</i><p>
+		<b>O'Neill MA, Eberhard S, Albersheim P, Darvill AG. </b> (2001) Requirement of borate cross-linking of cell wall rhamnogalacturonan II for Arabidopsis growth. Science: <b>294</b>, 846-9. <a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=11679668" target="_blank">PubMed</a><p>
+	</dl></dl>
+<a name="AG-I"></a>
+	<b><dd>2.3.5 Arabinogalactan I (AG-I)</dd></b><p>
+	<dl><dl>
+
+	</dl></dl>
+<a name="AG-II"></a>
+	<b><dd>2.3.6 Arabinogalactan II (AG-II)</dd></b><p>
+	<dl><dl>
+
+	</dl></dl>
+<a name="A"></a>
+	<b><dd>2.3.7 Arabinan (A)</dd></b><p>
+	<dl><dl>
+
+	</dl></dl>
+	</dl>
+<a name="callose"></a>
+	<b><dd>2.4 Callose</dd></b><p>
+	<dl>
+	<a name="GSL"></a>
+	<b><dd>2.4.1 Glucan synthase-like (<a href="http://afmb.cnrs-mrs.fr/CAZY/GT_48.html" target=_blank">CAZy-GT48</a>, GSL)</dd></b><p>
+	<dl><dl>
+		<b>Jacobs AK, Lipka V, Burton RA, Panstruga R, Strizhov N, Schulze-Lefert P, Fincher GB. </b> (2003) An Arabidopsis Callose Synthase, GSL5, Is Required for Wound and Papillary Callose Formation. Plant Cell: <b>15</b>, 2503-13. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=14555698" target="_blank">PubMed</a><p>
+		<b>Nishimura MT, Stein M, Hou BH, Vogel JP, Edwards H, Somerville SC. </b> (2003) Loss of a callose synthase results in salicylic acid-dependent disease resistance. Science: <b>301</b>, 969-72. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=12920300" target="_blank">PubMed</a><p>
+		<b>Hong Z, Delauney AJ, Verma DP. </b> (2001) A cell plate-specific callose synthase and its interaction with phragmoplastin. Plant Cell: <b>13</b>, 755-68. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=11283334" target="_blank">PubMed</a><p>
+		<b>Doblin MS, De Melis L, Newbigin E, Bacic A, Read SM. </b> (2001) Pollen tubes of Nicotiana alata express two genes from different beta-glucan synthase families. Plant Physiol: <b>125</b>, 2040-52. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=11299383" target="_blank">PubMed</a><p>
+		<b>Hong Z, Zhang Z, Olson JM, Verma DP. </b> (2001) A novel UDP-glucose transferase is part of the callose synthase complex and interacts with phragmoplastin at the forming cell plate. Plant Cell: <b>13</b>, 769-79. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=11283335" target="_blank">PubMed</a><p>
+	</dl></dl>
+	</dl>
+<a name="othergt"></a>
+	<b><dd>2.5 Other glycosyl transferases</dd></b><p>
+	<dl>
+<a name="GT8"></a>
+	<b><dd>2.5.1 Glycosyl transferases (pectin bios. <a href="http://afmb.cnrs-mrs.fr/CAZY/GT_8.html" target=_blank">CAZy-GT8</a>)</dd></b><p>
+	<dl><dl>
+			<b>Lao NT, Long D, Kiang S, Coupland G, Shoue DA, Carpita NC, Kavanagh TA. </b> (2003) Mutation of a family 8 glycosyltransferase gene alters cell wall carbohydrate composition and causes a humidity-sensitive semi-sterile dwarf phenotype in Arabidopsis. Plant Mol Biol: <b>53</b>, 647-61. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=15010604" target="_blank">PubMed</a><p>
+			<b>Bouton S, Leboeuf E, Mouille G, Leydecker MT, Talbotec J, Granier F, Lahaye M, Hofte H, Truong HN. </b> (2002) QUASIMODO1 encodes a putative membrane-bound glycosyltransferase required for normal pectin synthesis and cell adhesion in Arabidopsis. Plant Cell: <b>14</b>, 2577-90. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=12368506" target="_blank">PubMed</a><p>
+	</dl></dl>
+	</dl>
+<a name="reassembly"></a>
+	<b><dt>3. Reassembly</dt></b><p>
+<a name="expansion"></a>
+	<b><dd>3.1 Cell expansion</dd></b><p>
+	<dl>
+<a name="EXP"></a>
+	<b><dd>3.1.1 Expansins (EXP)</dd></b><p>
+	<dl><dd>
+		<b>Li Y, Jones L, McQueen-Mason S. </b> (2003) Expansins and cell growth. Curr Opin Plant Biol: <b>6</b>, 603-10. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=14611960" target="_blank">PubMed</a><p>
+		<b>Cosgrove DJ, Li LC, Cho HT, Hoffmann-Benning S, Moore RC, Blecker D. </b> (2002) The growing world of expansins. Plant Cell Physiol: <b>43</b>, 1436-44. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=12514240" target="_blank">PubMed</a><p>
+		<b>Shieh MW, Cosgrove DJ. </b> (1998) Expansins. J Plant Res: <b>111</b>, 149-57. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=11541947" target="_blank">PubMed</a><p>
+	</dd></dl>
+<a name="GH18"></a>
+	<b><dd>3.1.2 Yieldins (<a href="http://afmb.cnrs-mrs.fr/CAZY/GH_18.html" target=_blank">CAZy-GH18</a>, GH18)</dd></b><p>
+	<dl><dd>
+		<b>Samac D.A., Hironaka C.M., Yallaly P.E., Shah D.M. </b> (1990) Isolation and characterization of the genes encoding basic and acidic chitinase in Arabidopsis thaliana. Plant Physiol: <b>93</b>, 907-914. <a href="http://wos3.isiknowledge.com/CIW.cgi?&Promo+Code=rs02&Func=Links&PointOfEntry=FullRecord&UT=A1990DP61300011&CustomersIP=138.23.191.153&ServiceUser=Links&ServiceName=TransferToWos&PublisherID=ResearchSoft&CustomersID=ResearchSoft&SID=QLeZIArg-GgAAHKTgKo" target="_blank">ISI</a><p>
+	</dd></dl>
+	</dl>
+<a name="hemireassembly"></a>
+	<b><dd>3.2 Hemicellulose reassembly</dd></b><p>
+	<dl>
+<a name="XTH"></a>
+	<b><dd>3.2.1 Xyloglucan Endotransglucosylases/Hydrolases (<a href="http://afmb.cnrs-mrs.fr/CAZY/GH_16.html" target=_blank">CAZy-GH16</a>, XTH: XET &amp; XEH)</dd></b><p>
+	<dl><dd>
+		<b>Bourquin V, Nishikubo N, Abe H, Brumer H, Denman S, Eklund M, Christiernin M, Teeri TT, Sundberg B, Mellerowicz EJ. </b> (2002) Xyloglucan endotransglycosylases have a function during the formation of secondary cell walls of vascular tissues. Plant Cell: <b>14</b>, 3073-88. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=pubmed&dopt=Abstract&list_uids=12468728" target="_blank">PubMed</a><p>
+		<b>Rose JKC, Braam J, Fry SC, Nishitani K. </b> (2002) The XTH Family of Enzymes Involved in Xyloglucan Endotransglucosylation and Endohydrolysis: Current Perspectives and a New Unifying Nomenclature. Plant and Cell Physiology: <b>43</b>, 1421-1435. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=pubmed&dopt=Abstract&list_uids=12514239" target="_blank">PubMed</a><p>
+	</dd></dl>
+	</dl>
+<a name="hydrolases"></a>
+	<b><dd>3.3 Hydrolases</dd></b><p>
+	<dl>
+<a name="BGAL"></a>
+	<b><dd>3.3.1 &beta;-Galactosidase (<a href="http://afmb.cnrs-mrs.fr/CAZY/GH_35.html" target=_blank">CAZy-GH35</a>, BGAL)</dd></b><p>
+	<dl><dd>
+		<b>Carey AT, Smith DL, Harrison E, Bird CR, Gross KC, Seymour GB, Tucker GA. </b> (2001) Down-regulation of a ripening-related beta-galactosidase gene (TBG1) in transgenic tomato fruits. J Exp Bot: <b>52</b>, 663-8. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=11413202" target="_blank">PubMed</a><p>
+		<b>Carey AT, Holt K, Picard S, Wilde R, Tucker GA, Bird CR, Schuch W, Seymour GB. </b> (1995) Tomato exo-(1-->4)-beta-D-galactanase. Isolation, changes during ripening in normal and mutant tomato fruit, and characterization of a related cDNA clone. Plant Physiol: <b>108</b>, 1099-107. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=7630937" target="_blank">PubMed</a><p>
+	</dd></dl>
+<a name="GH9"></a>
+	<b><dd>3.3.2 Glycoside dehydrogenase (<a href="http://afmb.cnrs-mrs.fr/CAZY/GH_9.html" target=_blank">CAZy-GH9</a>)</dd></b><p>
+	<dl><dd>
+		<b>Molhoj M, Ulvskov P, Dal Degan F. </b> (2001) Characterization of a functional soluble form of a Brassica napus membrane-anchored endo-1,4-beta-glucanase heterologously expressed in Pichia pastoris. Plant Physiol: <b>127</b>, 674-84. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=11598241" target="_blank">PubMed</a><p>
+		<b>Sato S, Kato T, Kakegawa K, Ishii T, Liu YG, Awano T, Takabe K, Nishiyama Y, Kuga S, Sato S, Nakamura Y, Tabata S, Shibata D. </b> (2001) Role of the putative membrane-bound endo-1,4-beta-glucanase KORRIGAN in cell elongation and cellulose synthesis in Arabidopsis thaliana.  Plant Cell Physiol: <b>42</b>, 251-63. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=11266576" target="_blank">PubMed</a><p>
+		<b>Yung MH, Schaffer R, Putterill J. </b> (1999) Identification of genes expressed during early Arabidopsis carpel development by mRNA differential display: characterisation of ATCEL2, a novel endo-1,4-beta-D-glucanase gene. Plant J: <b>17</b>, 203-8. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=10074717" target="_blank">PubMed</a><p>
+		<b>Nicol F, His I, Jauneau A, Vernhettes S, Canut H, Hofte H. </b> (1998) A plasma membrane-bound putative endo-1,4-beta-D-glucanase is required for normal wall assembly and cell elongation in Arabidopsis. EMBO J: <b>17</b>, 5563-76. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=9755157" target="_blank">PubMed</a><p>
+	</dd></dl>
+<a name="GH17"></a>
+	<b><dd>3.3.3 Glycoside dehydrogenase (<a href="http://afmb.cnrs-mrs.fr/CAZY/GH_17.html" target=_blank">CAZy-GH17</a>)</dd></b><p>
+	<dl><dd>
+		<b>Hird DL, Worrall D, Hodge R, Smartt S, Paul W, Scott R. </b> (1993) The anther-specific protein encoded by the Brassica napus and Arabidopsis thaliana A6 gene displays similarity to beta-1,3-glucanases. Plant J: <b>4</b>, 1023-33. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=8281185" target="_blank">PubMed</a><p>
+	</dd></dl>
+<a name="GH28"></a>
+	<b><dd>3.3.4 Glycoside hydrolase (<a href="http://afmb.cnrs-mrs.fr/CAZY/GH_28.html" target=_blank">CAZy-GH28</a>)</dd></b><p>
+	<dl><dd>
+		<b>Markovic O, Janecek S. </b> (2001) Pectin degrading glycoside hydrolases of family 28: sequence-structural features, specificities and evolution. Protein Eng: <b>14</b>, 615-31. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=pubmed&dopt=Abstract&list_uids=11707607" target="_blank">PubMed</a><p>
+	</dd></dl>
+<a name="GH10"></a>
+<b><dd>3.3.5 Glycoside hydrolase (</b>possibly involved in xylan degradation: <b><a href="http://afmb.cnrs-mrs.fr/CAZY/GH_10.html" target=_blank">CAZy-GH10</a>, <a href="http://afmb.cnrs-mrs.fr/CAZY/GH_43.html" target=_blank">CAZy-GH43</a> & <a href="http://afmb.cnrs-mrs.fr/CAZY/GH_51.html" target=_blank">CAZy-GH51</a>)</dd></b><p>
+	<dl><dd>
+		<b>Fulton LM, Cobbett CS. </b> (2003) Two alpha-L-arabinofuranosidase genes in Arabidopsis thaliana are differentially expressed during vegetative growth and flower development. J Exp Bot: <b>54</b>, 2467-77. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=pubmed&dopt=Abstract&list_uids=14512381" target="_blank">PubMed</a><p>
+		<b>Coughlan MP, Hazlewood GP. </b> (1993) beta-1,4-D-xylan-degrading enzyme systems: biochemistry, molecular biology and applications. Biotechnol Appl Biochem: <b>17</b>, 259-89. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=8338637" target="_blank">PubMed</a><p>
+	</dd></dl>
+	</dl>
+<a name="lyases"></a>
+	<b><dd>3.4 Lysases</dd></b><p>
+	<dl>
+<a name="PL1"></a>
+	<b><dd>3.4.1 Pectate and pectin lyases (<a href="http://afmb.cnrs-mrs.fr/CAZY/PL_1.html" target=_blank">CAZy-PL1</a>)</dd></b><p>
+	<dl><dd>
+		<b>Vogel JP, Raab TK, Schiff C, Somerville SC. </b> (2002) PMR6, a pectate lyase-like gene required for powdery mildew susceptibility in Arabidopsis. Plant Cell: <b>14</b>, 2095-106. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=12215508" target="_blank">PubMed</a><p>
+	</dd></dl>
+<a name="PL4"></a>
+	<b><dd>3.4.2 Rhamnogalacturonan I lyases (<a href="http://afmb.cnrs-mrs.fr/CAZY/PL_4.html" target=_blank">CAZy-PL4</a>)</dd></b><p>
+	<dl><dd>
+		<b>McDonough MA, Kadirvelraj R, Harris P, Poulsen JC, Larsen S. </b> (2004) Rhamnogalacturonan lyase reveals a unique three-domain modular structure for polysaccharide lyase family 4. FEBS Lett: <b>565</b>, 188-94. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=15135077" target="_blank">PubMed</a><p>
+	</dd></dl>
+	</dl>
+<a name="esterases"></a>
+	<b><dd>3.5 Esterases</dd></b><p>
+	<dl>
+<a name="PME"></a>
+	<b><dd>3.5.1 Pectin methyl esterases (<a href="http://afmb.cnrs-mrs.fr/CAZY/CE_8.html" target=_blank">CAZy-CE8)</a></dd></b><p>
+	<dl><dd>
+		<b>Orfila C, Huisman MM, Willats WG, van Alebeek GJ, Schols HA, Seymour GB, Knox JP. </b> (2002) Altered cell wall disassembly during ripening of Cnr tomato fruit: implications for cell adhesion and fruit softening. Planta: <b>215</b>, 440-7. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=12111226" target="_blank">PubMed</a><p>
+		<b>Micheli F, Holliger C, Goldberg R, Richard L. </b> (1998) Characterization of the pectin methylesterase-like gene AtPME3: a new member of a gene family comprising at least 12 genes in Arabidopsis thaliana. Gene: <b>220</b>, 13-20. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=9767082" target="_blank">PubMed</a><p>
+	</dd></dl>
+<a name="PAE"></a>
+	<b><dd>3.5.2 Pectin acetylesterases (<a href="http://afmb.cnrs-mrs.fr/CAZY/CE_13.html" target=_blank">CAZy-CE13</a>)</dd></b><p>
+	<dl><dd>
+		<b>Vercauteren I, de Almeida Engler J, De Groodt R, Gheysen G. </b> (2002) An Arabidopsis thaliana pectin acetylesterase gene is upregulated in nematode feeding sites induced by root-knot and cyst nematodes. Mol Plant Microbe Interact: <b>15</b>, 404-7. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=12026180" target="_blank">PubMed</a><p>
+		<b>Breton C, Bordenave M, Richard L, Pernollet JC, Huet JC, Perez S, Goldberg R. </b> (1996) PCR cloning and expression analysis of a cDNA encoding a pectinacetylesterase from Vigna radiata L. FEBS Lett: <b>388</b>, 139-42. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=8690073" target="_blank">PubMed</a><p>
+	</dd></dl>
+<a name="FE"></a>
+	<b><dd>3.5.3 Feruloyl esterases (<a href="http://afmb.cnrs-mrs.fr/CAZY/CE_1.html" target=_blank">CAZy-CE1</a>)</dd></b><p>
+	<dl><dd>
+		
+	</dd></dl>
+	</dl>
+<a name="structural"></a>
+	<b><dt>4. Structural proteins</dt></b><p>
+<a name="reviewstruct"></a>
+	<b><dd>4. Reviews (<a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=PubMed&term=plant%5Btitle%5D%20AND%20cell%5Btitle%5D%20AND%20wall%5Btitle%5D%20AND%20proteins%5Btitle%5D" target=_blank">Update search</a>)</dd></b><p>
+	<dl><dl><dl>
+		<b>Cassab GI. </b> (1998) Plant Cell Wall Proteins. Annu Rev Plant Physiol Plant Mol Biol: <b>49</b>, 281-309. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=15012236" target="_blank">PubMed</a><p>
+		<b>Showalter AM. </b> (1993) Structure and function of plant cell wall proteins. Plant Cell: <b>5</b>, 9-23. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=8439747" target="_blank">PubMed</a><p>
+	</dl></dl></dl>
+<a name="HRGP"></a>
+	<b><dd>4.1 Hydroxyproline-rich glycoproteins or extensins (HRGP)</dd></b><p>
+	<dl><dl><dl>
+		<b>Kieliszewski MJ, Lamport DT. </b> (1994) Extensin: repetitive motifs, functional sites, post-translational codes, and phylogeny. Plant J: <b>5</b>, 157-72. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=8148875" target="_blank">PubMed</a><p>
+	</dl></dl></dl>
+<a name="LRX"></a>
+	<b><dd>4.2 Leucine-rich repeat extensins (LRX)</dd></b><p>
+	<dl><dl><dl>
+		<b>Baumberger N, Doesseger B, Guyot R, Diet A, Parsons RL, Clark MA, Simmons MP, Bedinger P, Goff SA, Ringli C, Keller B. </b> (2003) Whole-genome comparison of leucine-rich repeat extensins in Arabidopsis and rice. A conserved family of cell wall proteins form a vegetative and a reproductive clade. Plant Physiol: <b>131</b>, 1313-26. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=12644681" target="_blank">PubMed</a><p>
+	</dl></dl></dl>
+<a name="PRP"></a>
+	<b><dd>4.3 Proline-rich cell wall proteins (PRP)</dd></b><p>
+	<dl><dl><dl>
+		<b>Fowler TJ, Bernhardt C, Tierney ML. </b> (1999) Characterization and expression of four proline-rich cell wall protein genes in Arabidopsis encoding two distinct subsets of multiple domain proteins. Plant Physiol: <b>121</b>, 1081-92. <a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=10594096" target="_blank">PubMed</a><p>
+		<b>Bernhardt C, Tierney ML. </b> (2000) Expression of AtPRP3, a proline-rich structural cell wall protein from Arabidopsis, is regulated by cell-type-specific developmental pathways involved in root hair formation. Plant Physiol: <b>122</b>, 705-14. <a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=10712533" target="_blank">PubMed</a><p>
+	</dl></dl></dl>
+<a name="GRP"></a>
+	<b><dd>4.4 Glycine-rich proteins (GRP)</dd></b><p>
+	<dl><dl><dl>
+		<b>Park AR, Cho SK, Yun UJ, Jin MY, Lee SH, Sachetto-Martins G, Park OK. </b> (2002) Interaction of the Arabidopsis receptor protein kinase Wak1 with a glycine-rich protein, AtGRP-3. J Biol Chem: <b>276</b>, 26688-93. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=11335717" target="_blank">PubMed</a><p>
+	</dl></dl></dl>
+<a name="AGP"></a>
+	<b><dd>4.5 Arabinogalactan proteins</dd></b><p>
+	<dl><dl><dl>
+		<b>Schultz CJ, Rumsewicz MP, Johnson KL, Jones BJ, Gaspar YM, Bacic A. </b> (2002) Using genomic resources to guide research directions. The arabinogalactan protein gene family as a test case. Plant Physiol: <b>129</b>, 1448-63. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=12177459" target="_blank">PubMed</a><p>
+		<b>van Hengel AJ, Roberts K. </b> (2002) Fucosylated arabinogalactan-proteins are required for full root cell elongation in arabidopsis. Plant J: <b>32</b>, 105-13. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=12366804" target="_blank">PubMed</a><p>
+	</dl></dl></dl>
+<a name="glycoprot"></a>
+	<b><dt>5. Glycoprotein biosynthesis</dt></b><p>
+<a name="GFT"></a>
+	<b><dd>5.1 Glycoprotein fucosyltransferases (<a href="http://afmb.cnrs-mrs.fr/CAZY/GT_10.html" target=_blank">CAZy-GT10</a>, GT10)</dd></b><p>
+	<dl><dl><dl>
+		<b>Wilson IB, Rendic D, Freilinger A, Dumic J, Altmann F, Mucha J, Muller S, Hauser MT. </b> (2001) Cloning and expression of cDNAs encoding alpha1,3-fucosyltransferase homologues from Arabidopsis thaliana. Biochim Biophys Acta: <b>1527</b>, 88-96. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=11420147" target="_blank">PubMed</a><p>
+	</dl></dl></dl>
+<a name="GT31"></a>
+	<b><dd>5.2 Glycosyl transferases 31a/b (<a href="http://afmb.cnrs-mrs.fr/CAZY/GT_31.html" target=_blank">CAZy-GT31)</a></dd></b><p>
+	<dl><dl><dl>
+
+	</dl></dl></dl>
+<a name="development"></a>
+	<b><dt>6. Targeting, development, signaling and defense</dt></b><p>
+<a name="GPI"></a>
+	<b><dd>6.1 Glycosylphosphatidylinositol anchor biosynthesis (GPI)</dd></b><p>
+	<dl><dl><dl>
+		<b>Lalanne E, Honys D, Johnson A, Borner GH, Lilley KS, Dupree P, Grossniklaus U, Twell D. </b> (2004) SETH1 and SETH2, two components of the glycosylphosphatidylinositol anchor biosynthetic pathway, are required for pollen germination and tube growth in Arabidopsis. Plant Cell: <b>16</b>, 229-40. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=14671020" target="_blank">PubMed</a><p>
+		<b>Eisenhaber B, Wildpaner M, Schultz CJ, Borner GH, Dupree P, Eisenhaber F. </b> (2003) lycosylphosphatidylinositol lipid anchoring of plant proteins. Sensitive prediction from sequence- and genome-wide studies for Arabidopsis and rice. Plant Physiol: <b>133</b>, 1691-701. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=14681532" target="_blank">PubMed</a><p>
+	</dl></dl></dl>
+	</dl>
+</ol>
+<br>
+<b><br>
+<p>
+</body>
+</html>

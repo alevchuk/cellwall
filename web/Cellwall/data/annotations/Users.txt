@@ -1,0 +1,3 @@
+User	1	tgirke@citrus.ucr.edu	6d1567355519f94e	Thomas	Girke	UC Riverside	108 Noel T. Keen Hall\nUC Riverside\nRiverside, CA 92521	2004-07-21 12:07:35
+Comment	Q6UDF0	tgirke@citrus.ucr.edu	CtManS	Dhugga KS, Barreiro R, Whitten B, Stecca K, Hazebroek J, Randhawa GS, Dolan M, Kinney AJ, Tomes D, Nichols S, Anderson P.  (2004) Guar seed beta-mannan synthase is a member of the cellulose synthase super gene family. Science: 303, 363-6.	2004-07-21 14:57:13
+

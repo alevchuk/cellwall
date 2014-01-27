@@ -1,0 +1,55 @@
+<family>
+	<name>Glycosyl transferases 21A</name>
+	<abrev>GT31a</abrev>
+	<genome name="A. thaliana">
+		<sequence>At1g05170</sequence>
+		<sequence>At1g11730</sequence>
+		<sequence>At1g22015</sequence>
+		<sequence>At1g26810</sequence>
+		<sequence>At1g27120</sequence>
+		<sequence>At1g32930</sequence>
+		<sequence>At1g33430</sequence>
+		<sequence>At1g53290</sequence>
+		<sequence>At1g74800</sequence>
+		<sequence>At1g77810</sequence>
+		<sequence>At2g25300</sequence>
+		<sequence>At2g26100</sequence>
+		<sequence>At2g32430</sequence>
+		<sequence>At3g06440</sequence>
+		<sequence>At3g14960</sequence>
+		<sequence>At4g21060</sequence>
+		<sequence>At4g26940</sequence>
+		<sequence>At4g32120</sequence>
+		<sequence>At5g53340</sequence>
+		<sequence>At5g62620</sequence>
+	</genome>
+	<genome name="O. sativa">
+		<sequence>LOC_Os01g22550</sequence>
+		<sequence>LOC_Os01g65590</sequence>
+		<sequence>LOC_Os02g06840</sequence>
+		<sequence>LOC_Os02g35870</sequence>
+		<sequence>LOC_Os02g36770</sequence>
+		<sequence>LOC_Os03g38050</sequence>
+		<sequence>LOC_Os03g48610</sequence>
+		<sequence>LOC_Os03g58900</sequence>
+		<sequence>LOC_Os03g58920</sequence>
+		<sequence>LOC_Os05g11060</sequence>
+		<sequence>LOC_Os05g35270</sequence>
+		<sequence>LOC_Os06g06280</sequence>
+		<sequence>LOC_Os06g07910</sequence>
+		<sequence>LOC_Os06g08010</sequence>
+		<sequence>LOC_Os06g12390</sequence>
+		<sequence>LOC_Os06g46570</sequence>
+		<sequence>LOC_Os07g09670</sequence>
+		<sequence>LOC_Os07g09690</sequence>
+		<sequence>LOC_Os08g02370</sequence>
+		<sequence>LOC_Os08g03670</sequence>
+		<sequence>LOC_Os08g29710</sequence>
+		<sequence>LOC_Os09g27950</sequence>
+	</genome>
+	<genome name="UniProt">
+		<sequence>Q8RW34</sequence>
+		<sequence>Q8W0S0</sequence>
+		<sequence>Q9ZS49</sequence>
+	</genome>
+</family>

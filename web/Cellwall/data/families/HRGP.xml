@@ -1,0 +1,34 @@
+<family>
+	<name>Hydroxyproline-rich glycoproteins</name>
+	<abrev>HRGP</abrev>
+	<genome name="A. thaliana">
+		<sequence>At1g23720</sequence>
+		<sequence>At1g26240</sequence>
+		<sequence>At1g26250</sequence>
+		<sequence>At2g24980</sequence>
+		<sequence>At2g28240</sequence>
+		<sequence>At3g22440</sequence>
+		<sequence>At3g28550</sequence>
+		<sequence>At3g54580</sequence>
+		<sequence>At3g54590</sequence>
+		<sequence>At4g08400</sequence>
+		<sequence>At4g08410</sequence>
+		<sequence>At4g13390</sequence>
+		<sequence>At4g14900</sequence>
+		<sequence>At4g16790</sequence>
+		<sequence>At4g22470</sequence>
+		<sequence>At4g28300</sequence>
+		<sequence>At4g34150</sequence>
+		<sequence>At5g06630</sequence>
+		<sequence>At5g06640</sequence>
+		<sequence>At5g49080</sequence>
+		<sequence>At5g51680</sequence>
+	</genome>
+	<genome name="O. sativa">
+		<sequence>LOC_Os03g58070</sequence>
+		<sequence>LOC_Os07g07680</sequence>
+	</genome>
+	<genome name="UniProt">
+		<sequence>Q9LEM1</sequence>
+	</genome>
+</family>

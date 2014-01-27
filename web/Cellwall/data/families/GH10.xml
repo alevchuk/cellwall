@@ -1,0 +1,46 @@
+<family>
+	<name>Glycoside Hydrolase Family 10</name>
+	<abrev>GH10</abrev>
+	<genome name="A. thaliana">
+		<sequence>At1g10050</sequence>
+		<sequence>At1g58370</sequence>
+		<sequence>At2g14690</sequence>
+		<sequence>At4g08160</sequence>
+		<sequence>At4g33810</sequence>
+		<sequence>At4g33820</sequence>
+		<sequence>At4g33830</sequence>
+		<sequence>At4g33840</sequence>
+		<sequence>At4g33850</sequence>
+		<sequence>At4g33860</sequence>
+		<sequence>At4g38300</sequence>
+		<sequence>At4g38650</sequence>
+	</genome>
+	<genome name="O. sativa">
+		<sequence>LOC_Os01g04290</sequence>
+		<sequence>LOC_Os01g04300</sequence>
+		<sequence>LOC_Os03g10440</sequence>
+		<sequence>LOC_Os03g10470</sequence>
+		<sequence>LOC_Os03g14010</sequence>
+		<sequence>LOC_Os03g47010</sequence>
+		<sequence>LOC_Os05g23350</sequence>
+		<sequence>LOC_Os05g23920</sequence>
+		<sequence>LOC_Os05g25560</sequence>
+		<sequence>LOC_Os07g27320</sequence>
+		<sequence>LOC_Os10g21100</sequence>
+		<sequence>LOC_Os10g21110</sequence>
+	</genome>
+	<genome name="UniProt">
+		<sequence>P93185</sequence>
+		<sequence>P93186</sequence>
+		<sequence>P93187</sequence>
+		<sequence>Q70DK4</sequence>
+		<sequence>Q75RZ0</sequence>
+		<sequence>Q8GTJ2</sequence>
+		<sequence>Q8L2X3</sequence>
+		<sequence>Q94G05</sequence>
+		<sequence>Q94G06</sequence>
+		<sequence>Q94G07</sequence>
+		<sequence>Q9XGT8</sequence>
+		<sequence>Q9ZTB8</sequence>
+	</genome>
+</family>

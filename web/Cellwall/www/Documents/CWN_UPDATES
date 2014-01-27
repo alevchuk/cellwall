@@ -1,0 +1,63 @@
+CWN Updates
+Index page
+	Add News Field (red)
+		BLAST search and protein domain viewing will be enabled soon.		
+
+Annotation pages
+
+	Links
+		Annotation links 
+			[TIGR; TAIR; MIPS; UniProt; Aramemnon]
+			TAIR: http://arabidopsis.org/servlets/TairObject?type=locus&name=At4g02500
+		
+		Functional category
+			[GO; KEGG; AraCyc]
+			AraCyc: http://www.arabidopsis.org:1555/ARA/NEW-IMAGE?type=GENE&object=AT5G05170
+		
+		Family sites
+			[CAZy; Cell Wall Genomics]
+			Cell Wall Genomics: http://bleeckerlab.botany.wisc.edu/public/theview.php?gene=At3g62720
+		
+		Expression
+			[AFGC; NASC; MPSS]
+			AFGC: http://www.arabidopsis.org/servlets/Search?action=new_search&type=expression
+			NASC: http://ssbdjc2.nottingham.ac.uk/narrays/geneswinger.pl?searchfor=AGI&id=At3g62720
+			
+		Knockout
+			[SIGnAL; GABI]
+			
+	User Annotation 
+		Link to separate user annotation page. In the future we show next to link the number of annotations available. 
+	
+	Literature
+		Link to anchor in literature.html
+		Separate link for Update Search at NCBI
+
+Annotation upload form:
+	'Add Annotation' on annotation page
+	
+	Click on this link opens login page containing two fields and two links:
+			Email:
+			Password:
+			New user registration
+			Forgot password (sends pwd to above email)
+
+	User registration page
+			First name
+			Last Name
+			E-mail
+			Institution
+			Address
+			Password
+	
+	Annotation submission
+			Name
+			Type your information here
+			References
+	
+Add blast page
+
+Create ftp download option
+			
+Family members
+	Remove Fut11-13

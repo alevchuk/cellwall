@@ -1,0 +1,33 @@
+<family>
+	<name>Glycoprotein fucosyltransferases</name>
+	<abrev>GFT</abrev>
+	<genome name="A. thaliana">
+		<sequence>At1g49710</sequence>
+		<sequence>At1g71990</sequence>
+		<sequence>At3g19280</sequence>
+	</genome>
+	<genome name="O. sativa">
+		<sequence>LOC_Os04g35270</sequence>
+		<sequence>LOC_Os08g36840</sequence>
+		<sequence>LOC_Os12g07290</sequence>
+	</genome>
+	<genome name="UniProt">
+		<sequence>Q5DTC7</sequence>
+		<sequence>Q5DTC8</sequence>
+		<sequence>Q5DTC9</sequence>
+		<sequence>Q5TJK3</sequence>
+		<sequence>Q6A2M3</sequence>
+		<sequence>Q6Q5Y3</sequence>
+		<sequence>Q6Q8A9</sequence>
+		<sequence>Q70G68</sequence>
+		<sequence>Q70G69</sequence>
+		<sequence>Q70G72</sequence>
+		<sequence>Q70G73</sequence>
+		<sequence>Q8L5D1</sequence>
+		<sequence>Q8VXF9</sequence>
+		<sequence>Q93WR9</sequence>
+		<sequence>Q93WS0</sequence>
+		<sequence>Q93X61</sequence>
+		<sequence>Q9ST51</sequence>
+	</genome>
+</family>

@@ -1,0 +1,10 @@
+<menu title="Main">
+	<link href="Documents/README.html">ReadMe</link>
+	<link href="index.pl">Index</link>
+	<link href="search.pl">Search</link>
+	<link href="statistics.pl">Statistics</link>
+	<link href="Documents/literature.html">Literature</link>
+	<link href="downloads.pl">Downloads</link>
+	<link href="Documents/links.html">Links</link>
+	<link href="mailto:thomas.girke@ucr.edu">E-Mail</link>
+</menu>

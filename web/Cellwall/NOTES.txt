@@ -1,0 +1,33 @@
+Cell Wall Navigator
+===================
+:date: 2005-08-10T08:20:00-07:00
+
+Update Method
+-------------
+
+Updating the data in CWN_ is rather simple:
+    1.  All of the source databases (UniPRot_, TIGR_, GenBank_) are
+        updated.
+    2.  The families are updated. Certain families are updated in
+        different manners, however in general its simply:
+        1.  run hmmsearch over the source databases.
+        2.  parse the output
+        3.  check for errors
+        4.  output as xml.
+    3.  The cellwall_test database is dropped and reloaded, to remove any
+        possible stale data.
+    4.  './cellwall insert cellwall.xml' is run to insert the data into MySQL.
+    5.  The additional annotations are loaded:
+        1. the old users and comments, ./cellwall annotate data/annotations/Users.txt
+        2. display ids: ./cellwall annotate data/annotation/DisplayIDs.txt
+        3. tair's publication list (ignoring the many extra ids):
+            ./cellwall tair data/Locus_published.DATE > tmp
+            ./cellwall annotate tmp
+            rm tmp
+        4. Mutants: ./cellwall mutants data/gene_aliass.DATE (ignore missing)
+        5. PFAM data:
+            ./cellwall get proteins > proteins.fa
+            hmm-pfam -o proteins.hmmerout /data/PFAM/Pfam_ls proteins.fa
+            tools/add_domains.pl proteins.hmmerout
+
+.. _CWN: http://bioweb.ucr.edu/Cellwall/

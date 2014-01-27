@@ -1,0 +1,44 @@
+My Cell Wall Navigator Manual
+
+(A) Changes on index page:
+Text on index page can be changed in:
+	/data/projects/Cellwall/index.pl
+
+Family names can be changed in MySQL family table:
+	mysql cellwall -p
+	SELECT * FROM family;
+	UPDATE family SET name="Sugar 1-kinases" WHERE id ="1";
+	Exit mysql and run this command as root:
+		$ /etc/init.d/apache2 reload
+
+Group names can be changed in MySQL groups table:
+	SELECT * FROM groups;
+	UPDATE groups SET name="Other glycosyl transferases" WHERE id ="6";
+	Exit mysql and run this command as root:
+		$ /etc/init.d/apache2 reload
+	
+(B) Change annotation pages:
+	(1) Insert change as root in this file: /usr/local/share/perl/5.8.2/Cellwall/Web/Sequence.pm
+	(2) Restart apache with this command:
+		$ /etc/init.d/apache2 reload
+
+(C) Add Abr/name to sequence:
+	mysql cellwall -p
+	SELECT * FROM sequence; #double-check key and uniqueness of Abr
+	UPDATE sequence SET display="CtManS" WHERE accession ="Q6UDF0"; #adds Abr "CtManS" to "Q6UDF0"
+	SELECT id FROM sequence WHERE accession = 'Q6UDF0'; # shows required ID 2487 for next step
+	INSERT INTO idxref VALUES(2487, 'CtManS'); #appends row with '2487 CtManS'; sequence # '2487' is now there twice!
+
+	execute as root:
+	/etc/init.d/apache2 reload
+		
+(D) Changes in family URLs:
+	Go into separate family *.xml files and change links there. They are under /data/projects/Cellwall/Families
+
+(E) Changes on search page:
+	There are several files in /usr/local/share/perl/5.8.2/Cellwall/Web that are part of search page:
+		Family.pm
+		Index.pm
+		Search.pm
+		Sequence.pm
+		Users.pm

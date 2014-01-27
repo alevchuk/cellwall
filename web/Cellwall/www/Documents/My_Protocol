@@ -1,0 +1,36 @@
+(1) Split cluster IDs into separate files, have them in this format:
+ 	
+	Fam# At#
+	1 AT4G16130.1
+ 	1 At3g42850.1
+ 	2 At3g03250.1
+ 	2 At5g17310.1
+ 	3 At1g12780.1
+ 	3 At4g23920.1
+			       
+
+	$ for i in `seq 1 36`; do egrep "^$i " FamilyIDs > $i.id; done
+
+(2) Remove cluster numbers in front of IDs
+	$ perl -p -i -w -e 's/.+ //g' *.id
+
+(3) Retrieve sequences with FASTACMD: 
+	$ for i in *.id; do fastacmd -d /data/SPROT_TREMBL/Uniprot_At_OSA/Uniprot_At_OSA -i $i > $i.fasta; done
+
+Keys not found:
+	At2g13675.1
+	At3g29365.1	not in latest TIGR annotation., added manually
+	At5g04300.1
+	At2g46630.1	TIGR: is pseudogene, added manually
+
+(4) Remove weird 'lcl|' in front of IDs of *.fast files and name change of *.id.fasta to *.fasta:
+	$ perl -p -i -w -e 's/lcl\|//g' *.id.fasta
+	$ for i in *.id.fasta; do mv $i ${i/\.id\.fasta/\.fasta}; done
+
+(5) BLASTP of all families against Uniprot_At_OSA
+	$ for i in *.fasta; do blastall -p blastp -d /data/SPROT_TREMBL/Uniprot_At_OSA/Uniprot_At_OSA -i $i -o $i.blastp; done
+
+(6) Upload all ATH, OSA and Uniprot keys into database (Josh):
+	- append to query key list (above)
+	- make keys in each family unique
+	

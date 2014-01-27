@@ -1,0 +1,28 @@
+<family>
+	<name>Proline-rich proteins</name>
+	<abrev>PRP</abrev>
+	<genome name="A. thaliana">
+		<sequence>At1g54970</sequence>
+		<sequence>At2g21140</sequence>
+		<sequence>At3g62680</sequence>
+		<sequence>At4g38770</sequence>
+	</genome>
+	<genome name="O. sativa">
+		<sequence>LOC_Os03g14130</sequence>
+		<sequence>LOC_Os10g05750</sequence>
+		<sequence>LOC_Os10g05790</sequence>
+		<sequence>LOC_Os10g05820</sequence>
+		<sequence>LOC_Os10g05860</sequence>
+		<sequence>LOC_Os10g05930</sequence>
+		<sequence>LOC_Os10g05950</sequence>
+		<sequence>LOC_Os10g05970</sequence>
+		<sequence>LOC_Os10g05980</sequence>
+		<sequence>LOC_Os10g05990</sequence>
+		<sequence>LOC_Os10g06000</sequence>
+	</genome>
+	<genome name="UniProt">
+		<sequence>O82066</sequence>
+		<sequence>Q9M6T7</sequence>
+		<sequence>Q9SBX4</sequence>
+	</genome>
+</family>

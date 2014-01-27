@@ -1,0 +1,415 @@
+#!/usr/bin/perl
+# vim:sw=4 ts=4 ft=perl
+# $Id: cellwall 129 2005-06-28 21:28:35Z laurichj $
+
+use lib  qw( /srv/web/Cellwall/lib /srv/web/Cellwall/lib/Cellwall );
+
+use strict;
+use lib split(':', $ENV{CELLWALL_LIB});
+use Cellwall;
+use Error qw/:try/;
+use Getopt::Std;
+
+my %opts;
+getopts('H:d:u:p:b:', \%opts);
+
+my $cw = new Cellwall(
+	-host     => $opts{H} || $ENV{CELLWALL_HOST},
+	-db       => $opts{d} || $ENV{CELLWALL_DB},
+	-user     => $opts{u} || $ENV{CELLWALL_USER},
+	-password => $opts{p} || $ENV{CELLWALL_PASSWD},
+	-base     => $opts{b} || $ENV{CELLWALL_BASE},
+);
+
+# Get the command
+my $command = shift @ARGV;
+die "I need a command to run!" unless $command;
+
+if( $command eq 'insert' ) {
+	load_xml($cw, @ARGV);
+	insert($cw);
+} elsif( $command eq 'execute' ) {
+	$cw->query_all();
+	$cw->execute(@ARGV);
+} elsif( $command eq 'query' ) {
+	query($cw, @ARGV);
+	display($cw);
+} elsif( $command eq 'load' ) {
+	load_xml($cw, @ARGV);
+	display($cw);
+} elsif( $command eq 'links' ) {
+	links($cw, @ARGV);
+} elsif( $command eq 'annotate' ) {
+	annotate($cw, @ARGV);
+} elsif( $command eq 'mutants' ) {
+	mutants($cw, @ARGV);
+} elsif( $command eq 'tair' ) {
+	$cw->tair(@ARGV);
+} elsif( $command eq 'get' ) {
+	query($cw);
+	get($cw, @ARGV);
+} elsif( $command eq 'slave' ) {
+	# Do slave
+	$cw->query_root();
+	$cw->slave(@ARGV);
+} elsif( $command eq 'dups' ) {
+	$cw->load(@ARGV);
+	find_Dups($cw);
+} elsif( $command eq 'dump' ) {
+	# Dump all annotations
+	$cw->dump_All(@ARGV);
+} elsif( $command eq 'search' ) {
+	# So some search stuff
+	$cw->search(@ARGV);
+}
+
+sub load_xml
+{
+	my($cw, $file) = @_;
+	$file = $file || "test.xml";
+
+	try {
+		# load the XML file
+		$cw->load($file);
+	} catch Error::Simple with {
+		my $E = shift;
+		die "Error loading XML file: " . $E->text();
+	};
+}
+
+sub insert
+{
+	my($cw) = @_;
+
+	try {
+		# insert everything into the database
+	   $cw->insert();
+	} catch Error::Simple with {
+		my $E = shift;
+		print STDERR "Error inserting database: ", $E->text(), " at line: ", $E->line();
+	};
+}
+
+sub query
+{
+	my($cw) = @_;
+
+	try {
+		# query the sql database for all content
+		$cw->query_all();
+	} catch Error::Simple with {
+		my $E = shift;
+		print STDERR "Error querying database: ", $E->text(), " at line: ", $E->line(), " in file: ", $E->file(), "\n";
+	};
+}
+
+sub display
+{
+	my($cw) = @_;
+
+	# Print out the information we've queried:
+	my @groups = $cw->get_all_Groups();
+
+	# Print the groups:
+	foreach my $group (@groups) {
+		display_group($group, 0) if not defined $group->parent();
+	}
+
+	# Print the genomes:
+	foreach my $genome ($cw->get_all_Genomes()) {
+		printf("Genome: %s [%d]\n", $genome->name(), $genome->id() || '0');
+
+		# Print each database in the genome
+		foreach my $db ($genome->get_all_Databases()) {
+			printf("\tDatabase: %s<%s>\n", $db->name(), $db->type() );
+		}
+	}
+
+	# Print each database in the cellwall
+	foreach my $db ($cw->get_all_Databases()) {
+		printf("Database: %s<%s> [%d]\n", $db->name(), $db->type(), $db->id() || '0' );
+	}
+
+	# Print each search in the cellwall
+	foreach my $search ($cw->get_all_Searches()) {
+		if( $search->genome() ) {
+			printf("Search: %s<%s> [%d] with %s on %s\:\:%s\n", $search->name(), $search->type(), $search->id() || '0', $search->query(), $search->genome()->name(), $search->database()->type() );
+		} elsif( $search->database() ) {
+			printf("Search: %s<%s> [%d] with %s on %s\n", $search->name(), $search->type(), $search->id() || '0', $search->query(), $search->database()->name() );
+		} else {
+			printf("Search: %s<%s> [%d] with %s on %s\n", $search->name(), $search->type(), $search->id() || '0', $search->query(), $search->database_id() );
+		}
+	}
+}
+
+sub display_group
+{
+	my($group, $indent) = @_;
+	printf("%sGroup %d: %s [%d]\n", "\t" x $indent, $group->rank(), $group->name(), $group->id() || '0');
+
+	$indent = 0 unless $indent;
+
+	# Print out each family:
+	foreach my $child ($group->get_all_Children()) {
+		if( $child->isa('Cellwall::Group') ) {
+			display_group($child, $indent + 1);
+		} else {
+			display_family($child, $indent + 1);
+		}
+	}
+}
+
+sub display_family
+{
+	my($fam, $indent) = @_;
+
+	printf("%sFamily %d: %s<%s> [%d]\n", "\t" x $indent, $fam->rank(), $fam->name(), $fam->abrev(), $fam->id() || '0' );
+
+	foreach my $sf ($fam->get_SubFamilies()) {
+		printf("%s\tSubFamily %s\n", "\t" x $indent, $sf);
+	}
+
+	# Print out each sequence
+	foreach my $seq ($fam->get_all_Sequences()) {
+		printf("%s\t$seq Sequence: %s [%d]: %s\n", "\t" x $indent, $seq->accession_number(), $seq->length(), $seq->description() );
+		printf("%s\t\tSpecies: %s\n",         "\t" x $indent, $seq->species()->binomial());
+	}
+}
+
+
+sub annotate
+{
+	my($self, $file) = @_;
+
+	open(IN, $file) || die "unable to open annotations";
+
+	while(my $line = <IN>) {
+		chomp($line);
+		my($type, $acc, @terms) = split("\t", $line);
+		$self->sql()->add_AnnotationTab($acc, $type, @terms);
+	}
+
+	close(IN);
+}
+
+sub get
+{
+	my($self, $action, @ARGS) = @_;
+
+	if( $action eq 'proteins' ) {
+		get_proteins($self, @ARGS);
+	} elsif( $action eq 'sequences' ) {
+		get_sequences($self, @ARGS);
+	}
+}
+
+sub get_proteins
+{
+	my($self, $filename) = @_;
+	my $out;
+	
+	if( defined $filename ) {
+		throw Error::Simple('file exists') if -f $filename;
+		$out = new Bio::SeqIO(
+			-format => 'fasta',
+			-file => ">$filename"
+		);
+	} else {
+		$out = new Bio::SeqIO(
+			-format => 'fasta',
+			-fh     => \*STDOUT,
+		);
+	}
+
+	foreach my $seq ($self->get_all_Proteins()) {
+		$seq->display_name( $seq->accession_number() );
+		$out->write_seq($seq);
+	}
+}
+
+sub get_sequences
+{
+	my($self, $filename) = @_;
+	my $out;
+	
+	if( defined $filename ) {
+		throw Error::Simple('file exists') if -f $filename;
+		$out = new Bio::SeqIO(
+			-format => 'genbank',
+			-file => ">$filename"
+		);
+	} else {
+		$out = new Bio::SeqIO(
+			-format => 'genbank',
+			-fh     => \*STDOUT,
+		);
+	}
+
+	foreach my $fam ($self->get_all_Families()) {
+		foreach my $seq ($fam->get_all_Sequences) {
+			$out->write_seq($seq);
+		}
+	}
+}
+
+sub mutants
+{
+	my($self, @files) = @_;
+
+	my $sth = $self->sql()->prepare("UPDATE sequence SET gene_name = ?, fullname = ?, alt_fullname = ?, symbols = ? WHERE accession = ?");
+
+	foreach my $file (@files) {
+		my %data;
+
+		open(INPUT, $file) || die "unable to open $file\: $!";
+		while(my $line = <INPUT>) {
+			next if $line =~ /^locus name/o;
+
+			chomp $line;
+			my($id, $name, $type, $value) = split("\t", $line, 4);
+			next unless defined $name;
+			
+			if(not defined $type or $type eq '') {
+				$data{$id}->{gene} = $name;
+			} elsif( $type eq 'symbol' ) {
+				push(@{$data{$id}->{symbol}}, $value);
+			} elsif( $type eq 'full_name' ) {
+				$data{$id}->{fullname} = $value;
+			} elsif( $type eq 'alt_full_name' ) {
+				$data{$id}->{alt_fullname} = $value;
+			}
+		}
+
+		foreach my $id (keys(%data)) {
+			my $sym;
+			print "Altering $id...";
+			$sym = join("; ", @{$data{$id}->{symbol}}) if defined $data{$id}->{symbol};
+			$sth->execute($data{$id}->{gene}, $data{$id}->{fullname}, $data{$id}->{alt_fullname}, $sym, $id);
+			my $rows  = $sth->rows();
+			if( $rows == 0 ) {
+				print "not found\n";
+			} else {
+				print " $rows altered.\n";
+			}
+		}
+		
+		close(INPUT);
+	}
+}
+
+sub Cellwall::tair
+{
+	my($self, $file) = @_;
+
+	if( defined $file ) {
+		open(FILE, $file) || die "unable to open file: $!";
+	} else {
+		*FILE = *STDIN;
+	}
+
+	my %pubmed;
+	my %tair;
+
+	while(my $line = <FILE>) {
+		chomp($line);
+		next if $line =~ /^Locus_name/;
+
+		my($locus, $gene, $tair, $pubmed) = split(/\s*\t\s*/, $line);
+
+		if( defined($pubmed) and $pubmed ne '') {
+			# We'll prefer the pubmed id
+			push(@{$pubmed{$locus}}, $pubmed);
+		} else {
+			push(@{$tair{$locus}}, $tair);
+		}
+	}
+
+	close(FILE);
+
+	# Now, lets go through and link all of the pubmed links up
+	foreach my $id (sort keys %pubmed) {
+		print join("\t", "DBLink", $id, 'Annotation', 'PubMed', sprintf("http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=pubmed&list_uids=%s", join(',', @{$pubmed{$id}}))), "\n";
+	}
+
+	foreach my $id (sort keys %tair) {
+		foreach my $entry (sort @{$tair{$id}}) {
+			print join("\t", "DBLink", $id, 'Annotation', 'TairPub', 
+				"http://arabidopsis.org/servlets/TairObject?type=publication&id=$entry"), "\n";
+		}
+	}
+}
+
+sub find_Dups
+{
+	my($cw) = @_;
+	my %ids;
+
+	my @groups = $cw->get_all_Groups();
+
+	foreach my $group (@groups) {
+		find_group_Dups($group, \%ids) if not defined $group->parent();
+	}
+}
+
+sub find_group_Dups
+{
+	my($group, $ids) = @_;
+
+	foreach my $child ($group->get_all_Children()) {
+		if( $child->isa('Cellwall::Group') ) {
+			find_group_Dups($child, $ids);
+		} else {
+			find_family_Dups($child, $ids);
+		}
+	}
+}
+
+sub find_family_Dups
+{
+	my($family, $ids) = @_;
+
+
+	foreach my $seq ($family->get_all_Sequences()) {
+		if( not exists $ids->{$seq->accession_number()} ) {
+			@{$ids->{$seq->accession_number()}} =
+				$seq->get_secondary_accessions();
+		} else {
+			print $seq->accession_number(), ": ",
+				join("\t", @{$ids->{$seq->accession_number()}}), "\n";
+		}
+	}
+}
+
+sub Cellwall::search
+{
+	my($self, $cmd, @args) = @_;
+
+	if( $cmd eq 'insert' ) {
+		$self->insert_Search(@args);
+	}
+}
+
+sub Cellwall::insert_Search
+{
+	my($self, $search, @files) = @_;
+	$self->query_root();
+
+	my $sob = $self->get_Search($search);
+	throw Error::Simple("Unable to get search: $search") unless defined $sob;
+	$self->debug(2, "Inserting into " . $sob->name());
+	
+	foreach my $file (@files) {
+		# Search file names are in the form somedir/ID,SEARCH.ext
+		my($accession) = ( $file =~ /(?:^|\/|\\)?([^,\\\/]+),/o );
+		$self->debug(1, "reading $file as $accession");
+
+		# Get the id
+		my $id = $self->sql()->lookup_Accession($accession);
+		unless( defined $id ) {
+			$self->debug(0, "ERROR: Accession $accession not found in database");
+		} else {
+			# Insert the file into the database
+			$sob->insert_File($id, $file);
+		}
+	}
+}

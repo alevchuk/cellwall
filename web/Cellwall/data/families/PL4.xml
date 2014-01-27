@@ -1,0 +1,21 @@
+<family>
+	<name>Rhamnogalacturonan I lyases</name>
+	<abrev>PL4</abrev>
+	<genome name="A. thaliana">
+		<sequence>At1g09880</sequence>
+		<sequence>At1g09890</sequence>
+		<sequence>At1g09910</sequence>
+		<sequence>At2g22620</sequence>
+		<sequence>At4g24430</sequence>
+		<sequence>At4g37950</sequence>
+		<sequence>At4g38030</sequence>
+	</genome>
+	<genome name="O. sativa">
+		<sequence>LOC_Os08g44020</sequence>
+		<sequence>LOC_Os08g44040</sequence>
+		<sequence>LOC_Os11g03940</sequence>
+		<sequence>LOC_Os12g03790</sequence>
+	</genome>
+	<genome name="UniProt">
+	</genome>
+</family>

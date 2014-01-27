@@ -1,0 +1,154 @@
+<cellwall>
+	<genome>
+		<name>EST</name>
+		<database type="blast">
+			<file>/data/NCBI/blast/est_others/est_others</file>
+			<alphabet>nucleotide</alphabet>
+		</database>
+		<database type="genbank">
+			<index>/data/NCBI/genbank/est.index</index>
+		</database>
+	</genome>
+
+	<genome>
+		<name>A. thaliana</name>
+		<database type="genbank">
+			<index>/data/TIGR/arabidopsis/Ath.index</index>
+		</database>
+		<database type="blast">
+			<file>/data/TIGR/arabidopsis/blast/ATH1.pep</file>
+			<alphabet>protein</alphabet>
+		</database>
+	</genome>
+	
+	<genome>
+		<name>O. sativa</name>
+		<database type="genbank">
+			<index>/data/TIGR/rice/OSA.index</index>
+		</database>
+		<database type="blast">
+			<file>/data/TIGR/rice/blast/OSA1.pep</file>
+			<alphabet>protein</alphabet>
+		</database>
+	</genome>
+	
+	<genome>
+		<name>UniProt</name>
+		<database type="genbank">
+			<index>/data/UNIPROT/uniprot.index</index>
+		</database>
+		<database type="blast">
+			<file>UniProt_sprot_trembl</file>
+			<alphabet>protein</alphabet>
+		</database>
+	</genome>
+
+	<search type="clustalw">
+		<name>Alignment</name>
+		<query>family</query>
+	</search>
+
+	<search type="phylip">
+		<name>Tree</name>
+		<query>family</query>
+	</search>
+
+	<search type="blast">
+		<name>EST</name>
+		<query>protein</query>
+		<genome>EST</genome>
+		<cutoff>1e-3</cutoff>
+		<count>10000</count>
+		<processors>4</processors>
+	</search>
+
+	<group>
+		<name>Monosaccharide activation and interconversion</name>
+		<include>data/families/S1K.xml</include>
+		<group>
+			<name>Nucleotide-sugar pyrophosphorylases</name>
+			<include>data/families/GMP.xml</include>
+			<include>data/families/UGP.xml</include>
+		</group> 
+		<group>
+			<name>Nucleotide-sugar interconversion enzymes</name>
+			<include>data/families/RHM.xml</include>
+			<include>data/families/AXS.xml</include>
+			<include>data/families/GAE.xml</include>
+			<include>data/families/GMD.xml</include>
+			<include>data/families/AUD.xml</include>
+			<include>data/families/GER.xml</include>
+			<include>data/families/UGE.xml</include>
+			<include>data/families/UGD.xml</include>
+		</group>
+	</group>
+	<group>
+		<name>Polysaccharide synthesis</name>
+		<group>
+			<name>Cellulose and Galactomannan</name>
+			<include>data/families/CSL.xml</include>
+		</group>
+		<group>
+			<name>Hemicellulose</name>
+			<include>data/families/RGP.xml</include>
+			<include>data/families/XGT.xml</include>
+			<include>data/families/XFT.xml</include>
+			<include>data/families/XXT.xml</include>
+		</group>
+		<group>
+			<name>Callose</name>
+			<include>data/families/GSL.xml</include>
+		</group>
+		<group>
+			<name>Other glycosyl transferases</name>
+			<include>data/families/GT8.xml</include>
+		</group>
+	</group>
+	<group>
+		<name>Reassembly</name>
+		<group>
+			<name>Cell Expansion</name>
+			<include>data/families/EXP.xml</include>
+			<include>data/families/GH18.xml</include>
+		</group>
+		<group>
+			<name>Hemicellulose reassembly</name>
+			<include>data/families/XTH.xml</include>
+		</group>
+		<group>
+			<name>Glycoside hydrolases</name>
+			<include>data/families/BGAL.xml</include>
+			<include>data/families/GH9.xml</include>
+			<include>data/families/GH17.xml</include>
+			<include>data/families/GH28.xml</include>
+			<include>data/families/GH10.xml</include>
+			<include>data/families/GH43.xml</include>
+			<include>data/families/GH51.xml</include>
+		</group>
+		<group>
+			<name>Lyases</name>
+			<include>data/families/PL1.xml</include>
+			<include>data/families/PL4.xml</include>
+		</group>
+		<group>
+			<name>Esterases</name>
+			<include>data/families/PME.xml</include>
+			<include>data/families/PAE.xml</include>
+			<include>data/families/FE.xml</include>
+		</group>
+	</group>
+	<group>
+		<name>Structural proteins</name>
+		<include>data/families/HRGP.xml</include>
+		<include>data/families/LRX.xml</include>
+		<include>data/families/PRP.xml</include>
+		<include>data/families/GRP.xml</include>
+		<include>data/families/AGP.xml</include>
+	</group>
+	<group>
+		<name>Glycoprotein glycosyltransferases</name>
+		<include>data/families/GFT.xml</include>
+		<include>data/families/GT31a.xml</include>
+		<include>data/families/GT31b.xml</include>
+	</group>
+</cellwall>

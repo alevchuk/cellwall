@@ -1,0 +1,119 @@
+---------------
+A. Primary Wall
+---------------
+
+1. Monosaccharide activation and interconversion
+	1.1 C-1 kinases
+		1.1.1 Gal C-1 kinase
+		1.1.2 GalA C-1 kinase
+		1.1.3 Ara C-1 kinase
+		1.1.4 GlcA C-1 kinase
+		1.1.5 Fuc C-1 kinase
+			
+	1.2 Nucleotide-sugar pyrophosphorylases
+		1.2.1 UDP-Glc pyrophosphorylase (Gluc-1-P <-> UDP-Gluc)
+		1.2.2 GDP-Glc pyrophosphorylase (Gluc-1-P <-> GDP-Gluc)
+		1.2.3 GDP-Fuc pyrophosphorylase (Fuc-1-P <-> GDP-Fuc)
+		1.2.4 UDP-Gal pyrophosphorylase (Gal-1-P <-> UDP-Gal)
+		1.2.5 UDP-GalA pyrophosphorylase (GalA-1-P <-> UDP-GalA)
+		1.2.6 UDP-GlclA pyrophosphorylase (GlcA-1-P <-> UDP-GlcA)
+		1.2.7 UDP-Ara pyrophosphorylase (Ara-1-P <-> UDP-Ara)
+	
+	1.3 Nucleotide-sugar interconversion
+	Most nucleotide-sugar interconversion enzymes belong to superfamily of small dehydrogenases/reductases which require NAD+ for reduction (Seifert 2004)
+		1.3.1 UDP-Glc C-4 epimerases (UDP-Glc <-> UDP-Gal)
+		1.3.2 UDP-D-GlcA C-4 epimerases (UDP-GlcA <-> UDP-GalA)
+		1.3.3 UDP-D-Glc dehydrogenases (UDP-Glc -> UDP-GlcA)
+		1.3.4 UDP-L-Rha synthases (3,5-epimerase/4-keto reductase: UDP-deoxy-Glc <-> UDP-Rha) 
+		1.3.5 UDP-D-apiose/UDP-D-Xyl synthases (UDP-GlcA -> UDP-apiose and UDP-xylose)
+		1.3.6 NAD dependent epimerase/dehydratases (contains UDP-glucuronic acid decarboxylase)
+		1.3.7 GDP-L-Fuc synthases (GDP-Man <-> GDP-Fuc)
+		1.3.8 GDP-D-mannose-4,6-dehydratase  (GDP-Man <-> GDP-Fuc)
+		1.3.9 UDP-xylose C-4 epimerase (UDP-Xyl <-> UDP-Ara)
+		
+2. Polysaccharide synthesis
+	2.1 Cellulose and galactomannan
+		2.1.1 Cellulose synthase-like and beta-mannan (CSL, MSL, CAZy-GT2)
+			- cellulose (1->4) beta-D-glucan		
+			- galactomannan (1->4) beta-mannan		
+	2.2 Hemicellulose
+		2.2.1 Reversibly glycosylated polypeptides (RGP)	
+		2.2.2 Xyloglucan galactosyltransferases (XGT, CAZy-GT47) 	
+		2.2.3 Xyloglucan fucosyltransferase (XFT, CAZy-GT37) 
+		2.2.4 Xyloglucan xylosyltransferases (XXT, CAZy-GT34) 		
+			- hemicellulose is old term for most cellulose cross-linking glycans, most of them are branched glycans 
+			- xyloglucans (XyGs) and glucuronoarabinoxylans (GAXs) are major cross-linking glycans of flowering plants
+			- glucomannans, galactoglucomannans and galactomannans less abundant in all angiosperms
+			- XyGs are cross-linkers in all dicots and one half of monocots
+			- XyGs consist of (1->4)beta-D-glucan backbone with (1->6)-linked alpha-D-Xylose at base of side branches, branching pattern can be defined with four single letters: G = Glu, no side branch, X = Glu-Xyl, L = Glu-Xyl-Gal, F = Glu-Xyl-Gal-Fuc, A = Glu-Xyl-Ara
+			- All dicots and non-commelinoid monocots composed of fucogalacto-XyGs (fgXyG): XXXG-XXFG
+			- Solanaceous dicots contain additional arabino-XyGs (AXyG) with partially C6 acetylated Gs: AXGG, XAGG, AAGG
+			- Commelinoid monocots (includes all grasses, s. page 68) contain only small amounts of XyGs. Their major cross-linkers are GAXs
+			- GAXs consist of (1->4)beta-D-xylan backbone with (1->2)-linked GlcA and (1->2)- or (1->3)-linked aplph-L-arabinose 
+			- Commelinoid GAXs have (1->3)-linked and dicots (1->2)-linked aplpha-L-arabinose
+			- Commelinoid GAXs contain feruloyl groups (see 3.5.3)
+	2.3 Pectins		
+		2.3.1 Homogalacturonan (HGA) synthesis -> see what genes are available?		
+		2.3.2 Rhamnogalacturonan (RG1) synthesis -> see what genes are available?		
+		2.3.3 Substituted galacturonan synthesis -> see what genes are available?
+			- pectins are heterogeneous, branched, highly hydrated, D-galacturonic acid (GalA)-rich polysaccharides 
+			- golgi secrets methyl-esterfied chains of homogalacturonans (HGAs), methyl groups are then removed in CW by pectin methyl esterases (see below) 
+			- pectin network consists of:
+					1. HG = homogalacturonans (linear GalA polymer)
+					2. XGA = xylogalacturonans (GalA backbone with Xyl side groups)
+					3. RG-I = rhamnogalacturonan I (Rha-GalA backbone with Gal side groups)
+					4. RG-II = rhamnogalacturonan II (core of 9x GalA core with complex side chains)
+					5. AG-I = arabinogalactan I (linear Gal backbone with Ara side groups)
+					6. AG-II = arabinogalactan II (branched Gal backbone with Ara side groups), they interact with AGP
+					7. A = arabinan (branched Ara backbone)
+					
+	2.4 Callose		
+		2.4.1 Glucan synthase-like (GSL, CAZy-GT48)
+	2.5 Other glycosyl transferases		
+		2.5.1a Glycosyl transferases (CAZy-GT31a)
+		2.5.1b Glycosyl transferases (CAZy-GT31b)
+		2.5.2 Glycosyl transferases (pectin bios. CAZy-GT8)
+					
+3. Reassembly
+	3.1 Cell expansion		
+		3.1.1 Expansins
+		3.1.2 Yieldins (CAZy-GH18)
+	3.2 Hemicellulose reassembly		
+		3.2.1 Xyloglucan endotransglucosylases/hydrolases (XTH)
+	3.3 Hydrolases		
+		3.3.1 ß-Galactosidase (CAZy-GH35)
+		3.3.2 Glycoside hydrolase family 9 (CAZy-GH9, Endo-1,4-beta-glucanase)
+		3.3.3 Glycoside hydrolase family 17 (CAZy-GH17, Glucan endo-1,3-beta-glucosidase)
+	3.4 Lyases		
+		3.4.1 Pectate and pectin lyases (CAZy-PL1, involved in pectin metab)
+		3.4.2 Rhamnogalacturonan I lyases (CAZy-PL4, involved in pectin metab)
+	3.5 Esterases
+		3.5.1 Pectin methyl esterases (CAZy-CE8, involved in pectin metab)
+		3.5.2 Pectin acetylestereases (CAZy-CE13, involved in pectin metab)
+		3.5.3 Feruloyl esterases (CAZy-CE1, involved in hemicellulose metab)
+		
+4. Structural proteins
+	4.1 Hydroxyproline-rich glycoproteins (HRGP)
+			consists of Ser-(Hyp)4 repeats and Tyr-Lys-Tyr sequence
+			Hyp glycosylated with arabinosides and Ser with galactose
+			Tyr-Lys-Tyr forms isotyrosine linkage
+	4.2 Leucine-rich repeat extensins (LRX)
+	4.3 Proline-rich proteins (PRP)
+	4.4 Glycine-rich proteins (GRP, ThG check family!)
+	4.5 Arabinogalactan-proteins (AGP)
+		enriched in Pro(Hyp), Ala, Ser/Thr
+		called proteoglycans because 95% is carbohydrate consisting mostly of arabinogalactan
+		some AGPs have GPI anchor attached
+
+5. Development, signaling and defense
+	5.1 Glycosylphosphatidylinositol (GPI)-anchored proteins	
+
+
+-----------------
+B. Secondary Wall
+-----------------
+1. Lignan synthesis
+2. Lignin assembly
+3. Cellulose and associated matrix polysaccharides
+
+
