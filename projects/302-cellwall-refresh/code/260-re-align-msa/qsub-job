@@ -1,0 +1,4 @@
+#!/bin/bash
+
+cd ~/cellwall/projects/302-cellwall-refresh
+code/260-re-align-msa/run-guidance

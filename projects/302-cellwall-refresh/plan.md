@@ -10,7 +10,7 @@
 2.2 re-align msa                                        ===> Unnecessary because in 2.1 bad sequences not removed.
 2.3 build an hmm from the msa                           ===> <a href="http://biocluster.ucr.edu/~alevchuk/cellwall-refresh/data/230-build-hmm/gh43.hmm">hmm</a>
 2.4 find matches in uniprot for the hmm (-E 0.1)        ===> 3243 peptides found for GH43 <a href="http://biocluster.ucr.edu/~alevchuk/cellwall-refresh/data/240-find-matches-in-uniprot/">Uniprot hits</a>
-2.5 add matches to fam_x
+2.5 add matches to fam_x                                ===> Used uniprot web ui <a href="http://biocluster.ucr.edu/~alevchuk/cellwall-refresh/data/250-add-to-family/201402182BNZGRYYXK.fasta">New Family</a>
 2.6 re-align msa
 
 In my ec2 instance of cellwall web ui:
