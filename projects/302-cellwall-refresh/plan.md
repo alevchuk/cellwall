@@ -1,6 +1,6 @@
 <pre>
 1.1 pick the smallest family: fam_x                     ===> GH43 (11 peptides) <a href="http://biocluster.ucr.edu/~alevchuk/cellwall-refresh/data/110-one-family/gh43.fasta">gh43.fasta</a>
-1.2 download latest uniprot                             ===> Uniprot 2014-01 (50 million sequences) <a href="http://biocluster.ucr.edu/~alevchuk/cellwall-refresh/data/120-download-uniprot/">data</a>
+1.2 download latest uniprot                             ===> Uniprot 2014-01 (52,159,208 sequences) <a href="http://biocluster.ucr.edu/~alevchuk/cellwall-refresh/data/120-download-uniprot/">data</a>
 1.3 build an msa from fam_x                             ===> Used MAFFT <a href="http://biocluster.ucr.edu/~alevchuk/cellwall-refresh/data/130-build-msa/gh43/MSA.MAFFT.Guidance_res_pair_res.html">MSA visualiztion</a>
 
 2.1 remove bad sequences with one of:                   ===> Used GUIDANCE. No bad sequences were removed from GH43.
