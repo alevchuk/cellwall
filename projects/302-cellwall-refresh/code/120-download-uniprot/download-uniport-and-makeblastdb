@@ -1,0 +1,76 @@
+#!/bin/bash
+
+function usage(){
+  echo "Usage: $0 <output_dir>"
+}
+
+if [ -z "$1" ]; then
+  echo "ERROR: No output dir specified!"
+  echo
+  usage
+  exit
+fi
+
+function download_gzip {
+	url=$1
+	filename=$(echo $1 | awk -F/ '{print $NF}')
+	if (stat $filename  &> /dev/null); then
+		if (gunzip --test $filename); then
+			return 0
+		fi
+	fi
+
+	wget -c $url
+}
+
+function gunzip_and_fix_fasta {
+	file_in=$1
+	file_out="${file_in%.gz}"
+
+	if [ $file_in == $file_out ]; then
+		echo "ERROR: Filename $file_in does not end with '.gz'"
+		exit 1
+	fi
+
+	# Uncompress +
+	# replace all |s (pipes) with spaces to avoid parsing failures in various tools (e.g. hmmsearch, formatdb) +
+	# remove all the "tr" prefixes for Trembl +
+	# remove all the "sp" prefixes for SwissProt
+	gunzip --test $file_in
+	gunzip --force --to-stdout $file_in |
+		perl -p -i -e 's/\|/ /g' |
+		perl -p -i -e 's/^>tr />/g' | \
+		perl -p -i -e 's/^>sp />/g' \
+		> $file_out
+}
+
+set -u # exit if you try to use an uninitialized variable
+set -e # exit if any statement returns a non-true return value
+set -v # print the commands (and comments) right before they run
+
+# Check dependencies
+which wget || (echo "ERROR: Dependency wget not found" && exit 1)
+which gunzip || (echo "ERROR: Dependency gunzip not found" && exit 1)
+which makeblastdb || (echo "ERROR: Dependency makeblastdb not found" && exit 1)
+
+# Create output dir
+newdir=$1
+mkdir -v $newdir &> /dev/null || true
+cd $newdir
+
+# Download SwissProt
+download_gzip ftp://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/complete/uniprot_sprot.fasta.gz
+
+## Download Trembl
+download_gzip ftp://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/complete/uniprot_trembl.fasta.gz
+
+gunzip_and_fix_fasta uniprot_sprot.fasta.gz
+gunzip_and_fix_fasta uniprot_trembl.fasta.gz
+
+# Concatenate SwissProt and Trembl
+mv --force uniprot_trembl.fasta uniprot_sprot_plus_trembl.fasta.tmp && \
+  cat uniprot_sprot.fasta >> uniprot_sprot_plus_trembl.fasta.tmp && \
+  mv --force uniprot_sprot_plus_trembl.fasta.tmp \
+     uniprot_sprot_plus_trembl.fasta
+
+makeblastdb -dbtype prot -in uniprot_sprot_plus_trembl.fasta

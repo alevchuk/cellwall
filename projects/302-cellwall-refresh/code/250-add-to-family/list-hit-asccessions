@@ -1,0 +1,8 @@
+#!/bin/bash
+
+set -e
+
+stat code > /dev/null || stat data > /dev/null || \
+        (echo "ERROR: You must run this script from the root of the project dir"; exit 1)
+
+cat data/240-find-matches-in-uniprot/gh43-uniprot-hits | awk '$3 == "MSA.MAFFT.aln" {print $19}'

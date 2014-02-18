@@ -1,0 +1,14 @@
+#!/bin/bash
+
+set -e
+
+stat code > /dev/null || stat data > /dev/null || \
+        (echo "ERROR: You must run this script from the root of the project dir"; exit 1)
+
+~/src/guidance.v1.41/www/Guidance/guidance.pl \
+  --msaProgram MAFFT \
+  --seqType aa  \
+  --mafft  ~/src/mafft-7.130-with-extensions/scripts/mafft \
+  \
+  --seqFile data/110-one-family/cwn-2005/GH43.fasta \
+  --outDir data/130-build-msa/gh43

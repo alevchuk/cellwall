@@ -1,0 +1,11 @@
+#!/bin/bash
+
+set -e
+
+stat code > /dev/null || stat data > /dev/null || \
+	(echo "ERROR: You must run this script from the root of the project dir"; exit 1)
+
+original_archive="$(realpath ../../archive/2005/cwn-2005.tar.gz)"
+(cd data/110-one-family; cat $original_archive | tar zxf -)
+
+grep -c '>' data/110-one-family/cwn-2005/* | tr ':' ' ' | sort -rnk2 | column -t

@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -e
+
+stat code > /dev/null || stat data > /dev/null || \
+        (echo "ERROR: You must run this script from the root of the project dir"; exit 1)
+
+~/opt/hmmer-3.1b1/bin/hmmbuild  --amino  data/230-build-hmm/gh43.hmm \
+  data/130-build-msa/gh43/MSA.MAFFT.aln.With_Names > data/230-build-hmm/gh43.hmm.log
