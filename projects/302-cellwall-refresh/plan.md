@@ -9,9 +9,9 @@
    * or blast all-against-all
 2.2 re-align msa                                        ===> Unnecessary because in 2.1 bad sequences not removed.
 2.3 build an hmm from the msa                           ===> <a href="http://biocluster.ucr.edu/~alevchuk/cellwall-refresh/data/230-build-hmm/gh43.hmm">hmm</a>
-2.4 find matches in uniprot for the hmm (-E 0.1)        ===> 3243 peptides found for GH43 <a href="http://biocluster.ucr.edu/~alevchuk/cellwall-refresh/data/240-find-matches-in-uniprot/">Uniprot hits</a>
-2.5 add matches to fam_x                                ===> Used uniprot web ui <a href="http://biocluster.ucr.edu/~alevchuk/cellwall-refresh/data/250-add-to-family/201402182BNZGRYYXK.fasta">New Family</a>
-2.6 re-align msa
+2.4 Find top 100 matches in uniprot for the hmm
+2.6 Build an msa from the top 100 matches (to be used in the next data refresh)
+2.7 Find matches in uniprot for the hmm above a descent E-value (to be loaded into CWN as family)
 
 In my ec2 instance of cellwall web ui:
 --------------------------------
@@ -26,5 +26,16 @@ In production:
 
 5.1 repeat all of the steps above for the next family
 
-6.1 if a family is too big, discuss a splitting it
+In my ec2 instance of cellwall web ui:
+---------------------------------------------
+6.1 Deploy http://www.sequenceserver.com
+6.2 Import the families into the Blast server
+6.1 Cross-link CWN to enable Blast searches
+---------------------------------------------
+
+In production:
+-----------------------------------------------------
+7.1 apply the same changes to http://cellwall.ucr.edu
+-----------------------------------------------------
+
 </pre>
